@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View for the Wizard -->
+    <record id="view_biziship_bol_import_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.bol.import.wizard.form</field>
+        <field name="model">biziship.bol.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import BOL" class="biziship-bol-form">
+                <style>
+                    /* Modern Progress Bar */
+                    .biziship-progress-container {
+                        display: none;
+                        width: 100%;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                    }
+                    .biziship-progress-text {
+                        text-align: center;
+                        color: #495057;
+                        font-weight: 500;
+                        font-size: 14px;
+                        margin-bottom: 8px;
+                    }
+                    .biziship-progress-wrapper {
+                        width: 100%;
+                        background-color: #e9ecef;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        height: 24px;
+                        box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+                    }
+                    .biziship-progress-bar {
+                        width: 0%;
+                        height: 100%;
+                        background-color: #714B67; /* Odoo Primary Purple */
+                        background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+                        background-size: 1rem 1rem;
+                    }
+                    @keyframes biziship-stripes {
+                        from { background-position: 1rem 0; }
+                        to { background-position: 0 0; }
+                    }
+                    @keyframes biziship-fill {
+                        0% { width: 0%; }
+                        100% { width: 95%; }
+                    }
+
+                    /* Trigger: When Odoo disables the primary button during RPC call, show animation! */
+                    .modal:has(button[name="action_process_bol"]:disabled) .biziship-progress-container,
+                    .modal:has(button[name="action_process_bol"].o_disabled) .biziship-progress-container {
+                        display: block;
+                    }
+                    .modal:has(button[name="action_process_bol"]:disabled) .biziship-progress-bar,
+                    .modal:has(button[name="action_process_bol"].o_disabled) .biziship-progress-bar {
+                        animation: biziship-fill 15s cubic-bezier(0.1, 0.7, 1.0, 0.1) forwards, biziship-stripes 1s linear infinite;
+                    }
+                    .modal:has(button[name="action_process_bol"]:disabled) .biziship-help-text,
+                    .modal:has(button[name="action_process_bol"].o_disabled) .biziship-help-text {
+                        display: none;
+                    }
+                </style>
+                
+                <div class="text-center mb-4 mt-2 biziship-help-text">
+                    <h2 style="font-weight: 300;">Extract BOL Details</h2>
+                    <p class="text-muted">Select your Bill of Lading document (PDF, PNG, JPG) and click Process.</p>
+                </div>
+                
+                <group class="biziship-help-text">
+                    <field name="file_name" invisible="1"/>
+                    <field name="bol_file" filename="file_name"/>
+                </group>
+
+                <div class="biziship-progress-container">
+                    <div class="biziship-progress-text">Analyzing Freight Data... (~15s)</div>
+                    <div class="biziship-progress-wrapper">
+                        <div class="biziship-progress-bar"></div>
+                    </div>
+                </div>
+
+                <footer>
+                    <button name="action_process_bol" string="Process BOL" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for the Wizard -->
+    <record id="action_biziship_bol_import_wizard" model="ir.actions.act_window">
+        <field name="name">Process BOL (BiziShip)</field>
+        <field name="res_model">biziship.bol.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

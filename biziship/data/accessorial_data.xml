@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Pickup Accessorials -->
+        <record id="accessorial_SORTPU" model="biziship.accessorial">
+            <field name="name">Sort/Segregate Pickup</field>
+            <field name="code">SORTPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_CONPU" model="biziship.accessorial">
+            <field name="name">Construction Site Pickup</field>
+            <field name="code">CONPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_INPU" model="biziship.accessorial">
+            <field name="name">Inside Pickup</field>
+            <field name="code">INPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_CNVPU" model="biziship.accessorial">
+            <field name="name">Trade Show Pickup</field>
+            <field name="code">CNVPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_AIRPU" model="biziship.accessorial">
+            <field name="name">Airport Pickup</field>
+            <field name="code">AIRPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_CFSPU" model="biziship.accessorial">
+            <field name="name">Container Freight Station Pickup</field>
+            <field name="code">CFSPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_CAMPPU" model="biziship.accessorial">
+            <field name="name">Camp Pickup</field>
+            <field name="code">CAMPPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_CHRCPU" model="biziship.accessorial">
+            <field name="name">Church Pickup</field>
+            <field name="code">CHRCPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_EDUPU" model="biziship.accessorial">
+            <field name="name">School Pickup</field>
+            <field name="code">EDUPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_CLUBPU" model="biziship.accessorial">
+            <field name="name">Country Club Pickup</field>
+            <field name="code">CLUBPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_FARMPU" model="biziship.accessorial">
+            <field name="name">Farm Pickup</field>
+            <field name="code">FARMPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_GOVPU" model="biziship.accessorial">
+            <field name="name">Government Site Pickup</field>
+            <field name="code">GOVPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_HOSPU" model="biziship.accessorial">
+            <field name="name">Hospital Pickup</field>
+            <field name="code">HOSPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_HOTLPU" model="biziship.accessorial">
+            <field name="name">Hotel Pickup</field>
+            <field name="code">HOTLPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_PRISPU" model="biziship.accessorial">
+            <field name="name">Prison Pickup</field>
+            <field name="code">PRISPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_UTLPU" model="biziship.accessorial">
+            <field name="name">Utility Site Pickup</field>
+            <field name="code">UTLPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_PIERPU" model="biziship.accessorial">
+            <field name="name">Pier Pickup</field>
+            <field name="code">PIERPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_MILPU" model="biziship.accessorial">
+            <field name="name">Military Installation Pickup</field>
+            <field name="code">MILPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_GROPU" model="biziship.accessorial">
+            <field name="name">Grocery Warehouse Pickup</field>
+            <field name="code">GROPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_MINEPU" model="biziship.accessorial">
+            <field name="name">Mine Site Pickup</field>
+            <field name="code">MINEPU</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_9" model="biziship.accessorial">
+            <field name="name">Excessive Length, 9ft</field>
+            <field name="code">ELS_9</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_11" model="biziship.accessorial">
+            <field name="name">Excessive Length, 11ft</field>
+            <field name="code">ELS_11</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_13" model="biziship.accessorial">
+            <field name="name">Excessive Length, 13ft</field>
+            <field name="code">ELS_13</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_15" model="biziship.accessorial">
+            <field name="name">Excessive Length, 15ft</field>
+            <field name="code">ELS_15</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_17" model="biziship.accessorial">
+            <field name="name">Excessive Length, 17ft</field>
+            <field name="code">ELS_17</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_18" model="biziship.accessorial">
+            <field name="name">Excessive Length, 18ft</field>
+            <field name="code">ELS_18</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_19" model="biziship.accessorial">
+            <field name="name">Excessive Length, 19ft</field>
+            <field name="code">ELS_19</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_21" model="biziship.accessorial">
+            <field name="name">Excessive Length, 21ft</field>
+            <field name="code">ELS_21</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_22" model="biziship.accessorial">
+            <field name="name">Excessive Length, 22ft</field>
+            <field name="code">ELS_22</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_23" model="biziship.accessorial">
+            <field name="name">Excessive Length, 23ft</field>
+            <field name="code">ELS_23</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_24" model="biziship.accessorial">
+            <field name="name">Excessive Length, 24ft</field>
+            <field name="code">ELS_24</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_25" model="biziship.accessorial">
+            <field name="name">Excessive Length, 25ft</field>
+            <field name="code">ELS_25</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_26" model="biziship.accessorial">
+            <field name="name">Excessive Length, 26ft</field>
+            <field name="code">ELS_26</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_27" model="biziship.accessorial">
+            <field name="name">Excessive Length, 27ft</field>
+            <field name="code">ELS_27</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_28" model="biziship.accessorial">
+            <field name="name">Excessive Length, 28ft</field>
+            <field name="code">ELS_28</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_29" model="biziship.accessorial">
+            <field name="name">Excessive Length, 29ft</field>
+            <field name="code">ELS_29</field>
+            <field name="type">origin</field>
+        </record>
+        <record id="accessorial_ELS_30" model="biziship.accessorial">
+            <field name="name">Excessive Length, 30ft and over</field>
+            <field name="code">ELS_30</field>
+            <field name="type">origin</field>
+        </record>
+        <!-- Destination Accessorials -->
+        <record id="accessorial_SATPU" model="biziship.accessorial"><field name="name">Saturday Pickup</field><field name="code">SATPU</field><field name="type">destination</field></record>
+        <record id="accessorial_PFZ" model="biziship.accessorial"><field name="name">Protection From Freezing</field><field name="code">PFZ</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_8" model="biziship.accessorial"><field name="name">Excessive Length, 8ft</field><field name="code">ELS_8</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_10" model="biziship.accessorial"><field name="name">Excessive Length, 10ft</field><field name="code">ELS_10</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_12" model="biziship.accessorial"><field name="name">Excessive Length, 12ft</field><field name="code">ELS_12</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_14" model="biziship.accessorial"><field name="name">Excessive Length, 14ft</field><field name="code">ELS_14</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_16" model="biziship.accessorial"><field name="name">Excessive Length, 16ft</field><field name="code">ELS_16</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_20" model="biziship.accessorial"><field name="name">Excessive Length, 20ft</field><field name="code">ELS_20</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_6" model="biziship.accessorial"><field name="name">Excessive Length, 6ft</field><field name="code">ELS_6</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_7" model="biziship.accessorial"><field name="name">Excessive Length, 7ft</field><field name="code">ELS_7</field><field name="type">destination</field></record>
+        <record id="accessorial_CNVDEL" model="biziship.accessorial"><field name="name">Trade Show Delivery</field><field name="code">CNVDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_INDEL" model="biziship.accessorial"><field name="name">Inside Delivery</field><field name="code">INDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CONDEL" model="biziship.accessorial"><field name="name">Construction Site Delivery</field><field name="code">CONDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_DOCKPU" model="biziship.accessorial"><field name="name">Dock Pickup (Will Call)</field><field name="code">DOCKPU</field><field name="type">destination</field></record>
+        <record id="accessorial_BLIND" model="biziship.accessorial"><field name="name">Blind Shipment</field><field name="code">BLIND</field><field name="type">destination</field></record>
+        <record id="accessorial_SORTDEL" model="biziship.accessorial"><field name="name">Sort/Segregate Delivery</field><field name="code">SORTDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CFSDEL" model="biziship.accessorial"><field name="name">Container Freight Station Delivery</field><field name="code">CFSDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_AIRDEL" model="biziship.accessorial"><field name="name">Airport Delivery</field><field name="code">AIRDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_FARMDEL" model="biziship.accessorial"><field name="name">Farm Delivery</field><field name="code">FARMDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CAMPDEL" model="biziship.accessorial"><field name="name">Camp Delivery</field><field name="code">CAMPDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CHRCDEL" model="biziship.accessorial"><field name="name">Church Delivery</field><field name="code">CHRCDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CLUBDEL" model="biziship.accessorial"><field name="name">Country Club Delivery</field><field name="code">CLUBDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_EDUDEL" model="biziship.accessorial"><field name="name">School Delivery</field><field name="code">EDUDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_GOVDEL" model="biziship.accessorial"><field name="name">Government Site Delivery</field><field name="code">GOVDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_HOSDEL" model="biziship.accessorial"><field name="name">Hospital Delivery</field><field name="code">HOSDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_HOTLDEL" model="biziship.accessorial"><field name="name">Hotel Delivery</field><field name="code">HOTLDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_PRISDEL" model="biziship.accessorial"><field name="name">Prison Delivery</field><field name="code">PRISDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_UTLDEL" model="biziship.accessorial"><field name="name">Utility Site Delivery</field><field name="code">UTLDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_PIERDEL" model="biziship.accessorial"><field name="name">Pier Delivery</field><field name="code">PIERDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_MILDEL" model="biziship.accessorial"><field name="name">Military Installation Delivery</field><field name="code">MILDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_GRODEL" model="biziship.accessorial"><field name="name">Grocery Warehouse Delivery</field><field name="code">GRODEL</field><field name="type">destination</field></record>
+        <record id="accessorial_MINEDEL" model="biziship.accessorial"><field name="name">Mine Site Delivery</field><field name="code">MINEDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_FLTBDEL" model="biziship.accessorial"><field name="name">Flatbed Delivery</field><field name="code">FLTBDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_MANDEL2" model="biziship.accessorial"><field name="name">2 Man Delivery</field><field name="code">MANDEL2</field><field name="type">destination</field></record>
+        <record id="accessorial_MANDEL3" model="biziship.accessorial"><field name="name">3 Man Delivery</field><field name="code">MANDEL3</field><field name="type">destination</field></record>
+        <record id="accessorial_MANDEL4" model="biziship.accessorial"><field name="name">4 Man Delivery</field><field name="code">MANDEL4</field><field name="type">destination</field></record>
+        <record id="accessorial_RDNS" model="biziship.accessorial"><field name="name">Residential Direct No Signature</field><field name="code">RDNS</field><field name="type">destination</field></record>
+        <record id="accessorial_RDTH" model="biziship.accessorial"><field name="name">Residential Direct Threshold</field><field name="code">RDTH</field><field name="type">destination</field></record>
+        <record id="accessorial_RDRC" model="biziship.accessorial"><field name="name">Residential Direct Room of Choice</field><field name="code">RDRC</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG" model="biziship.accessorial"><field name="name">Residential Direct White Glove</field><field name="code">RDWG</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG20" model="biziship.accessorial"><field name="name">Residential Direct White Glove 20 min</field><field name="code">RDWG20</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG30" model="biziship.accessorial"><field name="name">Residential Direct White Glove 30 min</field><field name="code">RDWG30</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG45" model="biziship.accessorial"><field name="name">Residential Direct White Glove 45 min</field><field name="code">RDWG45</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG60" model="biziship.accessorial"><field name="name">Residential Direct White Glove 60 min</field><field name="code">RDWG60</field><field name="type">destination</field></record>
+        <record id="accessorial_WG30" model="biziship.accessorial"><field name="name">White Glove Assembly 30 Mins</field><field name="code">WG30</field><field name="type">destination</field></record>
+        <record id="accessorial_WG60" model="biziship.accessorial"><field name="name">White Glove Assembly 60 Mins</field><field name="code">WG60</field><field name="type">destination</field></record>
+        <record id="accessorial_GS8" model="biziship.accessorial"><field name="name">Guaranteed by 8AM</field><field name="code">GS8</field><field name="type">destination</field></record>
+        <record id="accessorial_GS9" model="biziship.accessorial"><field name="name">Guaranteed by 9AM</field><field name="code">GS9</field><field name="type">destination</field></record>
+        <record id="accessorial_GS10" model="biziship.accessorial"><field name="name">Guaranteed by 10AM</field><field name="code">GS10</field><field name="type">destination</field></record>
+        <record id="accessorial_GS11" model="biziship.accessorial"><field name="name">Guaranteed by 11AM</field><field name="code">GS11</field><field name="type">destination</field></record>
+        <record id="accessorial_GSAM" model="biziship.accessorial"><field name="name">Guaranteed by 12PM</field><field name="code">GSAM</field><field name="type">destination</field></record>
+        <record id="accessorial_GS14" model="biziship.accessorial"><field name="name">Guaranteed by 2PM</field><field name="code">GS14</field><field name="type">destination</field></record>
+        <record id="accessorial_GS15" model="biziship.accessorial"><field name="name">Guaranteed by 3PM</field><field name="code">GS15</field><field name="type">destination</field></record>
+        <record id="accessorial_GS1530" model="biziship.accessorial"><field name="name">Guaranteed by 3:30PM</field><field name="code">GS1530</field><field name="type">destination</field></record>
+        <record id="accessorial_GS17" model="biziship.accessorial"><field name="name">Guaranteed by 5PM</field><field name="code">GS17</field><field name="type">destination</field></record>
+        <record id="accessorial_GUR" model="biziship.accessorial"><field name="name">Guaranteed by Hour</field><field name="code">GUR</field><field name="type">destination</field></record>
+        <record id="accessorial_GSMUL" model="biziship.accessorial"><field name="name">Guaranteed Multi-Hour Window</field><field name="code">GSMUL</field><field name="type">destination</field></record>
+        <record id="accessorial_GSSING" model="biziship.accessorial"><field name="name">Guaranteed Single-Hour Window</field><field name="code">GSSING</field><field name="type">destination</field></record>
+        <record id="accessorial_MISC" model="biziship.accessorial"><field name="name">Misc Freight Charge</field><field name="code">*</field><field name="type">destination</field></record>
+        <!-- Destination Accessorials -->
+        <record id="accessorial_SATPU" model="biziship.accessorial"><field name="name">Saturday Pickup</field><field name="code">SATPU</field><field name="type">destination</field></record>
+        <record id="accessorial_PFZ" model="biziship.accessorial"><field name="name">Protection From Freezing</field><field name="code">PFZ</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_8" model="biziship.accessorial"><field name="name">Excessive Length, 8ft</field><field name="code">ELS_8</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_10" model="biziship.accessorial"><field name="name">Excessive Length, 10ft</field><field name="code">ELS_10</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_12" model="biziship.accessorial"><field name="name">Excessive Length, 12ft</field><field name="code">ELS_12</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_14" model="biziship.accessorial"><field name="name">Excessive Length, 14ft</field><field name="code">ELS_14</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_16" model="biziship.accessorial"><field name="name">Excessive Length, 16ft</field><field name="code">ELS_16</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_20" model="biziship.accessorial"><field name="name">Excessive Length, 20ft</field><field name="code">ELS_20</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_6" model="biziship.accessorial"><field name="name">Excessive Length, 6ft</field><field name="code">ELS_6</field><field name="type">destination</field></record>
+        <record id="accessorial_ELS_7" model="biziship.accessorial"><field name="name">Excessive Length, 7ft</field><field name="code">ELS_7</field><field name="type">destination</field></record>
+        <record id="accessorial_CNVDEL" model="biziship.accessorial"><field name="name">Trade Show Delivery</field><field name="code">CNVDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_INDEL" model="biziship.accessorial"><field name="name">Inside Delivery</field><field name="code">INDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CONDEL" model="biziship.accessorial"><field name="name">Construction Site Delivery</field><field name="code">CONDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_DOCKPU" model="biziship.accessorial"><field name="name">Dock Pickup (Will Call)</field><field name="code">DOCKPU</field><field name="type">destination</field></record>
+        <record id="accessorial_BLIND" model="biziship.accessorial"><field name="name">Blind Shipment</field><field name="code">BLIND</field><field name="type">destination</field></record>
+        <record id="accessorial_SORTDEL" model="biziship.accessorial"><field name="name">Sort/Segregate Delivery</field><field name="code">SORTDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CFSDEL" model="biziship.accessorial"><field name="name">Container Freight Station Delivery</field><field name="code">CFSDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_AIRDEL" model="biziship.accessorial"><field name="name">Airport Delivery</field><field name="code">AIRDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_FARMDEL" model="biziship.accessorial"><field name="name">Farm Delivery</field><field name="code">FARMDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CAMPDEL" model="biziship.accessorial"><field name="name">Camp Delivery</field><field name="code">CAMPDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CHRCDEL" model="biziship.accessorial"><field name="name">Church Delivery</field><field name="code">CHRCDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_CLUBDEL" model="biziship.accessorial"><field name="name">Country Club Delivery</field><field name="code">CLUBDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_EDUDEL" model="biziship.accessorial"><field name="name">School Delivery</field><field name="code">EDUDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_GOVDEL" model="biziship.accessorial"><field name="name">Government Site Delivery</field><field name="code">GOVDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_HOSDEL" model="biziship.accessorial"><field name="name">Hospital Delivery</field><field name="code">HOSDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_HOTLDEL" model="biziship.accessorial"><field name="name">Hotel Delivery</field><field name="code">HOTLDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_PRISDEL" model="biziship.accessorial"><field name="name">Prison Delivery</field><field name="code">PRISDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_UTLDEL" model="biziship.accessorial"><field name="name">Utility Site Delivery</field><field name="code">UTLDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_PIERDEL" model="biziship.accessorial"><field name="name">Pier Delivery</field><field name="code">PIERDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_MILDEL" model="biziship.accessorial"><field name="name">Military Installation Delivery</field><field name="code">MILDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_GRODEL" model="biziship.accessorial"><field name="name">Grocery Warehouse Delivery</field><field name="code">GRODEL</field><field name="type">destination</field></record>
+        <record id="accessorial_MINEDEL" model="biziship.accessorial"><field name="name">Mine Site Delivery</field><field name="code">MINEDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_FLTBDEL" model="biziship.accessorial"><field name="name">Flatbed Delivery</field><field name="code">FLTBDEL</field><field name="type">destination</field></record>
+        <record id="accessorial_MANDEL2" model="biziship.accessorial"><field name="name">2 Man Delivery</field><field name="code">MANDEL2</field><field name="type">destination</field></record>
+        <record id="accessorial_MANDEL3" model="biziship.accessorial"><field name="name">3 Man Delivery</field><field name="code">MANDEL3</field><field name="type">destination</field></record>
+        <record id="accessorial_MANDEL4" model="biziship.accessorial"><field name="name">4 Man Delivery</field><field name="code">MANDEL4</field><field name="type">destination</field></record>
+        <record id="accessorial_RDNS" model="biziship.accessorial"><field name="name">Residential Direct No Signature</field><field name="code">RDNS</field><field name="type">destination</field></record>
+        <record id="accessorial_RDTH" model="biziship.accessorial"><field name="name">Residential Direct Threshold</field><field name="code">RDTH</field><field name="type">destination</field></record>
+        <record id="accessorial_RDRC" model="biziship.accessorial"><field name="name">Residential Direct Room of Choice</field><field name="code">RDRC</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG" model="biziship.accessorial"><field name="name">Residential Direct White Glove</field><field name="code">RDWG</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG20" model="biziship.accessorial"><field name="name">Residential Direct White Glove 20 min</field><field name="code">RDWG20</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG30" model="biziship.accessorial"><field name="name">Residential Direct White Glove 30 min</field><field name="code">RDWG30</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG45" model="biziship.accessorial"><field name="name">Residential Direct White Glove 45 min</field><field name="code">RDWG45</field><field name="type">destination</field></record>
+        <record id="accessorial_RDWG60" model="biziship.accessorial"><field name="name">Residential Direct White Glove 60 min</field><field name="code">RDWG60</field><field name="type">destination</field></record>
+        <record id="accessorial_WG30" model="biziship.accessorial"><field name="name">White Glove Assembly 30 Mins</field><field name="code">WG30</field><field name="type">destination</field></record>
+        <record id="accessorial_WG60" model="biziship.accessorial"><field name="name">White Glove Assembly 60 Mins</field><field name="code">WG60</field><field name="type">destination</field></record>
+        <record id="accessorial_GS8" model="biziship.accessorial"><field name="name">Guaranteed by 8AM</field><field name="code">GS8</field><field name="type">destination</field></record>
+        <record id="accessorial_GS9" model="biziship.accessorial"><field name="name">Guaranteed by 9AM</field><field name="code">GS9</field><field name="type">destination</field></record>
+        <record id="accessorial_GS10" model="biziship.accessorial"><field name="name">Guaranteed by 10AM</field><field name="code">GS10</field><field name="type">destination</field></record>
+        <record id="accessorial_GS11" model="biziship.accessorial"><field name="name">Guaranteed by 11AM</field><field name="code">GS11</field><field name="type">destination</field></record>
+        <record id="accessorial_GSAM" model="biziship.accessorial"><field name="name">Guaranteed by 12PM</field><field name="code">GSAM</field><field name="type">destination</field></record>
+        <record id="accessorial_GS14" model="biziship.accessorial"><field name="name">Guaranteed by 2PM</field><field name="code">GS14</field><field name="type">destination</field></record>
+        <record id="accessorial_GS15" model="biziship.accessorial"><field name="name">Guaranteed by 3PM</field><field name="code">GS15</field><field name="type">destination</field></record>
+        <record id="accessorial_GS1530" model="biziship.accessorial"><field name="name">Guaranteed by 3:30PM</field><field name="code">GS1530</field><field name="type">destination</field></record>
+        <record id="accessorial_GS17" model="biziship.accessorial"><field name="name">Guaranteed by 5PM</field><field name="code">GS17</field><field name="type">destination</field></record>
+        <record id="accessorial_GUR" model="biziship.accessorial"><field name="name">Guaranteed by Hour</field><field name="code">GUR</field><field name="type">destination</field></record>
+        <record id="accessorial_GSMUL" model="biziship.accessorial"><field name="name">Guaranteed Multi-Hour Window</field><field name="code">GSMUL</field><field name="type">destination</field></record>
+        <record id="accessorial_GSSING" model="biziship.accessorial"><field name="name">Guaranteed Single-Hour Window</field><field name="code">GSSING</field><field name="type">destination</field></record>
+        <record id="accessorial_MISC" model="biziship.accessorial"><field name="name">Misc Freight Charge</field><field name="code">*</field><field name="type">destination</field></record>
+    </data>
+</odoo>

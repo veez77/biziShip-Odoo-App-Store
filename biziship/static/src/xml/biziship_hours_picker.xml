@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="biziship.HoursPicker">
+        <div class="biziship-hours-picker" t-ref="root">
+
+            <!-- Label row: title + live summary -->
+            <div class="biziship-hp-header">
+                <span class="biziship-hp-title" t-esc="title"/>
+                <span class="biziship-hp-summary" t-esc="summary"/>
+            </div>
+
+            <!-- Day-of-week pills -->
+            <div class="biziship-hp-days" role="group">
+                <t t-foreach="allDays" t-as="day" t-key="day.key">
+                    <button
+                        type="button"
+                        class="biziship-hp-pill"
+                        t-att-class="{ 'active': isDaySelected(day.key) }"
+                        t-att-aria-pressed="isDaySelected(day.key) ? 'true' : 'false'"
+                        t-att-aria-label="day.full"
+                        t-att-title="day.full"
+                        t-on-click="() => this.toggleDay(day.key)">
+                        <t t-esc="day.short"/>
+                    </button>
+                </t>
+            </div>
+
+            <!-- Time range: start [dropdown] to end [dropdown] -->
+            <div class="biziship-hp-times">
+                <!-- Start -->
+                <div class="biziship-hp-time-wrap">
+                    <button
+                        type="button"
+                        class="biziship-hp-time-btn"
+                        aria-haspopup="listbox"
+                        t-att-aria-expanded="state.openPicker === 'start' ? 'true' : 'false'"
+                        t-on-click="() => this.togglePicker('start')">
+                        <i class="fa fa-clock-o biziship-hp-clock"/>
+                        <span t-esc="startDisplay"/>
+                        <i class="fa fa-chevron-down biziship-hp-chev"/>
+                    </button>
+                    <div t-if="state.openPicker === 'start'" class="biziship-hp-dropdown" role="listbox" t-ref="list">
+                        <t t-foreach="timeOptions" t-as="opt" t-key="opt">
+                            <div
+                                class="biziship-hp-opt"
+                                t-att-class="{ 'selected': opt === start }"
+                                t-att-aria-selected="opt === start ? 'true' : 'false'"
+                                role="option"
+                                t-on-click="() => this.selectStart(opt)">
+                                <t t-esc="fmtTime12(opt)"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+                <span class="biziship-hp-to">to</span>
+
+                <!-- End -->
+                <div class="biziship-hp-time-wrap">
+                    <button
+                        type="button"
+                        class="biziship-hp-time-btn"
+                        aria-haspopup="listbox"
+                        t-att-aria-expanded="state.openPicker === 'end' ? 'true' : 'false'"
+                        t-on-click="() => this.togglePicker('end')">
+                        <i class="fa fa-clock-o biziship-hp-clock"/>
+                        <span t-esc="endDisplay"/>
+                        <i class="fa fa-chevron-down biziship-hp-chev"/>
+                    </button>
+                    <div t-if="state.openPicker === 'end'" class="biziship-hp-dropdown" role="listbox" t-ref="list">
+                        <t t-foreach="endOptions" t-as="opt" t-key="opt">
+                            <div
+                                class="biziship-hp-opt"
+                                t-att-class="{ 'selected': opt === end }"
+                                t-att-aria-selected="opt === end ? 'true' : 'false'"
+                                role="option"
+                                t-on-click="() => this.selectEnd(opt)">
+                                <t t-esc="fmtTime12(opt)"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </t>
+
+</templates>

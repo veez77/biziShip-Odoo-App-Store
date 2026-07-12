@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_biziship_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.biziship.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(biziship.action_biziship_bol_import_wizard)d" string="BiziShip: Process BOL" type="action" class="btn-secondary" invisible="state not in ['draft', 'sent', 'sale']"/>
+                <button name="action_demo_vinegar_order" string="Populate Demo Vinegar Order" type="object" class="btn-info" invisible="state != 'draft'"/>
+            </xpath>
+            <xpath expr="//field[@name='date_order']" position="attributes">
+                <attribute name="widget">date</attribute>
+                <attribute name="help"></attribute>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="LTL Freight Details" name="biziship_freight_details">
+                    <!-- BiziShip Branded Header -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e8e6f0;border-left:4px solid #f49800;border-radius:8px;padding:8px 18px 8px 14px;margin-bottom:14px;box-shadow:0 1px 4px rgba(32,31,65,0.07);">
+                        <div>
+                            <div style="font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#f49800;margin-bottom:1px;">Powered by</div>
+                            <div style="font-size:0.78rem;color:#888;letter-spacing:0.2px;">Smarter Freight. Faster Decisions.</div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 467.33 143.91" style="height:28px;width:auto;">
+                          <defs><style>.bc1{fill:#f49800}.bc2{fill:#201f41}</style></defs>
+                          <path class="bc2" d="M103.88,103.12c2.57-2.48,3.92-5.72,3.92-9.36v-55.07c0-3.57-1.34-6.8-3.86-9.36-2.49-2.61-5.75-3.98-9.41-3.98h-.12c-3.59,0-6.85,1.36-9.42,3.92-2.57,2.57-3.92,5.82-3.92,9.42v55.07c0,3.67,1.38,6.93,3.98,9.42,2.56,2.53,5.79,3.86,9.36,3.86h.12c3.64,0,6.87-1.36,9.36-3.92Z"/>
+                          <path class="bc2" d="M116.08,77.9c-3.37,3.39-5.15,7.43-5.15,11.67,0,2.34.53,4.75,1.58,7.14,2.83,6.65,8.32,10.32,15.46,10.32h39.56c3.59,0,6.83-1.34,9.36-3.86,2.57-2.57,3.92-5.82,3.92-9.42v-.12c0-3.59-1.36-6.85-3.92-9.42-2.53-2.53-5.76-3.86-9.36-3.86l-16.8-.03c7.41-7.78,15.62-16.39,24.62-25.84,3.38-3.35,5.16-7.39,5.16-11.68,0-2.35-.53-4.76-1.58-7.16-2.88-6.64-8.45-10.3-15.7-10.3h-36.59c-3.66,0-6.94,1.38-9.48,3.98-2.49,2.56-3.8,5.77-3.8,9.3v.18c0,3.52,1.32,6.74,3.8,9.3,2.53,2.61,5.81,3.98,9.48,3.98h14.08c-2.03,2.13-4.24,4.45-6.64,6.97-7.95,8.34-14,14.68-18,18.85Z"/>
+                          <path class="bc2" d="M206.81,29.33c-2.49-2.61-5.75-3.98-9.41-3.98h-.12c-3.59,0-6.85,1.36-9.42,3.92-2.57,2.57-3.92,5.82-3.92,9.42v55.07c0,3.67,1.38,6.93,3.98,9.42,2.56,2.53,5.79,3.86,9.36,3.86h.12c3.64,0,6.87-1.36,9.36-3.92,2.57-2.48,3.92-5.72,3.92-9.36v-55.07c0-3.57-1.34-6.8-3.86-9.36Z"/>
+                          <path class="bc2" d="M271.61,54.38s0,0-.01,0c-3.6-3.42-8.66-6.02-15.44-7.96-.04-.01-.09-.02-.13-.04-8.02-2.12-10.05-2.85-10.49-3.03-.13-.07-.23-.13-.3-.18,0-.18,0-.22.12-.35.02-.02.03-.03.04-.04.03,0,.1-.02.25-.02h13.77c4.18,0,7.97-1.56,10.96-4.53,3.05-2.92,4.67-6.73,4.67-11.03v-.14c0-4.21-1.59-8.03-4.6-11.03-3.01-3.01-6.82-4.6-11.03-4.6h-13.06c-8.7,0-16.25,3.15-22.46,9.35-6.16,6.16-9.28,13.69-9.28,22.39s2.69,16.06,7.98,21.23c3.61,3.54,8.67,6.23,15.47,8.24.03,0,.05.02.08.02,7.26,2.04,9.82,2.83,10.71,3.12-.03,0-.11.02-.24.02h-19.23c-4.16,0-7.96,1.59-10.96,4.6-3.01,3.01-4.6,6.82-4.6,11.03v.14c0,4.3,1.61,8.11,4.67,11.03,3,2.96,6.76,4.53,10.89,4.53h18.52c8.68,0,16.23-3.11,22.44-9.26.02-.02.03-.03.05-.05,6.14-6.2,9.26-13.75,9.26-22.44s-2.71-15.93-8.06-21.02Z"/>
+                          <path class="bc2" d="M317.24,25.35c-3.15,0-5.99.25-8.54.76v-12.33c0-3.6-1.36-6.86-3.93-9.43-.02-.02-.04-.04-.06-.06-2.56-2.49-5.78-3.81-9.31-3.81h-.18c-3.53,0-6.74,1.32-9.31,3.81-.02.02-.04.04-.06.06-2.57,2.57-3.93,5.83-3.93,9.43v80.08c0,3.68,1.38,6.93,3.99,9.43,2.56,2.53,5.78,3.87,9.31,3.87h.18c3.53,0,6.75-1.34,9.31-3.87,2.61-2.49,3.99-5.75,3.99-9.43v-33.18c0-2.42.78-4.35,2.46-6.06,1.7-1.7,3.64-2.49,6.08-2.49s4.32.79,6.03,2.49c1.67,1.71,2.46,3.63,2.46,6.06v33.18c0,3.68,1.38,6.93,3.99,9.43,2.56,2.53,5.8,3.87,9.37,3.87h.12c3.64,0,6.88-1.36,9.37-3.93,2.57-2.49,3.93-5.72,3.93-9.37v-33.18c0-9.69-3.48-18.08-10.36-24.96-6.88-6.87-15.25-10.36-24.9-10.36Z"/>
+                          <path class="bc2" d="M369.11,25.35h-.12c-3.6,0-6.86,1.36-9.43,3.93-2.57,2.57-3.93,5.83-3.93,9.43v55.14c0,3.68,1.38,6.93,3.99,9.43,2.56,2.53,5.8,3.87,9.37,3.87h.12c3.64,0,6.88-1.36,9.37-3.93,2.57-2.49,3.93-5.72,3.93-9.37v-55.14c0-3.57-1.34-6.81-3.87-9.37-2.5-2.61-5.75-3.99-9.43-3.99Z"/>
+                          <path class="bc1" d="M426.43,52c-3.97,0-7.26,1.33-10.04,4.08-2.74,2.78-4.08,6.07-4.08,10.04s1.3,7.17,4.09,10c2.82,2.81,6.01,4.13,10.03,4.13s7.16-1.32,9.98-4.14c2.82-2.82,4.14-6,4.14-9.98s-1.32-7.22-4.14-10.05c-2.78-2.78-5.95-4.08-9.98-4.08Z"/>
+                          <path class="bc2" d="M455.34,37.34c-7.96-7.96-17.69-12-28.9-12s-20.91,4.01-28.83,11.92c-7.96,7.88-12.02,17.58-12.07,28.83,0,0,0,.02,0,.02v58.62c0,3.56,1.36,6.8,3.93,9.37s5.81,3.93,9.37,3.93h.18c3.56,0,6.8-1.36,9.37-3.93,2.57-2.57,3.93-5.81,3.93-9.37v-19.62c4.1,1.34,8.82,2.02,14.12,2.02,11.22,0,20.94-4.04,28.9-12,7.96-7.96,12-17.68,12-28.9s-4.04-20.94-12-28.9Z"/>
+                          <path class="bc1" d="M38.89,54.95c-3.82,0-6.85,1.25-9.54,3.92-2.65,2.69-3.89,5.71-3.89,9.5s1.27,6.9,3.88,9.55c2.65,2.61,5.77,3.88,9.55,3.88s6.85-1.23,9.49-3.88c2.69-2.69,3.94-5.72,3.94-9.55s-1.25-6.81-3.94-9.49c-2.68-2.68-5.7-3.94-9.49-3.94Z"/>
+                          <path class="bc2" d="M66.37,40.78c-7.57-7.57-16.82-11.41-27.48-11.41-5.04,0-9.53.64-13.43,1.92V12.64c0-3.38-1.29-6.46-3.74-8.91-2.44-2.44-5.52-3.74-8.91-3.74h-.17c-3.38,0-6.46,1.29-8.91,3.74S0,9.26,0,12.64v55.73s0,.02,0,.02c.04,10.7,3.91,19.92,11.48,27.41,7.53,7.52,16.75,11.34,27.41,11.34s19.91-3.84,27.48-11.41c7.57-7.57,11.41-16.82,11.41-27.48s-3.84-19.91-11.41-27.48Z"/>
+                          <path class="bc2" d="M173.81,138.07l-1.61-5.52h-6.49l-1.58,5.52h-1.64l5.66-18.58h1.66l5.68,18.58h-1.69ZM166.09,131.2h5.71l-2.87-9.97-2.84,9.97Z"/>
+                          <path class="bc2" d="M178.26,138.07v-18.58h1.58v18.58h-1.58Z"/>
+                          <path class="bc2" d="M190.11,138.07v-18.58h1.58v17.16h7.35v1.42h-8.93Z"/>
+                          <path class="bc2" d="M205.82,138.41c-1.64,0-2.9-.61-3.77-1.82s-1.3-2.98-1.3-5.28.43-4.04,1.3-5.27,2.12-1.84,3.77-1.84,2.9.61,3.77,1.84c.87,1.22,1.3,2.98,1.3,5.27s-.43,4.07-1.3,5.28c-.87,1.22-2.12,1.82-3.77,1.82ZM205.82,137.05c1.18,0,2.06-.47,2.64-1.41s.87-2.38.87-4.33c0-3.83-1.17-5.74-3.51-5.74s-3.51,1.91-3.51,5.74c0,1.95.29,3.39.87,4.33.58.94,1.46,1.41,2.64,1.41Z"/>
+                          <path class="bc2" d="M221.51,136.27c-1.05,1.04-2.21,1.56-3.46,1.56-1.34,0-2.42-.61-3.24-1.84-.82-1.22-1.23-2.84-1.23-4.84,0-1.43.19-2.67.56-3.73.38-1.05.9-1.85,1.58-2.4.68-.55,1.47-.82,2.39-.82,1.16,0,2.33.5,3.51,1.5l.13-1.13h1.29v13.11c0,4.15-1.67,6.22-5.01,6.22-1.29,0-2.49-.32-3.59-.96v-1.26c1.2.57,2.36.86,3.49.86,1.25,0,2.16-.38,2.73-1.14s.86-2,.86-3.71v-1.42ZM218.45,136.46c1,0,2.02-.47,3.06-1.42v-8.18c-1.13-.86-2.16-1.29-3.11-1.29-1.07,0-1.89.47-2.44,1.41-.55.94-.83,2.32-.83,4.14,0,1.68.29,2.99.87,3.93.58.94,1.4,1.41,2.45,1.41Z"/>
+                          <path class="bc2" d="M227.89,121.55c-.32,0-.57-.1-.75-.29-.18-.2-.27-.46-.27-.8s.09-.61.27-.8c.18-.2.43-.29.75-.29s.58.09.76.28.28.46.28.82-.09.63-.28.82c-.19.19-.44.28-.76.28ZM227.14,138.07v-13.49h1.53v13.49h-1.53Z"/>
+                          <path class="bc2" d="M238,134.58c0-.52-.14-.96-.43-1.33-.29-.37-.73-.69-1.34-.98l-1.8-.86c-.86-.41-1.48-.9-1.88-1.46-.39-.56-.59-1.24-.59-2.02,0-1.09.35-1.98,1.06-2.68s1.6-1.05,2.69-1.05,2.13.27,3.11.8v1.26c-1.04-.48-2.05-.72-3.03-.72-.75,0-1.34.21-1.77.63-.43.42-.64.99-.64,1.7,0,.52.14.96.43,1.33s.79.72,1.5,1.06l1.8.86c.82.39,1.41.86,1.77,1.39.36.54.54,1.2.54,1.98,0,1.22-.36,2.17-1.07,2.87s-1.71,1.05-2.98,1.05-2.45-.32-3.54-.96v-1.26c.66.3,1.27.53,1.82.67.55.14,1.12.21,1.69.21.84,0,1.49-.22,1.96-.66.46-.44.7-1.05.7-1.84Z"/>
+                          <path class="bc2" d="M247.84,137.77c-.66.29-1.4.43-2.23.43-.97,0-1.68-.27-2.13-.8-.46-.54-.68-1.38-.68-2.52v-8.96h-2.09v-1.1l2.15-.21.24-3.94h1.23v3.91h3.35v1.34h-3.35v8.82c0,.73.14,1.27.42,1.61s.72.51,1.33.51c.57,0,1.16-.12,1.77-.35v1.26Z"/>
+                          <path class="bc2" d="M251.35,121.55c-.32,0-.57-.1-.75-.29-.18-.2-.27-.46-.27-.8s.09-.61.27-.8c.18-.2.43-.29.75-.29s.58.09.76.28.28.46.28.82-.09.63-.28.82c-.19.19-.44.28-.76.28ZM250.6,138.07v-13.49h1.53v13.49h-1.53Z"/>
+                          <path class="bc2" d="M263.52,137.56c-.82.5-1.8.75-2.92.75-1.68,0-2.94-.59-3.78-1.77s-1.26-2.92-1.26-5.23.44-4.03,1.33-5.21,2.18-1.78,3.87-1.78c.93,0,1.81.21,2.63.64v1.26c-.88-.36-1.68-.54-2.41-.54-1.32,0-2.29.45-2.91,1.34-.62.89-.92,2.27-.92,4.13v.32c0,1.86.31,3.24.92,4.13.62.89,1.56,1.34,2.83,1.34.82,0,1.7-.21,2.63-.64v1.26Z"/>
+                          <path class="bc2" d="M271.73,134.58c0-.52-.14-.96-.43-1.33-.29-.37-.73-.69-1.34-.98l-1.8-.86c-.86-.41-1.48-.9-1.88-1.46-.39-.56-.59-1.24-.59-2.02,0-1.09.35-1.98,1.06-2.68s1.6-1.05,2.69-1.05,2.13.27,3.11.8v1.26c-1.04-.48-2.05-.72-3.03-.72-.75,0-1.34.21-1.77.63-.43.42-.64.99-.64,1.7,0,.52.14.96.43,1.33s.79.72,1.5,1.06l1.8.86c.82.39,1.41.86,1.77,1.39.36.54.54,1.2.54,1.98,0,1.22-.36,2.17-1.07,2.87s-1.71,1.05-2.98,1.05-2.45-.32-3.54-.96v-1.26c.66.3,1.27.53,1.82.67.55.14,1.12.21,1.69.21.84,0,1.49-.22,1.96-.66.46-.44.7-1.05.7-1.84Z"/>
+                          <path class="bc2" d="M284.38,128.71c-2.13-1.04-3.19-2.59-3.19-4.67,0-1.48.44-2.69,1.33-3.61.88-.92,2.04-1.38,3.47-1.38,1.34,0,2.65.33,3.94.99v1.37c-1.25-.59-2.53-.88-3.83-.88-.98,0-1.78.31-2.39.94-.61.63-.91,1.45-.91,2.47,0,.77.2,1.42.6,1.97.4.54,1.02,1.02,1.86,1.43l2.52,1.23c2,.98,3,2.54,3,4.67,0,1.59-.47,2.86-1.42,3.82-.95.96-2.21,1.43-3.78,1.43-.79,0-1.55-.09-2.29-.28s-1.41-.46-2-.82v-1.37c1.43.66,2.85.99,4.26.99,1.11,0,1.99-.33,2.64-.99.65-.66.98-1.55.98-2.68,0-1.52-.76-2.65-2.28-3.41l-2.52-1.23Z"/>
+                          <path class="bc2" d="M298.62,138.41c-1.64,0-2.9-.61-3.77-1.82s-1.3-2.98-1.3-5.28.43-4.04,1.3-5.27,2.12-1.84,3.77-1.84,2.9.61,3.77,1.84c.87,1.22,1.3,2.98,1.3,5.27s-.43,4.07-1.3,5.28c-.87,1.22-2.12,1.82-3.77,1.82ZM298.62,137.05c1.18,0,2.06-.47,2.64-1.41s.87-2.38.87-4.33c0-3.83-1.17-5.74-3.51-5.74s-3.51,1.91-3.51,5.74c0,1.95.29,3.39.87,4.33.58.94,1.46,1.41,2.64,1.41Z"/>
+                          <path class="bc2" d="M310.28,137.93c-.39.14-.81.21-1.26.21-.64,0-1.14-.21-1.47-.62-.34-.41-.51-1.02-.51-1.82v-17.48h1.53v17.4c0,.43.07.73.21.91.14.18.38.27.72.27.25,0,.51-.03.78-.08v1.21Z"/>
+                          <path class="bc2" d="M320.74,138.07l-.13-1.37c-1.41,1.14-2.82,1.72-4.24,1.72-1.04,0-1.82-.35-2.36-1.05s-.8-1.71-.8-3.03v-9.76h1.53v9.14c0,1.16.17,2.01.52,2.53s.92.79,1.7.79c.52,0,1.09-.13,1.7-.39.62-.26,1.24-.62,1.86-1.09v-10.99h1.53v13.49h-1.31Z"/>
+                          <path class="bc2" d="M331.68,137.77c-.66.29-1.4.43-2.23.43-.97,0-1.68-.27-2.13-.8-.46-.54-.68-1.38-.68-2.52v-8.96h-2.09v-1.1l2.15-.21.24-3.94h1.23v3.91h3.35v1.34h-3.35v8.82c0,.73.14,1.27.42,1.61s.72.51,1.33.51c.57,0,1.16-.12,1.77-.35v1.26Z"/>
+                          <path class="bc2" d="M335.19,121.55c-.32,0-.57-.1-.75-.29-.18-.2-.27-.46-.27-.8s.09-.61.27-.8c.18-.2.43-.29.75-.29s.58.09.76.28.28.46.28.82-.09.63-.28.82c-.19.19-.44.28-.76.28ZM334.44,138.07v-13.49h1.53v13.49h-1.53Z"/>
+                          <path class="bc2" d="M344.47,138.41c-1.64,0-2.9-.61-3.77-1.82s-1.3-2.98-1.3-5.28.43-4.04,1.3-5.27,2.12-1.84,3.77-1.84,2.9.61,3.77,1.84c.87,1.22,1.3,2.98,1.3,5.27s-.43,4.07-1.3,5.28c-.87,1.22-2.12,1.82-3.77,1.82ZM344.47,137.05c1.18,0,2.06-.47,2.64-1.41s.87-2.38.87-4.33c0-3.83-1.17-5.74-3.51-5.74s-3.51,1.91-3.51,5.74c0,1.95.29,3.39.87,4.33.58.94,1.46,1.41,2.64,1.41Z"/>
+                          <path class="bc2" d="M360.48,138.07v-9.3c0-1.11-.18-1.92-.54-2.43s-.92-.76-1.69-.76c-1.14,0-2.42.5-3.83,1.5v10.99h-1.53v-13.49h1.31l.13,1.37c1.54-1.16,3.03-1.74,4.48-1.74,1.04,0,1.83.34,2.37,1.02.54.68.82,1.67.82,2.98v9.87h-1.53Z"/>
+                          <path class="bc2" d="M371.2,134.58c0-.52-.14-.96-.43-1.33-.29-.37-.73-.69-1.34-.98l-1.8-.86c-.86-.41-1.48-.9-1.88-1.46-.39-.56-.59-1.24-.59-2.02,0-1.09.35-1.98,1.06-2.68s1.6-1.05,2.69-1.05,2.13.27,3.11.8v1.26c-1.04-.48-2.05-.72-3.03-.72-.75,0-1.34.21-1.77.63-.43.42-.64.99-.64,1.7,0,.52.14.96.43,1.33s.79.72,1.5,1.06l1.8.86c.82.39,1.41.86,1.77,1.39.36.54.54,1.2.54,1.98,0,1.22-.36,2.17-1.07,2.87s-1.71,1.05-2.98,1.05-2.45-.32-3.54-.96v-1.26c.66.3,1.27.53,1.82.67.55.14,1.12.21,1.69.21.84,0,1.49-.22,1.96-.66.46-.44.7-1.05.7-1.84Z"/>
+                          <path class="bc2" d="M450.63,121.81h-.86c-2.1,0-3.86.26-5.22.78-1.39.53-2.5,1.25-3.31,2.14-.81.9-1.37,1.95-1.66,3.11-.28,1.1-.42,2.25-.42,3.43v5.02c0,.47.17.9.5,1.23.33.34.75.51,1.22.51s.89-.18,1.22-.51c.33-.33.5-.76.5-1.23v-2.44h6.3v2.45c0,.47.17.89.5,1.22.33.33.75.51,1.22.51s.89-.18,1.22-.51c.33-.33.5-.75.5-1.22v-12.76c0-.46-.17-.88-.5-1.22-.33-.34-.75-.52-1.23-.52ZM448.91,125.26v5.15h-6.3c.05-1.96.6-3.29,1.65-3.97,1.16-.75,2.72-1.15,4.64-1.18Z"/>
+                          <path class="bc2" d="M456.77,122.16c-.33-.34-.76-.52-1.23-.52s-.9.18-1.23.53c-.32.34-.49.76-.49,1.22v12.91c0,.47.17.9.5,1.23.33.33.75.51,1.22.51s.89-.18,1.22-.51c.33-.33.51-.76.51-1.23v-12.91c0-.46-.17-.89-.5-1.22Z"/>
+                          <circle class="bc2" cx="434.27" cy="134.9" r="3.14"/>
+                        </svg>
+                    </div>
+                    <!-- End BiziShip Branded Header -->
+                    <field name="biziship_is_connected" invisible="1"/>
+                    <field name="biziship_connected_email" invisible="1"/>
+                    <field name="biziship_connected_email_display" invisible="1"/>
+                    <field name="biziship_last_fetch_nonce" invisible="1"/>
+                    <field name="biziship_origin_zip_invalid" invisible="1"/>
+                    <field name="biziship_dest_zip_invalid" invisible="1"/>
+                    <div class="alert alert-info py-1 mb-2 d-flex justify-content-between align-items-center" role="status" style="border-radius: 4px; border-left: 4px solid #00b14f;" invisible="not biziship_is_connected">
+                        <div class="d-flex align-items-center">
+                            <i class="fa fa-user-circle text-primary me-2" style="font-size: 1.1rem;"/>
+                            <span>Logged in biziShip.ai as: <field name="biziship_connected_email_display" class="fw-bold ms-1"/></span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <button name="action_biziship_refresh_profile_rpc" type="object" icon="fa-refresh" class="btn btn-link p-0 text-muted" title="Sync your BiziShip account details (name, environment) without re-authenticating" style="font-size: 0.95rem; line-height: 1;"/>
+                            <span class="badge rounded-pill bg-success-light text-success fw-bold px-3" style="font-size: 11px; border: 1px solid #00b14f;">ACCOUNT CONNECTED</span>
+                            <button name="%(action_biziship_auth_wizard)d" type="action" icon="fa-sign-in" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign in again with a different email or refresh your session. You will receive a one-time PIN by email."/>
+                            <button name="%(action_biziship_logout_wizard)d" type="action" icon="fa-sign-out" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign out from biziShip.ai"/>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center gap-2 mb-2" invisible="not biziship_is_connected">
+                        <div class="d-flex align-items-center" invisible="biziship_priority1_env != 'PROD'">
+                            <span class="badge rounded-pill bg-success text-white px-2 py-1" style="font-size: 11px; font-weight: bold; letter-spacing: 0.5px;">Live!</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2" invisible="biziship_priority1_env != 'DEMO'">
+                            <span class="badge rounded-pill bg-secondary text-white px-2 py-1" style="font-size: 11px; font-weight: bold; letter-spacing: 0.5px;">Demo</span>
+                            <span class="text-muted" style="font-size: 11px;" invisible="biziship_demo_tries &lt; 0"><field name="biziship_demo_tries" nolabel="1" readonly="1" class="d-inline fw-bold"/> tries left</span>
+                        </div>
+                    </div>
+                    <div class="alert alert-warning py-1 mb-2" role="alert" invisible="biziship_is_connected">
+                        <i class="fa fa-exclamation-triangle me-1" title="Warning"/> 
+                        <span>biziShip.ai account not connected. Please <button name="%(action_biziship_auth_wizard)d" string="Connect" type="action" class="btn btn-link p-0 align-baseline"/> to enable all features.</span>
+                    </div>
+                    <group string="Logistics Details">
+                            <div class="d-flex align-items-center mb-2" colspan="2">
+                                <button name="action_biziship_load_from_pool" string="Load Saved Freight" type="object" class="biziship-btn-pool-action me-2" icon="fa-folder-open-o"/>
+                                <button name="action_biziship_save_to_pool" string="Save to My Pool" type="object" class="biziship-btn-pool-action" icon="fa-save"/>
+                            </div>
+                            <label for="biziship_po_number" string="PO Number"/>
+                            <div class="d-flex align-items-center gap-2">
+                                <button name="action_sync_po_from_destination" type="object" icon="fa-refresh" string="" class="btn btn-sm btn-link text-primary p-0" title="Copy from Destination PO"/>
+                                <field name="biziship_po_number" nolabel="1" class="flex-grow-1"/>
+                            </div>
+                            <label for="biziship_references_json" string="Reference Number"/>
+                            <field name="biziship_references_json" widget="biziship_references" nolabel="1"/>
+                            <field name="biziship_pickup_date"/>
+                        </group>
+                    <group>
+                        <group name="biziship_origin_group">
+                            <div colspan="2" class="d-flex align-items-center justify-content-between o_horizontal_separator mb-2 mt-0">
+                                <span class="fw-bold">ORIGIN &amp; PICKUP</span>
+                                <div class="d-flex align-items-center gap-4">
+                                    <button name="action_open_origin_address_history" string="Previous Addresses" type="object" class="btn btn-sm btn-link text-primary p-0" icon="fa-history"/>
+                                    <button name="action_biziship_refresh_origin_from_warehouse" string="Copy from Warehouse" type="object" class="btn btn-sm btn-link text-primary p-0" icon="fa-copy"/>
+                                </div>
+                            </div>
+                            <field name="biziship_origin_company" nolabel="1" colspan="2" placeholder="Origin Company Name"/>
+                            <field name="biziship_origin_address" widget="biziship_places" nolabel="1" colspan="2" placeholder="Address Line 1"/>
+                            <field name="biziship_origin_address2" nolabel="1" colspan="2" placeholder="Address Line 2 (optional)"/>
+                            <div class="d-flex w-100" colspan="2">
+                                <field name="biziship_origin_city" placeholder="City" style="flex: 2; margin-right: 8px;"/>
+                                <field name="biziship_origin_state_id" nolabel="1" placeholder="State" options="{'no_open': True, 'no_create': True}" style="flex: 1;" domain="[('country_id', '=?', biziship_origin_country_id)]"/>
+                            </div>
+                            <div class="d-flex w-100" colspan="2">
+                                <div style="flex: 2; margin-right: 8px;">
+                                    <field name="biziship_origin_zip" placeholder="Zip Code" nolabel="1" style="width: 100%;"/>
+                                    <div class="biziship-zip-error-bar" invisible="not biziship_origin_zip_invalid"/>
+                                </div>
+                                <field name="biziship_origin_country_id" nolabel="1" placeholder="Country" options="{'no_open': True, 'no_create': True}" domain="[('code', 'in', ('US', 'CA', 'MX'))]" style="flex: 1;"/>
+                            </div>
+                            <field name="biziship_origin_contact_name" nolabel="1" colspan="2" placeholder="Contact Name (optional)"/>
+                            <field name="biziship_origin_contact_phone" nolabel="1" colspan="2" placeholder="Contact Phone (optional)"/>
+                            <field name="biziship_origin_contact_email" nolabel="1" colspan="2" placeholder="Contact Email (optional)"/>
+                            <field name="biziship_origin_pickup_hours" widget="biziship_hours_picker" nolabel="1" colspan="2"/>
+                            <field name="biziship_origin_residential_warning" invisible="1"/>
+                            <field name="biziship_origin_address_invalid" invisible="1"/>
+                            <group colspan="2" class="mt-2">
+                                <field name="biziship_origin_residential"/>
+                                <field name="biziship_origin_liftgate"/>
+                                <field name="biziship_origin_limited_access"/>
+                            </group>
+                            <div colspan="2" class="alert alert-warning py-1 mt-1 mb-2 d-flex align-items-center" role="alert" invisible="not biziship_origin_residential_warning or biziship_origin_residential" style="font-size: 13px;">
+                                <i class="fa fa-exclamation-triangle me-2" title="Warning"></i>
+                                <span>This address appears to be residential. Consider checking "Residential Pickup/Delivery".</span>
+                            </div>
+                            <div colspan="2" class="alert alert-warning py-1 mt-1 mb-2 d-flex align-items-center" role="alert" invisible="not biziship_origin_address_invalid" style="font-size: 13px;">
+                                <i class="fa fa-exclamation-triangle me-2" title="Warning"></i>
+                                <span>This pickup address could not be validated. Please verify it is correct before requesting quotes.</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2 w-100" colspan="2">
+                                <field name="biziship_origin_accessorial_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="+ More Services" nolabel="1" style="flex-grow: 1;"/>
+                                <button name="action_biziship_uncheck_all_origin" string="Uncheck all" type="object" class="btn btn-sm btn-link text-muted ms-2 p-0 text-nowrap" invisible="not biziship_origin_residential and not biziship_origin_liftgate and not biziship_origin_limited_access and not biziship_origin_accessorial_ids"/>
+                            </div>
+                        </group>
+                        <group name="biziship_destination_group">
+                            <div colspan="2" class="d-flex align-items-center justify-content-between o_horizontal_separator mb-2 mt-0">
+                                <span class="fw-bold">DESTINATION</span>
+                                <div class="d-flex align-items-center gap-4">
+                                    <button name="action_open_dest_address_history" string="Previous Addresses" type="object" class="btn btn-sm btn-link text-primary p-0" icon="fa-history"/>
+                                    <button name="action_biziship_copy_customer_to_dest" string="Copy Customer Details" type="object" class="btn btn-sm btn-link text-primary p-0" icon="fa-copy" invisible="not partner_id"/>
+                                </div>
+                            </div>
+                            <field name="biziship_dest_company" nolabel="1" colspan="2" placeholder="Destination Company Name"/>
+                            <field name="biziship_dest_address" widget="biziship_places" nolabel="1" colspan="2" placeholder="Address Line 1"/>
+                            <field name="biziship_dest_address2" nolabel="1" colspan="2" placeholder="Address Line 2 (optional)"/>
+                            <div class="d-flex w-100" colspan="2">
+                                <field name="biziship_dest_city" placeholder="City" style="flex: 2; margin-right: 8px;"/>
+                                <field name="biziship_dest_state_id" nolabel="1" placeholder="State" options="{'no_open': True, 'no_create': True}" style="flex: 1;" domain="[('country_id', '=?', biziship_dest_country_id)]"/>
+                            </div>
+                            <div class="d-flex w-100" colspan="2">
+                                <div style="flex: 2; margin-right: 8px;">
+                                    <field name="biziship_dest_zip" placeholder="Zip Code" nolabel="1" style="width: 100%;"/>
+                                    <div class="biziship-zip-error-bar" invisible="not biziship_dest_zip_invalid"/>
+                                </div>
+                                <field name="biziship_dest_country_id" nolabel="1" placeholder="Country" options="{'no_open': True, 'no_create': True}" domain="[('code', 'in', ('US', 'CA', 'MX'))]" style="flex: 1;"/>
+                            </div>
+                            <field name="biziship_dest_contact_name" nolabel="1" colspan="2" placeholder="Contact Name (optional)"/>
+                            <field name="biziship_dest_contact_phone" nolabel="1" colspan="2" placeholder="Contact Phone (optional)"/>
+                            <field name="biziship_dest_contact_email" nolabel="1" colspan="2" placeholder="Contact Email (optional)"/>
+                            <field name="biziship_dest_delivery_hours" widget="biziship_hours_picker" nolabel="1" colspan="2"/>
+                            <field name="biziship_dest_residential_warning" invisible="1"/>
+                            <field name="biziship_dest_address_invalid" invisible="1"/>
+                            <group col="4" colspan="2" class="mt-2">
+                                <field name="biziship_dest_appointment" colspan="2"/>
+                                <field name="biziship_dest_residential" colspan="2"/>
+                                <field name="biziship_dest_notify" colspan="2"/>
+                                <field name="biziship_dest_limited_access" colspan="2"/>
+                                <field name="biziship_dest_liftgate" colspan="2"/>
+                                <field name="biziship_dest_hazmat" colspan="2"/>
+                            </group>
+                            <div colspan="2" class="alert alert-warning py-1 mt-1 mb-2 d-flex align-items-center" role="alert" invisible="not biziship_dest_residential_warning or biziship_dest_residential" style="font-size: 13px;">
+                                <i class="fa fa-exclamation-triangle me-2" title="Warning"></i>
+                                <span>This address appears to be residential. Consider checking "Residential Pickup/Delivery".</span>
+                            </div>
+                            <div colspan="2" class="alert alert-warning py-1 mt-1 mb-2 d-flex align-items-center" role="alert" invisible="not biziship_dest_address_invalid" style="font-size: 13px;">
+                                <i class="fa fa-exclamation-triangle me-2" title="Warning"></i>
+                                <span>This destination address could not be validated. Please verify it is correct before requesting quotes.</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2 w-100" colspan="2">
+                                <field name="biziship_dest_accessorial_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="+ More Services" nolabel="1" style="flex-grow: 1;"/>
+                                <button name="action_biziship_uncheck_all_dest" string="Uncheck all" type="object" class="btn btn-sm btn-link text-muted ms-2 p-0 text-nowrap" invisible="not biziship_dest_appointment and not biziship_dest_residential and not biziship_dest_notify and not biziship_dest_limited_access and not biziship_dest_liftgate and not biziship_dest_hazmat and not biziship_dest_accessorial_ids"/>
+                            </div>
+                        </group>
+                    </group>
+                    <group>
+                        <div colspan="2" class="d-flex align-items-center o_horizontal_separator mb-2 mt-0">
+                            <span class="fw-bold">CARGO DETAILS</span>
+                        </div>
+                        
+                        <field name="biziship_cargo_line_ids" nolabel="1" colspan="2" context="{'default_sale_order_id': id}" mode="kanban">
+                            <kanban class="biziship-cargo-kanban" create="0" quick_create="false">
+                                <templates>
+                                     <t t-name="kanban-box">
+                                        <div class="biziship-cargo-card oe_kanban_global_click">
+                                            <a t-if="!read_only_mode" type="delete" class="biziship-cargo-delete" title="Delete Cargo Item"><i class="fa fa-trash-o" title="Delete Icon"/></a>
+                                            
+                                            <div class="biziship-cargo-item-label">
+                                                <field name="display_name" class="fw-bold text-primary"/>
+                                                <!-- Hidden fields for Suggestion logic -->
+                                                <field name="nmfc_suggested_code" invisible="1"/>
+                                                <field name="nmfc_suggestion_confidence" invisible="1"/>
+                                                <field name="nmfc_suggestion_label" invisible="1"/>
+                                                <field name="nmfc_suggestion_rationale" invisible="1"/>
+                                                <field name="nmfc_applied_desc" invisible="1"/>
+                                                <field name="nmfc_is_stale" invisible="1"/>
+                                                <field name="is_processing" invisible="1"/>
+                                                <field name="biziship_nmfc_fav_trigger" invisible="1"/>
+                                            </div>
+
+                                            <!-- Row 1: Key Details -->
+                                            <div class="biziship-cargo-row-details">
+                                                <field name="packaging_type" class="fw-bold me-3" style="max-width: 100px;"/>
+                                                <span class="text-muted">Units:</span>
+                                                <field name="pieces" class="fw-bold me-3"/>
+                                                <span class="text-muted">Weight:</span>
+                                                <field name="weight" class="fw-bold"/>
+                                                <field name="weight_unit" class="me-3" style="max-width: 60px;"/>
+                                                <span class="text-muted">L</span>
+                                                <field name="length" style="max-width: 65px;"/>
+                                                <span class="text-muted ms-1">x W</span>
+                                                <field name="width" style="max-width: 65px;"/>
+                                                <span class="text-muted ms-1">x H</span>
+                                                <field name="height" style="max-width: 65px;"/>
+                                                <field name="dim_unit" class="ms-1" style="max-width: 55px;"/>
+                                            </div>
+
+                                            <!-- Row 2: Class Section & Flags (Merged) -->
+                                            <div class="biziship-cargo-row-class">
+                                                <div class="d-flex flex-column">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="me-2">Class:</span>
+                                                        <field name="freight_class" class="fw-bold me-2"/>
+                                                        <t t-if="record.is_class_overridden.raw_value">
+                                                            <span class="badge rounded-pill bg-info text-dark" style="font-size: 0.7em;">Calculated: <field name="computed_freight_class"/></span>
+                                                        </t>
+                                                    </div>
+                                                    <field name="line_total_weight_display" class="text-muted" style="font-size: 0.85em;"/>
+                                                </div>
+
+                                                <!-- Checkboxes on the Right (Always Visible) -->
+                                                <div class="biziship-cargo-row-flags">
+                                                    <div class="biziship-cargo-flag-group">
+                                                        <field name="hazmat" title="Hazardous Material"/><span>Hazmat</span>
+                                                    </div>
+                                                    <div class="biziship-cargo-flag-group">
+                                                        <field name="stackable" title="Stackable"/><span>Stackable</span>
+                                                    </div>
+                                                    <div class="biziship-cargo-flag-group">
+                                                        <field name="used" title="Used / Reconditioned"/><span>Used</span>
+                                                    </div>
+                                                    <div class="biziship-cargo-flag-group">
+                                                        <field name="machinery" title="Machinery"/><span>Machinery</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Row 3: Description & NMFC (Moved up) -->
+                                            <div class="biziship-cargo-row-desc">
+                                                <div class="biziship-cargo-desc-input">
+                                                    <field name="cargo_desc" placeholder="Commodity description (e.g. Steel bearings, hydraulic pump)" widget="biziship_commodity"/>
+                                                </div>
+                                                <div t-attf-class="biziship-cargo-nmfc-box {{ record.nmfc_is_stale.raw_value ? 'biziship-nmfc-stale' : '' }}" style="width: 140px !important;">
+                                                    <span class="text-muted me-1">NMFC</span>
+                                                    <field name="nmfc" placeholder="NMFC Code"/>
+                                                </div>
+                                            </div>
+
+                                            <!-- Row 4: Empty (Implicitly handled by card padding if no content) -->
+                                            <div class="biziship-cargo-row-empty">
+                                            </div>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                                    <form delete="0" class="biziship-cargo-form">
+                                <sheet>
+                                    <div class="biziship-cargo-card">
+                                        <!-- Header for Item #X -->
+                                        <div class="biziship-cargo-item-label mb-3">
+                                            <field name="display_name" readonly="1" class="fw-bold text-primary" style="font-size: 1.4em;"/>
+                                            <field name="last_weight_unit" invisible="1"/>
+                                            <field name="last_dim_unit" invisible="1"/>
+                                            <!-- Hidden fields for Suggestion logic -->
+                                            <field name="nmfc_suggested_code" invisible="1"/>
+                                            <field name="nmfc_suggestion_confidence" invisible="1"/>
+                                            <field name="nmfc_suggestion_label" invisible="1"/>
+                                            <field name="nmfc_suggestion_rationale" invisible="1"/>
+                                            <field name="nmfc_applied_desc" invisible="1"/>
+                                            <field name="biziship_nmfc_fav_trigger" invisible="1"/>
+                                        </div>
+                                        
+                                        <!-- Row 1: Key Details -->
+                                            <div class="biziship-cargo-row-details mb-4" style="white-space: nowrap; display: flex; align-items: baseline;">
+                                                <field name="packaging_type" class="me-3" style="width: 100px;"/>
+                                                <span class="me-1">Units:</span>
+                                                <field name="pieces" placeholder="Units" class="me-3" style="width: 65px;"/>
+                                                <span class="me-1">Weight:</span>
+                                                <field name="weight" placeholder="Weight" style="width: 110px;"/>
+                                                <field name="weight_unit" class="me-3" style="width: 60px;"/>
+                                                <span class="me-1">L</span><field name="length" style="width: 85px;"/>
+                                                <span class="ms-1 text-muted">x</span> <span class="ms-1">W</span><field name="width" style="width: 85px;"/>
+                                                <span class="ms-1 text-muted">x</span> <span class="ms-1">H</span><field name="height" style="width: 85px;"/>
+                                                <field name="dim_unit" class="ms-2" style="width: 70px;"/>
+                                            </div>
+                                        <!-- Row 2: Class Section & Flags (Merged) -->
+                                        <div class="biziship-cargo-row-class mb-4">
+                                            <div class="d-flex flex-column">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="me-2 text-muted">Class:</span>
+                                                    <field name="freight_class" class="fw-bold me-2" style="width: 80px;"/>
+                                                    <field name="is_class_overridden" invisible="1"/>
+                                                    <span invisible="not is_class_overridden" class="badge rounded-pill bg-info text-dark" style="font-size: 0.8em;">Calculated: <field name="computed_freight_class"/></span>
+                                                </div>
+                                                <field name="line_total_weight_display" class="text-muted" style="font-size: 0.85em;"/>
+                                            </div>
+
+                                            <!-- Checkboxes on the Right -->
+                                            <div class="biziship-cargo-row-flags">
+                                                <div class="biziship-cargo-flag-group">
+                                                    <field name="hazmat"/><span>Hazmat</span>
+                                                </div>
+                                                <div class="biziship-cargo-flag-group">
+                                                    <field name="stackable"/><span>Stackable</span>
+                                                </div>
+                                                <div class="biziship-cargo-flag-group">
+                                                    <field name="used"/><span>Used / Reconditioned</span>
+                                                </div>
+                                                <div class="biziship-cargo-flag-group">
+                                                    <field name="machinery"/><span>Machinery</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="biziship-cargo-row-desc mb-4">
+                                            <div class="biziship-cargo-desc-input">
+                                                <field name="cargo_desc" placeholder="Commodity description (e.g. Steel bearings, hydraulic pump)" widget="biziship_commodity"/>
+                                            </div>
+                                            <div class="biziship-cargo-nmfc-box">
+                                                <i class="fa fa-barcode me-2 text-muted" title="NMFC Code Icon"/>
+                                                <field name="nmfc" placeholder="NMFC Code"/>
+                                                <field name="biziship_nmfc_fav_trigger" widget="biziship_nmfc_star" nolabel="1"/>
+                                                <button name="action_biziship_nmfc_suggest" type="object" class="btn btn-sm btn-link p-0 ms-1" title="AI Suggest NMFC">
+                                                    <i class="fa fa-magic text-primary" style="font-size: 1.1em;"/>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Row 4: Empty -->
+                                        <div class="biziship-cargo-row-empty" style="height: 20px;">
+                                        </div>
+                                    </div>
+                                </sheet>
+                            </form>
+                        </field>
+
+                        <div colspan="2" class="mt-2 text-start">
+                            <button name="action_add_cargo_line" type="object" string="Add a line" class="btn btn-secondary biziship-btn-add-line"/>
+                        </div>
+                        
+                        <group name="cargo_footer" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="cargo_total_weight">
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="biziship_total_weight" string="Total Weight"/>
+                                </div>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <field name="biziship_total_weight" nolabel="1" class="oe_inline oe_right" style="font-weight: bold; font-size: 1.2em;"/>
+                                    <field name="biziship_total_weight_unit" nolabel="1" class="oe_inline ms-1"/>
+                                </div>
+                            </group>
+                            <div class="oe_clear"/>
+                        </group>
+                        </group>
+                    <div class="mt-4 text-center">
+                        <style>
+                            /* Modern Progress Bar for Fetch Quotes */
+                            .biziship-fetch-progress-container {
+                                display: none;
+                                width: 100%;
+                                max-width: 400px;
+                                margin: 20px auto;
+                            }
+                            .biziship-fetch-progress-text {
+                                text-align: center;
+                                color: #495057;
+                                font-weight: 500;
+                                font-size: 14px;
+                                margin-bottom: 8px;
+                            }
+                            .biziship-fetch-progress-wrapper {
+                                width: 100%;
+                                background-color: #e9ecef;
+                                border-radius: 8px;
+                                overflow: hidden;
+                                height: 24px;
+                                box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+                            }
+                            .biziship-fetch-progress-bar {
+                                width: 0%;
+                                height: 100%;
+                                background-color: #714B67;
+                                background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+                                background-size: 1rem 1rem;
+                            }
+                            
+                            /* We reuse the keyframes from the global/wizard css if present, or redefine them safely */
+                            @keyframes biziship-fetch-stripes {
+                                from { background-position: 1rem 0; }
+                                to { background-position: 0 0; }
+                            }
+                            @keyframes biziship-fetch-fill {
+                                0% { width: 0%; }
+                                10% { width: 30%; }
+                                50% { width: 60%; }
+                                100% { width: 95%; }
+                            }
+
+                            /* Trigger: When Odoo disables the form or button during RPC call */
+                            .biziship-fetch-progress-container {
+                                display: block;
+                                opacity: 0;
+                                visibility: hidden;
+                                transition: opacity 0.3s ease, visibility 0.3s ease;
+                                transition-delay: 0s;
+                            }
+
+                            /* Shown only while a quote fetch is actually running — the
+                               biziship-quote-fetching class is added by JS on the Get Live
+                               Quotes click and removed when the form reloads. (Using the
+                               button's :disabled state was too broad: Odoo also disables it
+                               when the record is dirty/invalid, e.g. after adding a cargo line.) */
+                            .o_form_view.biziship-quote-fetching .biziship-fetch-progress-container {
+                                opacity: 1;
+                                visibility: visible;
+                            }
+                            .o_form_view.biziship-quote-fetching .biziship-fetch-progress-bar {
+                                animation: biziship-fetch-fill 15s cubic-bezier(0.1, 0.7, 1.0, 0.1) forwards, biziship-fetch-stripes 1s linear infinite;
+                            }
+
+                            /* Highlight 0 weight/dimensions with light red background */
+                            .biziship-cargo-tree .text-danger {
+                                background-color: #f8d7da !important;
+                                color: #721c24 !important;
+                                font-weight: bold;
+                                padding: 2px 4px;
+                                border-radius: 3px;
+                            }
+                        </style>
+                        <div class="biziship-fetch-progress-container">
+                            <div class="biziship-fetch-progress-text">Fetching Live Quotes... (~15s)</div>
+                            <div class="biziship-fetch-progress-wrapper">
+                                <div class="biziship-fetch-progress-bar"></div>
+                            </div>
+                        </div>
+                        <group name="special_instructions_group" class="mb-3">
+                            <label for="biziship_special_instructions" style="font-size: 1.2rem; font-weight: bold;"/>
+                            <field name="biziship_special_instructions" nolabel="1" placeholder="Enter special instructions for the carrier (e.g. fragile, call before delivery)..." style="font-size: 1.1em; text-align: left;"/>
+                        </group>
+                        
+
+                        <button name="action_biziship_fetch_live_quotes" string="Get Live Quotes" type="object" class="biziship-btn-get-quotes" icon="fa-bolt" invisible="state not in ['draft', 'sent', 'sale']"/>
+                    </div>
+                </page>
+                <page string="LTL Freight Quotes" name="biziship_freight_quotes">
+                    <!-- BiziShip Branded Header -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e8e6f0;border-left:4px solid #f49800;border-radius:8px;padding:8px 18px 8px 14px;margin-bottom:14px;box-shadow:0 1px 4px rgba(32,31,65,0.07);">
+                        <div>
+                            <div style="font-size:0.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#f49800;margin-bottom:1px;">Powered by</div>
+                            <div style="font-size:0.78rem;color:#888;letter-spacing:0.2px;">Book the Best Rate in Seconds.</div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 467.33 143.91" style="height:28px;width:auto;">
+                          <defs><style>.bq1{fill:#f49800}.bq2{fill:#201f41}</style></defs>
+                          <path class="bq2" d="M103.88,103.12c2.57-2.48,3.92-5.72,3.92-9.36v-55.07c0-3.57-1.34-6.8-3.86-9.36-2.49-2.61-5.75-3.98-9.41-3.98h-.12c-3.59,0-6.85,1.36-9.42,3.92-2.57,2.57-3.92,5.82-3.92,9.42v55.07c0,3.67,1.38,6.93,3.98,9.42,2.56,2.53,5.79,3.86,9.36,3.86h.12c3.64,0,6.87-1.36,9.36-3.92Z"/>
+                          <path class="bq2" d="M116.08,77.9c-3.37,3.39-5.15,7.43-5.15,11.67,0,2.34.53,4.75,1.58,7.14,2.83,6.65,8.32,10.32,15.46,10.32h39.56c3.59,0,6.83-1.34,9.36-3.86,2.57-2.57,3.92-5.82,3.92-9.42v-.12c0-3.59-1.36-6.85-3.92-9.42-2.53-2.53-5.76-3.86-9.36-3.86l-16.8-.03c7.41-7.78,15.62-16.39,24.62-25.84,3.38-3.35,5.16-7.39,5.16-11.68,0-2.35-.53-4.76-1.58-7.16-2.88-6.64-8.45-10.3-15.7-10.3h-36.59c-3.66,0-6.94,1.38-9.48,3.98-2.49,2.56-3.8,5.77-3.8,9.3v.18c0,3.52,1.32,6.74,3.8,9.3,2.53,2.61,5.81,3.98,9.48,3.98h14.08c-2.03,2.13-4.24,4.45-6.64,6.97-7.95,8.34-14,14.68-18,18.85Z"/>
+                          <path class="bq2" d="M206.81,29.33c-2.49-2.61-5.75-3.98-9.41-3.98h-.12c-3.59,0-6.85,1.36-9.42,3.92-2.57,2.57-3.92,5.82-3.92,9.42v55.07c0,3.67,1.38,6.93,3.98,9.42,2.56,2.53,5.79,3.86,9.36,3.86h.12c3.64,0,6.87-1.36,9.36-3.92,2.57-2.48,3.92-5.72,3.92-9.36v-55.07c0-3.57-1.34-6.8-3.86-9.36Z"/>
+                          <path class="bq2" d="M271.61,54.38s0,0-.01,0c-3.6-3.42-8.66-6.02-15.44-7.96-.04-.01-.09-.02-.13-.04-8.02-2.12-10.05-2.85-10.49-3.03-.13-.07-.23-.13-.3-.18,0-.18,0-.22.12-.35.02-.02.03-.03.04-.04.03,0,.1-.02.25-.02h13.77c4.18,0,7.97-1.56,10.96-4.53,3.05-2.92,4.67-6.73,4.67-11.03v-.14c0-4.21-1.59-8.03-4.6-11.03-3.01-3.01-6.82-4.6-11.03-4.6h-13.06c-8.7,0-16.25,3.15-22.46,9.35-6.16,6.16-9.28,13.69-9.28,22.39s2.69,16.06,7.98,21.23c3.61,3.54,8.67,6.23,15.47,8.24.03,0,.05.02.08.02,7.26,2.04,9.82,2.83,10.71,3.12-.03,0-.11.02-.24.02h-19.23c-4.16,0-7.96,1.59-10.96,4.6-3.01,3.01-4.6,6.82-4.6,11.03v.14c0,4.3,1.61,8.11,4.67,11.03,3,2.96,6.76,4.53,10.89,4.53h18.52c8.68,0,16.23-3.11,22.44-9.26.02-.02.03-.03.05-.05,6.14-6.2,9.26-13.75,9.26-22.44s-2.71-15.93-8.06-21.02Z"/>
+                          <path class="bq2" d="M317.24,25.35c-3.15,0-5.99.25-8.54.76v-12.33c0-3.6-1.36-6.86-3.93-9.43-.02-.02-.04-.04-.06-.06-2.56-2.49-5.78-3.81-9.31-3.81h-.18c-3.53,0-6.74,1.32-9.31,3.81-.02.02-.04.04-.06.06-2.57,2.57-3.93,5.83-3.93,9.43v80.08c0,3.68,1.38,6.93,3.99,9.43,2.56,2.53,5.78,3.87,9.31,3.87h.18c3.53,0,6.75-1.34,9.31-3.87,2.61-2.49,3.99-5.75,3.99-9.43v-33.18c0-2.42.78-4.35,2.46-6.06,1.7-1.7,3.64-2.49,6.08-2.49s4.32.79,6.03,2.49c1.67,1.71,2.46,3.63,2.46,6.06v33.18c0,3.68,1.38,6.93,3.99,9.43,2.56,2.53,5.8,3.87,9.37,3.87h.12c3.64,0,6.88-1.36,9.37-3.93,2.57-2.49,3.93-5.72,3.93-9.37v-33.18c0-9.69-3.48-18.08-10.36-24.96-6.88-6.87-15.25-10.36-24.9-10.36Z"/>
+                          <path class="bq2" d="M369.11,25.35h-.12c-3.6,0-6.86,1.36-9.43,3.93-2.57,2.57-3.93,5.83-3.93,9.43v55.14c0,3.68,1.38,6.93,3.99,9.43,2.56,2.53,5.8,3.87,9.37,3.87h.12c3.64,0,6.88-1.36,9.37-3.93,2.57-2.49,3.93-5.72,3.93-9.37v-55.14c0-3.57-1.34-6.81-3.87-9.37-2.5-2.61-5.75-3.99-9.43-3.99Z"/>
+                          <path class="bq1" d="M426.43,52c-3.97,0-7.26,1.33-10.04,4.08-2.74,2.78-4.08,6.07-4.08,10.04s1.3,7.17,4.09,10c2.82,2.81,6.01,4.13,10.03,4.13s7.16-1.32,9.98-4.14c2.82-2.82,4.14-6,4.14-9.98s-1.32-7.22-4.14-10.05c-2.78-2.78-5.95-4.08-9.98-4.08Z"/>
+                          <path class="bq2" d="M455.34,37.34c-7.96-7.96-17.69-12-28.9-12s-20.91,4.01-28.83,11.92c-7.96,7.88-12.02,17.58-12.07,28.83,0,0,0,.02,0,.02v58.62c0,3.56,1.36,6.8,3.93,9.37s5.81,3.93,9.37,3.93h.18c3.56,0,6.8-1.36,9.37-3.93,2.57-2.57,3.93-5.81,3.93-9.37v-19.62c4.1,1.34,8.82,2.02,14.12,2.02,11.22,0,20.94-4.04,28.9-12,7.96-7.96,12-17.68,12-28.9s-4.04-20.94-12-28.9Z"/>
+                          <path class="bq1" d="M38.89,54.95c-3.82,0-6.85,1.25-9.54,3.92-2.65,2.69-3.89,5.71-3.89,9.5s1.27,6.9,3.88,9.55c2.65,2.61,5.77,3.88,9.55,3.88s6.85-1.23,9.49-3.88c2.69-2.69,3.94-5.72,3.94-9.55s-1.25-6.81-3.94-9.49c-2.68-2.68-5.7-3.94-9.49-3.94Z"/>
+                          <path class="bq2" d="M66.37,40.78c-7.57-7.57-16.82-11.41-27.48-11.41-5.04,0-9.53.64-13.43,1.92V12.64c0-3.38-1.29-6.46-3.74-8.91-2.44-2.44-5.52-3.74-8.91-3.74h-.17c-3.38,0-6.46,1.29-8.91,3.74S0,9.26,0,12.64v55.73s0,.02,0,.02c.04,10.7,3.91,19.92,11.48,27.41,7.53,7.52,16.75,11.34,27.41,11.34s19.91-3.84,27.48-11.41c7.57-7.57,11.41-16.82,11.41-27.48s-3.84-19.91-11.41-27.48Z"/>
+                          <path class="bq2" d="M173.81,138.07l-1.61-5.52h-6.49l-1.58,5.52h-1.64l5.66-18.58h1.66l5.68,18.58h-1.69ZM166.09,131.2h5.71l-2.87-9.97-2.84,9.97Z"/>
+                          <path class="bq2" d="M178.26,138.07v-18.58h1.58v18.58h-1.58Z"/>
+                          <path class="bq2" d="M190.11,138.07v-18.58h1.58v17.16h7.35v1.42h-8.93Z"/>
+                          <path class="bq2" d="M205.82,138.41c-1.64,0-2.9-.61-3.77-1.82s-1.3-2.98-1.3-5.28.43-4.04,1.3-5.27,2.12-1.84,3.77-1.84,2.9.61,3.77,1.84c.87,1.22,1.3,2.98,1.3,5.27s-.43,4.07-1.3,5.28c-.87,1.22-2.12,1.82-3.77,1.82ZM205.82,137.05c1.18,0,2.06-.47,2.64-1.41s.87-2.38.87-4.33c0-3.83-1.17-5.74-3.51-5.74s-3.51,1.91-3.51,5.74c0,1.95.29,3.39.87,4.33.58.94,1.46,1.41,2.64,1.41Z"/>
+                          <path class="bq2" d="M221.51,136.27c-1.05,1.04-2.21,1.56-3.46,1.56-1.34,0-2.42-.61-3.24-1.84-.82-1.22-1.23-2.84-1.23-4.84,0-1.43.19-2.67.56-3.73.38-1.05.9-1.85,1.58-2.4.68-.55,1.47-.82,2.39-.82,1.16,0,2.33.5,3.51,1.5l.13-1.13h1.29v13.11c0,4.15-1.67,6.22-5.01,6.22-1.29,0-2.49-.32-3.59-.96v-1.26c1.2.57,2.36.86,3.49.86,1.25,0,2.16-.38,2.73-1.14s.86-2,.86-3.71v-1.42ZM218.45,136.46c1,0,2.02-.47,3.06-1.42v-8.18c-1.13-.86-2.16-1.29-3.11-1.29-1.07,0-1.89.47-2.44,1.41-.55.94-.83,2.32-.83,4.14,0,1.68.29,2.99.87,3.93.58.94,1.4,1.41,2.45,1.41Z"/>
+                          <path class="bq2" d="M227.89,121.55c-.32,0-.57-.1-.75-.29-.18-.2-.27-.46-.27-.8s.09-.61.27-.8c.18-.2.43-.29.75-.29s.58.09.76.28.28.46.28.82-.09.63-.28.82c-.19.19-.44.28-.76.28ZM227.14,138.07v-13.49h1.53v13.49h-1.53Z"/>
+                          <path class="bq2" d="M238,134.58c0-.52-.14-.96-.43-1.33-.29-.37-.73-.69-1.34-.98l-1.8-.86c-.86-.41-1.48-.9-1.88-1.46-.39-.56-.59-1.24-.59-2.02,0-1.09.35-1.98,1.06-2.68s1.6-1.05,2.69-1.05,2.13.27,3.11.8v1.26c-1.04-.48-2.05-.72-3.03-.72-.75,0-1.34.21-1.77.63-.43.42-.64.99-.64,1.7,0,.52.14.96.43,1.33s.79.72,1.5,1.06l1.8.86c.82.39,1.41.86,1.77,1.39.36.54.54,1.2.54,1.98,0,1.22-.36,2.17-1.07,2.87s-1.71,1.05-2.98,1.05-2.45-.32-3.54-.96v-1.26c.66.3,1.27.53,1.82.67.55.14,1.12.21,1.69.21.84,0,1.49-.22,1.96-.66.46-.44.7-1.05.7-1.84Z"/>
+                          <path class="bq2" d="M247.84,137.77c-.66.29-1.4.43-2.23.43-.97,0-1.68-.27-2.13-.8-.46-.54-.68-1.38-.68-2.52v-8.96h-2.09v-1.1l2.15-.21.24-3.94h1.23v3.91h3.35v1.34h-3.35v8.82c0,.73.14,1.27.42,1.61s.72.51,1.33.51c.57,0,1.16-.12,1.77-.35v1.26Z"/>
+                          <path class="bq2" d="M251.35,121.55c-.32,0-.57-.1-.75-.29-.18-.2-.27-.46-.27-.8s.09-.61.27-.8c.18-.2.43-.29.75-.29s.58.09.76.28.28.46.28.82-.09.63-.28.82c-.19.19-.44.28-.76.28ZM250.6,138.07v-13.49h1.53v13.49h-1.53Z"/>
+                          <path class="bq2" d="M263.52,137.56c-.82.5-1.8.75-2.92.75-1.68,0-2.94-.59-3.78-1.77s-1.26-2.92-1.26-5.23.44-4.03,1.33-5.21,2.18-1.78,3.87-1.78c.93,0,1.81.21,2.63.64v1.26c-.88-.36-1.68-.54-2.41-.54-1.32,0-2.29.45-2.91,1.34-.62.89-.92,2.27-.92,4.13v.32c0,1.86.31,3.24.92,4.13.62.89,1.56,1.34,2.83,1.34.82,0,1.7-.21,2.63-.64v1.26Z"/>
+                          <path class="bq2" d="M271.73,134.58c0-.52-.14-.96-.43-1.33-.29-.37-.73-.69-1.34-.98l-1.8-.86c-.86-.41-1.48-.9-1.88-1.46-.39-.56-.59-1.24-.59-2.02,0-1.09.35-1.98,1.06-2.68s1.6-1.05,2.69-1.05,2.13.27,3.11.8v1.26c-1.04-.48-2.05-.72-3.03-.72-.75,0-1.34.21-1.77.63-.43.42-.64.99-.64,1.7,0,.52.14.96.43,1.33s.79.72,1.5,1.06l1.8.86c.82.39,1.41.86,1.77,1.39.36.54.54,1.2.54,1.98,0,1.22-.36,2.17-1.07,2.87s-1.71,1.05-2.98,1.05-2.45-.32-3.54-.96v-1.26c.66.3,1.27.53,1.82.67.55.14,1.12.21,1.69.21.84,0,1.49-.22,1.96-.66.46-.44.7-1.05.7-1.84Z"/>
+                          <path class="bq2" d="M284.38,128.71c-2.13-1.04-3.19-2.59-3.19-4.67,0-1.48.44-2.69,1.33-3.61.88-.92,2.04-1.38,3.47-1.38,1.34,0,2.65.33,3.94.99v1.37c-1.25-.59-2.53-.88-3.83-.88-.98,0-1.78.31-2.39.94-.61.63-.91,1.45-.91,2.47,0,.77.2,1.42.6,1.97.4.54,1.02,1.02,1.86,1.43l2.52,1.23c2,.98,3,2.54,3,4.67,0,1.59-.47,2.86-1.42,3.82-.95.96-2.21,1.43-3.78,1.43-.79,0-1.55-.09-2.29-.28s-1.41-.46-2-.82v-1.37c1.43.66,2.85.99,4.26.99,1.11,0,1.99-.33,2.64-.99.65-.66.98-1.55.98-2.68,0-1.52-.76-2.65-2.28-3.41l-2.52-1.23Z"/>
+                          <path class="bq2" d="M298.62,138.41c-1.64,0-2.9-.61-3.77-1.82s-1.3-2.98-1.3-5.28.43-4.04,1.3-5.27,2.12-1.84,3.77-1.84,2.9.61,3.77,1.84c.87,1.22,1.3,2.98,1.3,5.27s-.43,4.07-1.3,5.28c-.87,1.22-2.12,1.82-3.77,1.82ZM298.62,137.05c1.18,0,2.06-.47,2.64-1.41s.87-2.38.87-4.33c0-3.83-1.17-5.74-3.51-5.74s-3.51,1.91-3.51,5.74c0,1.95.29,3.39.87,4.33.58.94,1.46,1.41,2.64,1.41Z"/>
+                          <path class="bq2" d="M310.28,137.93c-.39.14-.81.21-1.26.21-.64,0-1.14-.21-1.47-.62-.34-.41-.51-1.02-.51-1.82v-17.48h1.53v17.4c0,.43.07.73.21.91.14.18.38.27.72.27.25,0,.51-.03.78-.08v1.21Z"/>
+                          <path class="bq2" d="M320.74,138.07l-.13-1.37c-1.41,1.14-2.82,1.72-4.24,1.72-1.04,0-1.82-.35-2.36-1.05s-.8-1.71-.8-3.03v-9.76h1.53v9.14c0,1.16.17,2.01.52,2.53s.92.79,1.7.79c.52,0,1.09-.13,1.7-.39.62-.26,1.24-.62,1.86-1.09v-10.99h1.53v13.49h-1.31Z"/>
+                          <path class="bq2" d="M331.68,137.77c-.66.29-1.4.43-2.23.43-.97,0-1.68-.27-2.13-.8-.46-.54-.68-1.38-.68-2.52v-8.96h-2.09v-1.1l2.15-.21.24-3.94h1.23v3.91h3.35v1.34h-3.35v8.82c0,.73.14,1.27.42,1.61s.72.51,1.33.51c.57,0,1.16-.12,1.77-.35v1.26Z"/>
+                          <path class="bq2" d="M335.19,121.55c-.32,0-.57-.1-.75-.29-.18-.2-.27-.46-.27-.8s.09-.61.27-.8c.18-.2.43-.29.75-.29s.58.09.76.28.28.46.28.82-.09.63-.28.82c-.19.19-.44.28-.76.28ZM334.44,138.07v-13.49h1.53v13.49h-1.53Z"/>
+                          <path class="bq2" d="M344.47,138.41c-1.64,0-2.9-.61-3.77-1.82s-1.3-2.98-1.3-5.28.43-4.04,1.3-5.27,2.12-1.84,3.77-1.84,2.9.61,3.77,1.84c.87,1.22,1.3,2.98,1.3,5.27s-.43,4.07-1.3,5.28c-.87,1.22-2.12,1.82-3.77,1.82ZM344.47,137.05c1.18,0,2.06-.47,2.64-1.41s.87-2.38.87-4.33c0-3.83-1.17-5.74-3.51-5.74s-3.51,1.91-3.51,5.74c0,1.95.29,3.39.87,4.33.58.94,1.46,1.41,2.64,1.41Z"/>
+                          <path class="bq2" d="M360.48,138.07v-9.3c0-1.11-.18-1.92-.54-2.43s-.92-.76-1.69-.76c-1.14,0-2.42.5-3.83,1.5v10.99h-1.53v-13.49h1.31l.13,1.37c1.54-1.16,3.03-1.74,4.48-1.74,1.04,0,1.83.34,2.37,1.02.54.68.82,1.67.82,2.98v9.87h-1.53Z"/>
+                          <path class="bq2" d="M371.2,134.58c0-.52-.14-.96-.43-1.33-.29-.37-.73-.69-1.34-.98l-1.8-.86c-.86-.41-1.48-.9-1.88-1.46-.39-.56-.59-1.24-.59-2.02,0-1.09.35-1.98,1.06-2.68s1.6-1.05,2.69-1.05,2.13.27,3.11.8v1.26c-1.04-.48-2.05-.72-3.03-.72-.75,0-1.34.21-1.77.63-.43.42-.64.99-.64,1.7,0,.52.14.96.43,1.33s.79.72,1.5,1.06l1.8.86c.82.39,1.41.86,1.77,1.39.36.54.54,1.2.54,1.98,0,1.22-.36,2.17-1.07,2.87s-1.71,1.05-2.98,1.05-2.45-.32-3.54-.96v-1.26c.66.3,1.27.53,1.82.67.55.14,1.12.21,1.69.21.84,0,1.49-.22,1.96-.66.46-.44.7-1.05.7-1.84Z"/>
+                          <path class="bq2" d="M450.63,121.81h-.86c-2.1,0-3.86.26-5.22.78-1.39.53-2.5,1.25-3.31,2.14-.81.9-1.37,1.95-1.66,3.11-.28,1.1-.42,2.25-.42,3.43v5.02c0,.47.17.9.5,1.23.33.34.75.51,1.22.51s.89-.18,1.22-.51c.33-.33.5-.76.5-1.23v-2.44h6.3v2.45c0,.47.17.89.5,1.22.33.33.75.51,1.22.51s.89-.18,1.22-.51c.33-.33.5-.75.5-1.22v-12.76c0-.46-.17-.88-.5-1.22-.33-.34-.75-.52-1.23-.52ZM448.91,125.26v5.15h-6.3c.05-1.96.6-3.29,1.65-3.97,1.16-.75,2.72-1.15,4.64-1.18Z"/>
+                          <path class="bq2" d="M456.77,122.16c-.33-.34-.76-.52-1.23-.52s-.9.18-1.23.53c-.32.34-.49.76-.49,1.22v12.91c0,.47.17.9.5,1.23.33.33.75.51,1.22.51s.89-.18,1.22-.51c.33-.33.51-.76.51-1.23v-12.91c0-.46-.17-.89-.5-1.22Z"/>
+                          <circle class="bq2" cx="434.27" cy="134.9" r="3.14"/>
+                        </svg>
+                    </div>
+                    <!-- End BiziShip Branded Header -->
+
+                    <div class="alert alert-info py-1 mb-2 d-flex justify-content-between align-items-center" role="status" style="border-radius: 4px; border-left: 4px solid #00b14f;" invisible="not biziship_is_connected">
+                        <div class="d-flex align-items-center">
+                            <i class="fa fa-user-circle text-primary me-2" style="font-size: 1.1rem;"/>
+                            <span>Logged in biziShip.ai as: <field name="biziship_connected_email_display" class="fw-bold ms-1"/></span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <button name="action_biziship_refresh_profile_rpc" type="object" icon="fa-refresh" class="btn btn-link p-0 text-muted" title="Sync your BiziShip account details (name, environment) without re-authenticating" style="font-size: 0.95rem; line-height: 1;"/>
+                            <span class="badge rounded-pill bg-success-light text-success fw-bold px-3" style="font-size: 11px; border: 1px solid #00b14f;">ACCOUNT CONNECTED</span>
+                            <button name="%(action_biziship_auth_wizard)d" type="action" icon="fa-sign-in" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign in again with a different email or refresh your session. You will receive a one-time PIN by email."/>
+                            <button name="%(action_biziship_logout_wizard)d" type="action" icon="fa-sign-out" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign out from biziShip.ai"/>
+                        </div>
+                    </div>
+                    <!-- BiziShip Booking Details Group -->
+                    <group invisible="not biziship_shipment_id">
+                        <div colspan="2" class="d-flex align-items-center o_horizontal_separator mb-2 mt-0">
+                            <span class="text-uppercase fw-bold me-2">BiziShip Booking Details</span>
+                            <button name="action_delete_biziship_booking" type="object" icon="fa-trash" class="btn btn-link text-muted p-0" title="Delete Booking Details" confirm="Are you sure you want to delete these booking details?"/>
+                        </div>
+                        <field name="biziship_bol_number" invisible="1"/>
+                        <field name="biziship_shipment_id" invisible="1"/>
+                        <field name="biziship_pro_number" readonly="1" invisible="not biziship_pro_number"/>
+                        <field name="biziship_bol_url" invisible="1"/>
+                        <div colspan="2" class="d-flex align-items-center justify-content-between mt-1 mb-1" invisible="not biziship_bol_url and not biziship_documents_html">
+                            <field name="biziship_documents_html" nolabel="1" readonly="1" class="flex-grow-1"/>
+                            <button name="action_biziship_refresh_documents" type="object"
+                                    string="Refresh Documents" icon="fa-refresh"
+                                    class="btn btn-sm btn-outline-secondary ms-3 flex-shrink-0"
+                                    title="Fetch latest documents and fresh URLs from BiziShip"/>
+                        </div>
+                        <!-- Reference section: populated from BOL PDF after booking -->
+                        <div colspan="2" class="biziship-reference-card" invisible="not biziship_bol_number">
+                            <div class="biziship-reference-header">Reference</div>
+                            <field name="biziship_ref_html" nolabel="1" readonly="1"/>
+                        </div>
+                        <div colspan="2" class="text-end mt-3 mb-1" style="padding-right: 4px;" invisible="not biziship_shipment_id">
+                            <div style="font-size: 1.25rem; font-weight: 700; color: #1a1a2e; letter-spacing: -0.2px; line-height: 1.3;">
+                                🎉 Congratulations, Your Shipment is Booked!
+                            </div>
+                            <div style="font-size: 0.78rem; color: #999; margin-top: 3px; letter-spacing: 0.3px;">
+                                By BiziShip.ai
+                            </div>
+                        </div>
+                        <!-- Tracking section -->
+                        <div colspan="2" class="mt-3" invisible="not biziship_bol_number">
+                            <div class="d-flex align-items-center justify-content-between" style="border-top:1px solid #e8f5e9;padding-top:12px;">
+                                <div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span style="font-size:11px;font-weight:700;text-transform:uppercase;color:#888;letter-spacing:0.7px;">Tracking Status</span>
+                                        <button name="action_biziship_refresh_tracking_quick" type="object" icon="fa-refresh" class="btn btn-link p-0 text-muted" title="Refresh tracking status" style="font-size:13px;line-height:1;"/>
+                                    </div>
+                                    <div class="mt-1">
+                                        <span style="display:inline-block;background:#e8f5e9;color:#1b7a40;font-weight:700;font-size:12px;border-radius:20px;padding:2px 12px;border:1px solid #a5d6a7;" invisible="not biziship_tracking_status">
+                                            <field name="biziship_tracking_status" nolabel="1" readonly="1"/>
+                                        </span>
+                                        <span style="color:#aaa;font-size:13px;" invisible="biziship_tracking_status">Not yet tracked</span>
+                                    </div>
+                                    <div style="font-size:11px;color:#aaa;margin-top:2px;" invisible="not biziship_last_tracked_at">
+                                        Last updated: <field name="biziship_last_tracked_at" nolabel="1" readonly="1" style="display:inline;font-size:11px;color:#aaa;"/>
+                                    </div>
+                                </div>
+                                <button name="action_open_tracking_wizard" string="📦 Track Shipment" type="object" class="btn btn-sm btn-outline-success fw-bold" style="font-size:13px;"/>
+                            </div>
+                        </div>
+                    </group>
+                    
+                    <!-- Route Map Group -->
+                    <group invisible="not biziship_route_map_html">
+                        <div colspan="2" class="w-100">
+                            <field name="biziship_route_map_html" nolabel="1" readonly="1" />
+                        </div>
+                    </group>
+
+                    <!-- Route Distance Row -->
+                    <group invisible="not biziship_route_miles">
+                        <div colspan="2" style="display:flex;align-items:center;justify-content:flex-end;padding:4px 2px 10px 2px;">
+                            <span style="font-size:13px;font-weight:700;color:#201f41;letter-spacing:0.2px;">
+                                🛣&#160;&#160;<field name="biziship_route_miles" nolabel="1" readonly="1" style="display:inline;font-weight:700;color:#201f41;"/> driving
+                            </span>
+                        </div>
+                    </group>
+                    <group invisible="not biziship_quote_ids">
+                        <div colspan="2" class="d-flex align-items-center justify-content-between mb-2 mt-4" style="border-bottom: 1px solid #dee2e6; padding-bottom: 8px;">
+                            <div class="d-flex align-items-center">
+                                <span class="text-uppercase fw-bold me-2" style="font-size: 0.9rem; color: #495057;">Available Quotes</span>
+                                <button name="action_delete_biziship_quotes" type="object" icon="fa-trash" class="btn btn-link text-muted p-0" title="Delete All Quotes" confirm="Are you sure you want to delete all quotes?"/>
+                            </div>
+                            <div class="d-flex align-items-center" invisible="biziship_priority1_env != 'PROD'">
+                                <span class="badge rounded-pill bg-success text-white px-2 py-1" style="font-size: 11px; font-weight: bold; letter-spacing: 0.5px;">Live!</span>
+                            </div>
+                            <div class="d-flex align-items-center gap-2" invisible="biziship_priority1_env != 'DEMO'">
+                                <span class="badge rounded-pill bg-secondary text-white px-2 py-1" style="font-size: 11px; font-weight: bold; letter-spacing: 0.5px;">Demo</span>
+                                <field name="biziship_demo_tries" invisible="1"/>
+                                <span class="text-muted" style="font-size: 11px;" invisible="biziship_demo_tries &lt; 0"><field name="biziship_demo_tries" nolabel="1" readonly="1" class="d-inline fw-bold"/> tries left</span>
+                            </div>
+                            <field name="biziship_priority1_env" invisible="1"/>
+                        </div>
+                    </group>
+                    <field name="biziship_quote_ids" nolabel="1">
+                        <tree string="Quotes" create="false" edit="false" class="biziship-quotes-tree">
+                            <field name="is_selected" column_invisible="True"/>
+                            <button name="action_select_quote_toggle" type="object" icon="fa-lg fa-toggle-on text-success" invisible="not is_selected" class="btn btn-link p-0" title="Selected" aria-label="Selected"/>
+                            <button name="action_select_quote_toggle" type="object" icon="fa-lg fa-toggle-off text-muted" invisible="is_selected" class="btn btn-link p-0" title="Select" aria-label="Not Selected"/>
+                            <field name="carrier_logo" widget="image" options="{'size': [30, 30]}" class="me-2" nolabel="1" readonly="1" optional="show"/>
+                            <field name="carrier_name" readonly="1"/>
+                            <field name="service_level" readonly="1"/>
+                            <field name="total_charge" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                            <field name="transit_days" readonly="1"/>
+                            <field name="delivery_date" readonly="1"/>
+                            <field name="carrier_liability_new" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Carrier Liability New" invisible="carrier_liability_new == 0" optional="show"/>
+                            <field name="carrier_liability_used" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" string="Carrier Liability Used" invisible="carrier_liability_used == 0" optional="show"/>
+                            <field name="currency" column_invisible="True" readonly="1"/>
+                            <field name="currency_id" column_invisible="True"/>
+                            <field name="quote_id_ref" readonly="1"/>
+                        </tree>
+                        <form string="Quote Details" create="false" edit="false">
+                            <sheet>
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="oe_title mb-0">
+                                        <h1 class="mb-0"><field name="carrier_name" readonly="1"/></h1>
+                                    </div>
+                                    <field name="carrier_logo" widget="image" class="ms-3" style="max-height: 50px; max-width: 150px; object-fit: contain;" readonly="1"/>
+                                </div>
+                                <group>
+                                    <group>
+                                        <field name="service_level" readonly="1"/>
+                                        <field name="transit_days" readonly="1"/>
+                                        <field name="delivery_date" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_charge" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                                        <field name="carrier_liability_new" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" invisible="carrier_liability_new == 0"/>
+                                        <field name="carrier_liability_used" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1" invisible="carrier_liability_used == 0"/>
+                                        <field name="currency" invisible="1" readonly="1"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="quote_id_ref" readonly="1"/>
+                                        <field name="is_selected" readonly="1"/>
+                                    </group>
+                                </group>
+                                <group string="Terminal Information" invisible="not origin_terminal_city and not destination_terminal_city">
+                                    <group>
+                                        <label for="origin_terminal_city" string="Origin Terminal"/>
+                                        <div class="o_row">
+                                            <field name="origin_terminal_city" class="oe_inline" readonly="1" nolabel="1"/>
+                                            <span invisible="not origin_terminal_state">, </span>
+                                            <field name="origin_terminal_state" class="oe_inline" readonly="1" nolabel="1"/>
+                                        </div>
+                                        <field name="origin_terminal_phone" widget="phone" readonly="1" string="Phone"/>
+                                    </group>
+                                    <group>
+                                        <label for="destination_terminal_city" string="Destination Terminal"/>
+                                        <div class="o_row">
+                                            <field name="destination_terminal_city" class="oe_inline" readonly="1" nolabel="1"/>
+                                            <span invisible="not destination_terminal_state">, </span>
+                                            <field name="destination_terminal_state" class="oe_inline" readonly="1" nolabel="1"/>
+                                        </div>
+                                        <field name="destination_terminal_phone" widget="phone" readonly="1" string="Phone"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Cargo Details" name="cargo_details">
+                                        <field name="biziship_cargo_line_ids" nolabel="1" create="false" delete="false">
+                                            <tree>
+                                                <field name="pieces" string="UNITS" readonly="1"/>
+                                                <field name="packaging_type" string="TYPE" readonly="1"/>
+                                                <field name="weight" string="WEIGHT" readonly="1"/>
+                                                <field name="weight_unit" nolabel="1" readonly="1"/>
+                                                <field name="length" string="L" readonly="1"/>
+                                                <field name="width" string="W" readonly="1"/>
+                                                <field name="height" string="H" readonly="1"/>
+                                                <field name="dim_unit" readonly="1"/>
+                                                <field name="cargo_desc" string="DESCRIPTION" readonly="1"/>
+                                                <field name="computed_freight_class" string="CLASS" readonly="1"/>
+                                                <field name="nmfc" string="NMFC" optional="show"/>
+                                            </tree>
+                                        </field>
+                                        <group col="6" class="mt-2">
+                                            <group colspan="4"/>
+                                            <group class="oe_subtotal_footer oe_right" colspan="2">
+                                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                                    <label for="biziship_total_weight" string="Total Weight"/>
+                                                </div>
+                                                <div class="oe_subtotal_footer_separator oe_inline">
+                                                    <field name="biziship_total_weight" nolabel="1" class="oe_inline oe_right" readonly="1" style="font-weight: bold; font-size: 1.2em;"/>
+                                                    <field name="biziship_total_weight_unit" nolabel="1" class="oe_inline ms-1" readonly="1"/>
+                                                </div>
+                                            </group>
+                                        </group>
+                                    </page>
+                                    <page string="Charge Breakdown" name="charge_breakdown">
+                                        <field name="quote_details" readonly="1" widget="text" style="font-family: monospace; white-space: pre;"/>
+                                    </page>
+                                </notebook>
+                                <footer>
+                                    <button string="Close" class="btn-primary" special="cancel" data-hotkey="z"/>
+                                </footer>
+                            </sheet>
+                        </form>
+                    </field>
+                    <div class="mt-4 text-center" invisible="not biziship_quote_ids">
+
+                        <field name="biziship_has_selected_quote" invisible="1"/>
+                        <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-primary" invisible="not biziship_has_selected_quote or biziship_priority1_env == 'DEMO'"/>
+                        <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-secondary" invisible="biziship_has_selected_quote or biziship_priority1_env == 'DEMO'" title="Please select a quote first to submit it."/>
+                        <div class="d-inline-flex align-items-center gap-3" invisible="biziship_priority1_env != 'DEMO'">
+                            <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-secondary" disabled="1"/>
+                            <div class="text-muted text-start" style="max-width: 340px; font-size: 13px;">
+                                Demo mode — to activate booking, contact our sales team at
+                                <a href="mailto:zeev@biziship.ai">zeev@biziship.ai</a> or
+                                <a href="mailto:avner@biziship.ai">avner@biziship.ai</a>,
+                                or call / <a href="https://wa.me/16787722785" target="_blank">WhatsApp +1 (678) 772-2785</a>.
+                            </div>
+                        </div>
+                    </div>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

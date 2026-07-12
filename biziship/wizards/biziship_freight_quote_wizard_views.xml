@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_biziship_freight_quote_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.freight.quote.wizard.form</field>
+        <field name="model">biziship.freight.quote.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Get Freight Quotes">
+                <style>
+                    /* Modern Progress Bar - Direct Quoting */
+                    .biziship-quote-request-container {
+                        display: none;
+                        width: 100%;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                    }
+                    .biziship-quote-request-text {
+                        text-align: center;
+                        color: #495057;
+                        font-weight: 500;
+                        font-size: 14px;
+                        margin-bottom: 8px;
+                    }
+                    .biziship-quote-request-wrapper {
+                        width: 100%;
+                        background-color: #e9ecef;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        height: 24px;
+                        box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+                    }
+                    .biziship-quote-request-bar {
+                        width: 0%;
+                        height: 100%;
+                        background-color: #714B67; /* Odoo Primary Purple */
+                        background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+                        background-size: 1rem 1rem;
+                    }
+                    @keyframes biziship-quote-request-stripes {
+                        from { background-position: 1rem 0; }
+                        to { background-position: 0 0; }
+                    }
+                    @keyframes biziship-quote-request-fill {
+                        0% { width: 0%; }
+                        100% { width: 95%; }
+                    }
+
+                    /* Trigger logic */
+                    .modal:has(button[name="action_get_quotes"]:disabled) .biziship-quote-request-container,
+                    .modal:has(button[name="action_get_quotes"].o_disabled) .biziship-quote-request-container {
+                        display: block;
+                    }
+                    .modal:has(button[name="action_get_quotes"]:disabled) .biziship-quote-request-bar,
+                    .modal:has(button[name="action_get_quotes"].o_disabled) .biziship-quote-request-bar {
+                        /* ~15 seconds to await priority1 API */
+                        animation: biziship-quote-request-fill 15s cubic-bezier(0.1, 0.7, 1.0, 0.1) forwards, biziship-quote-request-stripes 1s linear infinite;
+                    }
+                    .modal:has(button[name="action_get_quotes"]:disabled) .biziship-freight-quote-form-content,
+                    .modal:has(button[name="action_get_quotes"].o_disabled) .biziship-freight-quote-form-content {
+                        display: none;
+                    }
+
+                    /* Highlight 0 weight/dimensions with light red background */
+                    .biziship-cargo-tree .text-danger {
+                        background-color: #f8d7da !important;
+                        color: #721c24 !important;
+                        font-weight: bold;
+                        padding: 2px 4px;
+                        border-radius: 3px;
+                    }
+                </style>
+                
+                <div class="biziship-freight-quote-form-content">
+                    <div class="alert alert-info text-center" role="alert" style="font-size: 14px; margin-bottom: 20px;">
+                        Review the generated shipment details. Click "Fetch Live Quotes" to request precise LTL rates from Priority1.
+                    </div>
+                    
+                    <group>
+                        <!-- Top block: Cargo Details -->
+                        <div colspan="2" class="d-flex align-items-center o_horizontal_separator mb-2 mt-0">
+                            <span class="fw-bold">CARGO DETAILS</span>
+                        </div>
+                        <field name="cargo_line_ids" nolabel="1" colspan="2">
+                            <tree editable="bottom" class="biziship-cargo-tree">
+                                <field name="packaging_type" />
+                                <field name="pieces" />
+                                <field name="weight" decoration-danger="weight == 0" />
+                                <field name="weight_unit" />
+                                <field name="length" decoration-danger="length == 0" />
+                                <field name="width" decoration-danger="width == 0" />
+                                <field name="height" decoration-danger="height == 0" />
+                                <field name="dim_unit" />
+                                <field name="last_weight_unit" column_invisible="True" />
+                                <field name="last_dim_unit" column_invisible="True" />
+                                <field name="freight_class" string="Class" />
+                                <field name="cargo_desc" />
+                            </tree>
+                        </field>
+                        
+                        <group name="cargo_footer" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                            </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="cargo_total_weight">
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="total_weight" string="Total Weight"/>
+                                </div>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <field name="total_weight" nolabel="1" class="oe_inline oe_right" style="font-weight: bold; font-size: 1.2em;"/>
+                                    <field name="total_weight_unit" nolabel="1" class="oe_inline ms-1"/>
+                                </div>
+                            </group>
+                            <div class="oe_clear"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Logistics Details">
+                        <group>
+                            <field name="pickup_date"/>
+                            <field name="cargo_description"/>
+                        </group>
+                        <group>
+                            <field name="special_requirements" placeholder="liftgate, residential_delivery"/>
+                            <field name="special_instructions" placeholder="Pickup instructions..." style="font-size: 1.1em; text-align: left;"/>
+                            <field name="additional_notes" placeholder="Any order notes..."/>
+                        </group>
+                    </group>
+                    
+                    <group>
+                        <group string="Origin &amp; Pickup">
+                            <field name="origin_company" nolabel="1" colspan="2" placeholder="Company Name"/>
+                            <field name="origin_address" nolabel="1" colspan="2" placeholder="Address Line 1" />
+                            <field name="origin_address2" nolabel="1" colspan="2" placeholder="Address Line 2 (optional)" />
+                            <div class="d-flex w-100" colspan="2">
+                                <field name="origin_zip" placeholder="Zip Code" style="flex: 2; margin-right: 8px;"/>
+                                <field name="origin_country_id" nolabel="1" placeholder="Country" options="{'no_open': True, 'no_create': True}" domain="[('code', 'in', ('US', 'CA', 'MX'))]" style="flex: 1;"/>
+                            </div>
+                            <field name="origin_phone" nolabel="1" colspan="2" placeholder="Phone Number"/>
+                            
+                            <group colspan="2" class="mt-2">
+                                <field name="biziship_origin_residential" />
+                                <field name="biziship_origin_liftgate" />
+                                <field name="biziship_origin_limited_access" />
+                            </group>
+                            <div class="d-flex justify-content-between align-items-center mt-2 w-100" colspan="2">
+                                <field name="biziship_origin_accessorial_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="+ More Services" nolabel="1" style="flex-grow: 1;"/>
+                                <button name="action_uncheck_all_origin" string="Uncheck all" type="object" class="btn btn-sm btn-link text-muted ms-2 p-0 text-nowrap" invisible="not biziship_origin_residential and not biziship_origin_liftgate and not biziship_origin_limited_access and not biziship_origin_accessorial_ids"/>
+                            </div>
+                        </group>
+                        <group string="Destination">
+                            <field name="destination_company" nolabel="1" colspan="2" placeholder="Company Name" />
+                            <field name="destination_address" nolabel="1" colspan="2" placeholder="Address Line 1" />
+                            <field name="destination_address2" nolabel="1" colspan="2" placeholder="Address Line 2 (optional)" />
+                            <div class="d-flex w-100" colspan="2">
+                                <field name="destination_zip" placeholder="Zip Code" style="flex: 2; margin-right: 8px;" />
+                                <field name="destination_country_id" nolabel="1" placeholder="Country" options="{'no_open': True, 'no_create': True}" domain="[('code', 'in', ('US', 'CA', 'MX'))]" style="flex: 1;"/>
+                            </div>
+                            <field name="destination_phone" nolabel="1" colspan="2" placeholder="Phone Number"/>
+                            
+                            <group col="4" colspan="2" class="mt-2">
+                                <field name="biziship_dest_appointment" colspan="2" />
+                                <field name="biziship_dest_residential" colspan="2" />
+                                <field name="biziship_dest_notify" colspan="2" />
+                                <field name="biziship_dest_limited_access" colspan="2" />
+                                <field name="biziship_dest_liftgate" colspan="2" />
+                                <field name="biziship_dest_hazmat" colspan="2" />
+                            </group>
+                            <div class="d-flex justify-content-between align-items-center mt-2 w-100" colspan="2">
+                                <field name="biziship_dest_accessorial_ids" widget="many2many_tags" options="{'no_create': True}" placeholder="+ More Services" nolabel="1" style="flex-grow: 1;"/>
+                                <button name="action_uncheck_all_dest" string="Uncheck all" type="object" class="btn btn-sm btn-link text-muted ms-2 p-0 text-nowrap" invisible="not biziship_dest_appointment and not biziship_dest_residential and not biziship_dest_notify and not biziship_dest_limited_access and not biziship_dest_liftgate and not biziship_dest_hazmat and not biziship_dest_accessorial_ids"/>
+                            </div>
+                        </group>
+                    </group>
+                </div>
+
+                <div class="biziship-quote-request-container">
+                    <div class="biziship-quote-request-text">Requesting Live Tariffs from Priority1... (~15s)</div>
+                    <div class="biziship-quote-request-wrapper">
+                        <div class="biziship-quote-request-bar"></div>
+                    </div>
+                </div>
+
+                <footer>
+                    <button name="action_get_quotes" string="Fetch Live Quotes" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for the Wizard -->
+    <record id="action_biziship_freight_quote_wizard" model="ir.actions.act_window">
+        <field name="name">Direct Freight Quotes (BiziShip)</field>
+        <field name="res_model">biziship.freight.quote.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

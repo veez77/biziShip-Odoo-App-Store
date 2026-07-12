@@ -1,0 +1,1209 @@
+/* ZIP code validation indicator */
+.biziship-zip-error-bar {
+    height: 2px;
+    background-color: #dc3545;
+    border-radius: 1px;
+    margin-top: 1px;
+}
+
+/* BOL Reference section card */
+.biziship-reference-card {
+    background: #f8fffe;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    margin-bottom: 6px;
+}
+
+.biziship-reference-header {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #1b7a40;
+    margin-bottom: 10px;
+}
+
+.biziship-reference-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.biziship-reference-table tr {
+    line-height: 1.7;
+}
+
+.biziship-ref-icon {
+    width: 14px;
+    min-width: 14px;
+    padding-right: 3px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.biziship-ref-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #444;
+    white-space: nowrap;
+    padding-right: 16px;
+    width: 180px;
+}
+
+.biziship-reference-table .biziship-ref-value,
+.biziship-reference-table .biziship-ref-value .o_field_widget {
+    font-size: 14px;
+    color: #1a1a2e;
+}
+
+.biziship-ref-copyable {
+    cursor: pointer;
+    border-bottom: 1px dashed #aaa;
+    transition: color 0.15s, border-color 0.15s;
+}
+.biziship-ref-copyable:hover {
+    color: #017e84;
+    border-bottom-color: #017e84;
+}
+
+.biziship-pro-refresh:hover {
+    color: #017e84 !important;
+}
+
+/* Modern BiziShip Freight Pool Styling */
+
+.biziship-freight-pool-container {
+    background-color: #f1f5f9;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.biziship-freight-card {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    transition: all 0.2s ease-in-out !important;
+    border: 1px solid #e2e8f0 !important;
+    cursor: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+}
+
+.biziship-freight-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+    border-color: #cbd5e1 !important;
+}
+
+.biziship-card-icon {
+    background: #f8fafc;
+    border-radius: 12px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    color: #475569;
+    flex-shrink: 0;
+    border: 1px solid #f1f5f9;
+}
+
+.biziship-card-content {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.biziship-card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.biziship-card-summary {
+    font-size: 0.95rem;
+    color: #475569;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.biziship-card-creator {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+}
+
+.biziship-launch-btn {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 10px 20px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    border: none !important;
+    transition: background-color 0.2s !important;
+    margin-left: 20px !important;
+    text-transform: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.biziship-launch-btn:hover {
+    background-color: #0f172a !important;
+}
+
+.biziship-launch-btn i {
+    font-size: 1rem;
+    margin-right: 8px;
+}
+
+/* Notebook name alignment for better tab switching */
+.o_notebook .nav-link[name="biziship_freight_quotes"] {
+    background-color: rgba(113, 75, 103, 0.05);
+    /* Slight theme tint */
+    font-weight: 600;
+}
+
+.o_notebook .nav-link.active[name="biziship_freight_quotes"] {
+    background-color: white !important;
+    border-bottom: 3px solid #714B67 !important;
+}
+
+/* Save Freight Wizard Redesign */
+.biziship-save-wizard-container {
+    padding: 24px;
+    background: #ffffff;
+}
+
+.biziship-save-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.biziship-save-subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 24px;
+}
+
+.biziship-modern-input .o_input {
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 12px 16px !important;
+    font-size: 1rem !important;
+    height: auto !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    background-color: #ffffff !important;
+}
+
+.biziship-modern-input .o_input:focus {
+    border-color: #94a3b8 !important;
+    box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.1) !important;
+}
+
+.biziship-btn-cancel {
+    background: #ffffff !important;
+    color: #475569 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 10px 24px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s !important;
+}
+
+.biziship-btn-cancel:hover {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+
+.biziship-btn-save {
+    background: #94a3b8 !important;
+    /* Muted primary from screenshot */
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 10px 24px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.biziship-btn-save:hover {
+    background: #64748b !important;
+}
+
+/* Sale Order Main Buttons */
+.biziship-btn-get-quotes {
+    background-color: #0f172a !important;
+    color: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 14px 32px !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 20px auto !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+    width: fit-content !important;
+}
+
+.biziship-btn-get-quotes:hover {
+    background-color: #1e293b !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2) !important;
+}
+
+.biziship-btn-get-quotes i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.biziship-btn-pool-action {
+    background: #ffffff !important;
+    color: #1e293b !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 8px 16px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.biziship-btn-pool-action:hover {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+
+.biziship-btn-pool-action i {
+    margin-right: 6px;
+    color: #64748b;
+}
+
+/* Filter Bar Styling - Matching Web App */
+.biziship-filter-bar {
+    display: flex;
+    align-items: center;
+    background: transparent;
+}
+
+.biziship-search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.biziship-search-icon {
+    position: absolute;
+    left: 14px;
+    color: #94a3b8;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.biziship-search-input .o_input {
+    padding-left: 40px !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    background-color: #ffffff !important;
+    height: 44px !important;
+    font-size: 0.95rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.biziship-search-input .o_input:focus {
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 0 0 4px rgba(226, 232, 240, 0.4) !important;
+}
+
+.biziship-filter-container {
+    min-width: 180px;
+}
+
+.biziship-filter-select .o_input {
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    background-color: #ffffff !important;
+    height: 44px !important;
+    font-size: 0.95rem !important;
+    padding: 0 16px !important;
+    color: #475569 !important;
+    cursor: pointer !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+.biziship-filter-select .o_input:focus {
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 0 0 4px rgba(226, 232, 240, 0.4) !important;
+}
+
+.biziship-filter-label {
+    white-space: nowrap !important;
+    color: #64748b !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+}
+
+/* Compact 4-Row Cargo Card (Web App Style) */
+.biziship-cargo-kanban {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    padding: 12px 0 !important;
+    width: 100% !important;
+}
+
+/* Force Odoo's Kanban record container to be full width */
+.biziship-cargo-kanban .o_kanban_record {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    margin: 0 0 12px 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+}
+
+.biziship-cargo-card {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 16px 24px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 780px !important; /* Force width for row contents */
+}
+
+.biziship-cargo-item-label {
+    font-size: 1.0rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    margin-bottom: 2px !important;
+    color: #94a3b8 !important;
+}
+
+/* Row 1: Details (Packaging, Pcs, Weight, Dim) */
+.biziship-cargo-row-details {
+    display: flex !important;
+    flex-wrap: nowrap !important; /* Strictly no wrap on one line */
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 20px !important;
+    font-size: 1.15rem !important;
+    line-height: 1.4 !important;
+    white-space: nowrap !important;
+}
+
+.biziship-cargo-row-details .o_field_widget {
+    margin-right: 4px !important;
+}
+
+/* Row 2: Class Section & Flags (Merged) */
+.biziship-cargo-row-class {
+    font-size: 1.1rem !important;
+    color: #475569 !important;
+    margin-bottom: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+}
+
+/* Row 3: Flags (Hazmat, Stackable, etc.) - nested in Row 2 or standalone */
+.biziship-cargo-row-flags {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+    align-items: center !important;
+}
+
+.biziship-cargo-flag-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important; /* Tight space between checkbox and text */
+}
+
+/* Row 4: Description & NMFC */
+.biziship-cargo-row-desc {
+    display: flex !important;
+    gap: 20px !important;
+    align-items: center !important;
+}
+
+.biziship-cargo-desc-input {
+    flex-grow: 1 !important;
+    min-width: 480px !important; /* Significantly longer as requested */
+}
+
+.biziship-cargo-desc-input .o_field_widget {
+    width: 100% !important;
+}
+
+.biziship-cargo-nmfc-box {
+    width: 220px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 0 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    height: 42px !important;
+}
+
+.biziship-cargo-nmfc-box .o_field_widget {
+    width: 100% !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.biziship-cargo-delete {
+    position: absolute !important;
+    top: 16px !important;
+    right: 20px !important;
+    color: #cbd5e1 !important;
+    cursor: pointer !important;
+    font-size: 1.2em !important;
+    transition: color 0.2s !important;
+}
+
+.biziship-cargo-delete:hover {
+    color: #ef4444 !important;
+}
+
+/* "Add" button styling */
+.o_kanban_view .o_kanban_button_add:hover {
+    background-color: #e2e8f0 !important;
+}
+
+/* Hide the default "Open: Cargo Lines" title in the modal */
+.modal:has(.biziship-cargo-card) .modal-header .modal-title {
+    display: none !important;
+}
+
+.modal:has(.biziship-cargo-card) .modal-header {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+}
+
+.o_kanban_view .o_kanban_button_add {
+    background-color: #f8fafc !important;
+    color: #475569 !important;
+    border: 1.5px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 8px 20px !important;
+    font-weight: 700 !important;
+    margin-bottom: 16px !important;
+}
+
+.biziship-btn-add-line {
+    background-color: transparent !important;
+    border: 2px dashed #cbd5e1 !important;
+    color: #64748b !important;
+    width: 100% !important;
+    padding: 12px !important;
+    border-radius: 12px !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+    margin-top: 8px !important;
+}
+
+.biziship-btn-add-line:hover {
+    background-color: #f1f5f9 !important;
+    border-color: #94a3b8 !important;
+    color: #475569 !important;
+}
+
+/* Force modal width and hide redundant delete button */
+.modal-dialog:has(.biziship-cargo-form) {
+    min-width: 850px !important;
+}
+
+.modal:has(.biziship-cargo-form) .modal-footer button.o_form_button_delete,
+.modal:has(.biziship-cargo-form) .modal-footer button.o_btn_remove {
+    display: none !important;
+}
+
+/* Commodity Autocomplete & NMFC Suggestion */
+.biziship-commodity-container {
+    width: 100%;
+}
+
+.biziship-autocomplete-dropdown {
+    width: 100% !important;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 1060;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    margin-top: 2px;
+}
+
+.biziship-autocomplete-dropdown .dropdown-item {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    color: #495057;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+.biziship-autocomplete-dropdown .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #714B67;
+}
+
+.biziship-nmfc-stale input {
+    background-color: #fff9db !important; /* Very light amber */
+    border: 1.5px solid #ffbf00 !important;
+    border-radius: 4px;
+}
+
+.biziship-cargo-nmfc-box.biziship-nmfc-stale {
+    border: 1px solid #ffbf00;
+    background-color: #fff9db;
+    border-radius: 4px;
+    padding-left: 5px;
+}
+
+.badge.bg-success {
+    background-color: #2fb344 !important; /* Vibrant green */
+}
+
+.badge.bg-warning {
+    background-color: #f59f00 !important; /* Vibrant amber */
+    color: #fff !important;
+}
+
+.badge.bg-secondary {
+    background-color: #6c7a91 !important;
+}
+
+.biziship-nmfc-warning-text {
+    color: #d97706;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.biziship-nmfc-warning-text i {
+    color: #d97706;
+}
+
+.biziship-nmfc-info-text {
+    color: #64748b !important;
+    font-size: 0.85rem;
+    font-weight: 400;
+}
+
+.biziship-nmfc-info-text i {
+    color: #94a3b8;
+}
+
+.biziship-nmfc-suggestion-box {
+    background-color: #f0f7ff;
+    border: 1px solid #e1effe;
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 8px;
+}
+
+.biziship-nmfc-suggestion-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.biziship-nmfc-suggested-label {
+    color: #1a56db;
+    font-weight: 700;
+}
+
+.biziship-badge-high {
+    background-color: #def7ec;
+    color: #03543f;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.biziship-badge-medium {
+    background-color: #fdf6b2;
+    color: #723b13;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.biziship-nmfc-btn-apply {
+    background-color: #1a56db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 2px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.biziship-nmfc-btn-apply:hover {
+    background-color: #1e429f;
+}
+
+.biziship-nmfc-btn-dismiss {
+    color: #9ca3af;
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+.biziship-nmfc-btn-dismiss:hover {
+    color: #4b5563;
+    text-decoration: underline;
+}
+
+.biziship-nmfc-applied-text {
+    color: #059669;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.biziship-nmfc-btn-clear {
+    color: #94a3b8;
+    background: none;
+    border: none;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-left: 8px;
+    padding: 0;
+}
+
+.biziship-nmfc-btn-clear:hover {
+    color: #64748b;
+    text-decoration: underline;
+}
+
+.biziship-nmfc-rationale {
+    color: #6b7280;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Purple background highlight on address inputs in Origin & Destination groups */
+div[name="biziship_origin_address"] input,
+div[name="biziship_origin_address2"] input,
+div[name="biziship_origin_city"] input,
+div[name="biziship_origin_zip"] input,
+div[name="biziship_origin_state_id"] input,
+div[name="biziship_origin_country_id"] input,
+div[name="biziship_dest_address"] input,
+div[name="biziship_dest_address2"] input,
+div[name="biziship_dest_city"] input,
+div[name="biziship_dest_zip"] input,
+div[name="biziship_dest_state_id"] input,
+div[name="biziship_dest_country_id"] input {
+    font-weight: bold !important;
+}
+
+/* Red labels for mandatory phone fields in booking wizard */
+.o_form_label:has(+ .biziship-mandatory-field),
+.o_field_widget.biziship-mandatory-field + .o_form_label,
+.o_form_label.biziship-mandatory-field {
+    color: #dc3545 !important;
+}
+
+/* ============================================================
+   Recurring Pickup / Delivery Hours picker
+   ============================================================ */
+.biziship-hours-picker {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.biziship-hp-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.biziship-hp-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #0f172a;
+}
+
+.biziship-hp-summary {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+/* Day pills */
+.biziship-hp-days {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.biziship-hp-pill {
+    min-width: 36px;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f1f5f9;
+    color: #94a3b8;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    line-height: 1;
+}
+
+.biziship-hp-pill:hover {
+    border-color: #cbd5e1;
+}
+
+.biziship-hp-pill.active {
+    background: #0f172a;
+    border-color: #0f172a;
+    color: #ffffff;
+}
+
+/* Time range */
+.biziship-hp-times {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.biziship-hp-time-wrap {
+    position: relative;
+    flex: 1;
+}
+
+.biziship-hp-time-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #0f172a;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+}
+
+.biziship-hp-time-btn:hover {
+    border-color: #cbd5e1;
+}
+
+.biziship-hp-clock {
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.biziship-hp-chev {
+    margin-left: auto;
+    color: #94a3b8;
+    font-size: 0.7rem;
+}
+
+.biziship-hp-to {
+    color: #94a3b8;
+    font-size: 0.82rem;
+    font-weight: 500;
+    flex: 0 0 auto;
+}
+
+/* Dropdown */
+.biziship-hp-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    max-height: 220px;
+    overflow-y: auto;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    padding: 4px;
+}
+
+.biziship-hp-opt {
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #334155;
+    cursor: pointer;
+}
+
+.biziship-hp-opt:hover {
+    background: #f1f5f9;
+}
+
+.biziship-hp-opt.selected {
+    background: #0f172a;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ============================================================
+   Shipment notifications (booking dialog) — email chip input
+   ============================================================ */
+.biziship-notif {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 14px;
+    margin-top: 6px;
+    width: 100%;
+}
+
+.biziship-notif-header {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #0f172a;
+}
+
+.biziship-notif-header .fa {
+    color: #714B67;
+}
+
+.biziship-notif-help {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    margin: 2px 0 10px;
+}
+
+.biziship-notif-loading {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.biziship-notif-block {
+    margin-bottom: 10px;
+}
+
+.biziship-notif-sublabel {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 5px;
+}
+
+/* Read-only company-default chips */
+.biziship-chip-readonly-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.biziship-chip-readonly {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    border-radius: 9999px;
+    background: #f3f4f6;       /* gray-100 */
+    color: #6b7280;            /* gray-500 */
+    box-shadow: inset 0 0 0 1px #e5e7eb;  /* gray-200 ring */
+    font-size: 0.8rem;
+}
+
+/* Editable chip input container */
+.biziship-chip-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    min-height: 38px;
+    padding: 5px 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: text;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.biziship-chip-input.is-invalid {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+.biziship-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    background: #faf5fb;       /* primary-50 (purple tint) */
+    color: #5b3a52;            /* primary-700 */
+    box-shadow: inset 0 0 0 1px #e7d4e4;  /* primary-100 ring */
+    font-size: 0.8rem;
+}
+
+.biziship-chip-x {
+    border: none;
+    background: transparent;
+    color: #9b7790;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0 0 0 2px;
+    cursor: pointer;
+}
+
+.biziship-chip-x:hover {
+    color: #5b3a52;
+}
+
+.biziship-chip-field {
+    flex: 1 1 120px;
+    min-width: 120px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.85rem;
+    color: #0f172a;
+    padding: 2px 0;
+}
+
+/* Center the Total Charge and Transit Days columns in the quotes list */
+.biziship-quotes-tree th[data-name="total_charge"],
+.biziship-quotes-tree th[data-name="transit_days"],
+.biziship-quotes-tree td[name="total_charge"],
+.biziship-quotes-tree td[name="transit_days"] {
+    text-align: center !important;
+}
+
+/* ============================================================
+   Reference numbers widget (REF1 primary + additional)
+   ============================================================ */
+.biziship-refs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.biziship-ref-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+
+.biziship-ref-badge {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.biziship-ref-input {
+    flex: 0 0 auto;
+    width: 150px;
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+    font-size: 0.85rem;
+    color: #0f172a;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.biziship-ref-input:focus {
+    border-color: #714B67;
+    box-shadow: 0 0 0 3px rgba(113, 75, 103, 0.12);
+}
+
+.biziship-ref-remove {
+    flex: 0 0 auto;
+    border: none;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0 4px;
+    cursor: pointer;
+}
+
+.biziship-ref-remove:hover {
+    color: #dc2626;
+}
+
+.biziship-ref-add {
+    align-self: center;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    border: none;
+    background: transparent;
+    color: #714B67;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 4px;
+    cursor: pointer;
+}
+
+.biziship-ref-add:hover {
+    text-decoration: underline;
+}
+
+/* Salesperson recipient row + toggle */
+.biziship-sp-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #f8fafc;
+    transition: opacity 0.15s ease;
+}
+
+.biziship-sp-row.excluded {
+    opacity: 0.5;
+}
+
+.biziship-sp-avatar {
+    font-size: 1.5rem;
+    color: #94a3b8;
+    flex: 0 0 auto;
+}
+
+.biziship-sp-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.biziship-sp-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.biziship-sp-row.excluded .biziship-sp-name {
+    text-decoration: line-through;
+}
+
+.biziship-sp-email {
+    font-size: 0.76rem;
+    color: #94a3b8;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Toggle switch (iOS-style) */
+.biziship-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 22px;
+    flex: 0 0 auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.biziship-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.biziship-switch-slider {
+    position: absolute;
+    inset: 0;
+    background: #cbd5e1;
+    border-radius: 9999px;
+    transition: background 0.2s ease;
+}
+
+.biziship-switch-slider::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    top: 3px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.biziship-switch input:checked + .biziship-switch-slider {
+    background: #16a34a;
+}
+
+.biziship-switch input:checked + .biziship-switch-slider::before {
+    transform: translateX(18px);
+}
+
+.biziship-switch input:focus-visible + .biziship-switch-slider {
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.25);
+}
+
+.biziship-notif-error {
+    font-size: 0.78rem;
+    color: #dc2626;
+    margin-top: 5px;
+}
+
+.biziship-notif-help2 {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 5px;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.biziship</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="BiziShip" id="biziship" string="BiziShip" name="biziship" groups="base.group_system">
+                    <block title="BiziShip.ai Integration" id="biziship_settings">
+                        <setting id="biziship_api_key_setting"
+                                 string="BiziShip API Key"
+                                 help="Required to fetch live LTL quotes and book shipments. Get your key from your BiziShip.ai account, or contact BiziShip.ai support.">
+                            <field name="biziship_erp_api_key" password="True" placeholder="Enter your BiziShip API key"/>
+                        </setting>
+                        <setting id="biziship_api_url_setting"
+                                 string="BiziShip API URL"
+                                 help="Only needed if BiziShip.ai support instructs you to use a different endpoint (e.g. staging). Leave blank to use the default.">
+                            <field name="biziship_api_url" placeholder="Default endpoint (leave blank)"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

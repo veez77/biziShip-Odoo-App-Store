@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_biziship_save_freight_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.save.freight.wizard.form</field>
+        <field name="model">biziship.save.freight.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Save to My Pool">
+                <div class="biziship-save-wizard-container">
+                    <div class="biziship-save-title">Save to My Pool</div>
+                    <div class="biziship-save-subtitle">Give this freight a name you'll recognise later.</div>
+                    
+                    <div class="biziship-modern-input mt-3">
+                        <field name="name" nolabel="1" placeholder="e.g. Chicago to Atlanta — Dry Food"/>
+                    </div>
+                    
+                    <field name="sale_order_id" invisible="1"/>
+                </div>
+                <footer>
+                    <button string="Cancel" class="biziship-btn-cancel" special="cancel"/>
+                    <button name="action_save_freight" string="Save Freight" type="object" class="biziship-btn-save"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

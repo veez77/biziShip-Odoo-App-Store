@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="biziship_tracking_wizard_view_form" model="ir.ui.view">
+        <field name="name">biziship.tracking.wizard.form</field>
+        <field name="model">biziship.tracking.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Shipment Tracking" class="biziship_tracking_wizard">
+                <sheet>
+                    <!-- Header: BOL + Status + PRO with copy buttons (rendered in Python) -->
+                    <field name="header_html" nolabel="1" readonly="1" widget="html"/>
+
+                    <!-- Error banner -->
+                    <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:10px 14px;margin-bottom:14px;color:#856404;font-size:13px;" invisible="not error_message">
+                        ⚠️ <field name="error_message" nolabel="1" readonly="1" style="display:inline;color:#856404;font-size:13px;"/>
+                    </div>
+
+                    <!-- Tracking Events section -->
+                    <div style="margin-bottom:8px;">
+                        <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:#6c757d;letter-spacing:0.8px;margin-bottom:10px;">
+                            🚚 Tracking Events
+                        </div>
+                        <div invisible="events_html">
+                            <p style="color:#aaa;font-size:13px;">Click "Refresh" to load the latest tracking events.</p>
+                        </div>
+                        <field name="events_html" nolabel="1" readonly="1" invisible="not events_html" widget="html"/>
+                    </div>
+
+                    <!-- Divider -->
+                    <div style="border-top:1px solid #e9ecef;margin:16px 0;" invisible="not show_ai_panel"/>
+
+                    <!-- AI Journey Analysis panel -->
+                    <div invisible="not show_ai_panel">
+                        <div style="font-size:12px;font-weight:700;text-transform:uppercase;color:#6c757d;letter-spacing:0.8px;margin-bottom:10px;">
+                            ✨ AI Journey Analysis
+                        </div>
+                        <div style="background:#fff3cd;border:1px solid #ffc107;border-radius:6px;padding:10px 14px;margin-bottom:14px;color:#856404;font-size:13px;" invisible="not ai_error_message">
+                            ⚠️ <field name="ai_error_message" nolabel="1" readonly="1" style="display:inline;color:#856404;font-size:13px;"/>
+                        </div>
+                        <field name="ai_summary_html" nolabel="1" readonly="1" invisible="not ai_summary_html" widget="html"/>
+                    </div>
+
+                    <!-- Hidden fields (needed for domain evaluation) -->
+                    <field name="sale_order_id" invisible="1"/>
+                    <field name="show_ai_panel" invisible="1"/>
+                    <field name="has_tracking_events" invisible="1"/>
+                    <field name="tracking_status" invisible="1"/>
+                    <field name="pro_number" invisible="1"/>
+                    <field name="last_updated" invisible="1"/>
+                    <field name="bol_number" invisible="1"/>
+                </sheet>
+
+                <footer>
+                    <button name="action_refresh_tracking" string="🔄 Refresh" type="object" class="btn-primary"/>
+                    <button name="action_analyze_journey" string="✨ Analyze Journey" type="object" class="btn-secondary ms-2" invisible="not has_tracking_events"/>
+                    <button string="✨ Analyze Journey" class="btn-secondary ms-2 o_disabled pe-none opacity-50" invisible="has_tracking_events" title="Refresh tracking first to enable journey analysis"/>
+                    <button string="Close" class="btn-secondary ms-2" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_biziship_tracking_wizard" model="ir.actions.act_window">
+        <field name="name">Shipment Tracking</field>
+        <field name="res_model">biziship.tracking.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

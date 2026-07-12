@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_biziship_quote_confirm_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.quote.confirm.wizard.form</field>
+        <field name="model">biziship.quote.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Quote Selection">
+                <style>
+                    /* Modern Progress Bar - Quote Booking */
+                    .biziship-quote-progress-container {
+                        display: none;
+                        width: 100%;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                    }
+                    .biziship-quote-progress-text {
+                        text-align: center;
+                        color: #495057;
+                        font-weight: 500;
+                        font-size: 14px;
+                        margin-bottom: 8px;
+                    }
+                    .biziship-quote-progress-wrapper {
+                        width: 100%;
+                        background-color: #e9ecef;
+                        border-radius: 8px;
+                        overflow: hidden;
+                        height: 24px;
+                        box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+                    }
+                    .biziship-quote-progress-bar {
+                        width: 0%;
+                        height: 100%;
+                        background-color: #714B67; /* Odoo Primary Purple */
+                        background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+                        background-size: 1rem 1rem;
+                    }
+                    @keyframes biziship-quote-stripes {
+                        from { background-position: 1rem 0; }
+                        to { background-position: 0 0; }
+                    }
+                    @keyframes biziship-quote-fill {
+                        0% { width: 0%; }
+                        100% { width: 95%; }
+                    }
+
+                    /* Trigger: When Odoo disables the primary button during RPC call, show animation! */
+                    .modal:has(button[name="action_confirm_and_send"]:disabled) .biziship-quote-progress-container,
+                    .modal:has(button[name="action_confirm_and_send"].o_disabled) .biziship-quote-progress-container {
+                        display: block;
+                    }
+                    .modal:has(button[name="action_confirm_and_send"]:disabled) .biziship-quote-progress-bar,
+                    .modal:has(button[name="action_confirm_and_send"].o_disabled) .biziship-quote-progress-bar {
+                        /* 20 seconds for Quote Booking */
+                        animation: biziship-quote-fill 20s cubic-bezier(0.1, 0.7, 1.0, 0.1) forwards, biziship-quote-stripes 1s linear infinite;
+                    }
+                    .modal:has(button[name="action_confirm_and_send"]:disabled) .biziship-quote-help-group,
+                    .modal:has(button[name="action_confirm_and_send"].o_disabled) .biziship-quote-help-group {
+                        display: none;
+                    }
+
+                    /* Force gray line on text inputs in Hazmat section */
+                    .biziship-hazmat-section .o_field_char input {
+                        border-bottom: 1px solid #ccc !important;
+                    }
+                    /* Highlight PO Number field when empty */
+                    div[name="po_number"] input.o_input:placeholder-shown {
+                        background-color: #fff3cd !important;
+                        border-bottom: 2px solid #e6a817 !important;
+                        border-radius: 3px !important;
+                        padding-left: 4px !important;
+                    }
+                    /* Highlight PO Number label when field is empty */
+                    .o_wrap_field:has(div[name="po_number"] input:placeholder-shown) .o_form_label,
+                    .o_group:has(div[name="po_number"] input:placeholder-shown) label[for="po_number"] {
+                        color: #856404 !important;
+                        font-weight: bold !important;
+                    }
+                    /* Real-time: gray out Confirm Booking button when PO is empty */
+                    .modal:has(div[name="po_number"] input.o_input:placeholder-shown) button[name="action_confirm_and_send"] {
+                        opacity: 0.5 !important;
+                        pointer-events: none !important;
+                        cursor: not-allowed !important;
+                    }
+                </style>
+                <div class="alert alert-info text-center biziship-quote-help-group" role="alert" style="font-size: 14px;">
+                    Please confirm the details below to <b>confirm your booking</b>.
+                </div>
+                
+                <div class="d-flex align-items-center justify-content-between biziship-quote-help-group mb-3">
+                    <div class="oe_title mb-0">
+                        <h1 class="mb-0"><field name="carrier_name" readonly="1"/></h1>
+                    </div>
+                    <field name="carrier_logo" widget="image" class="ms-3" style="max-height: 50px; max-width: 150px; object-fit: contain;" readonly="1"/>
+                </div>
+
+                <group class="biziship-quote-help-group">
+                    <group>
+                        <!-- Left column -->
+                        <field name="delivery_date"/>
+                        <field name="biziship_sales_order_name" string="Sales Order" readonly="1"/>
+                        <field name="po_number" required="1" placeholder="Required"/>
+                        <field name="has_accessorials" invisible="1"/>
+                    </group>
+                    <group>
+                        <!-- Right column -->
+                        <field name="total_charge" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        <field name="carrier_liability_new" widget="monetary" options="{'currency_field': 'currency_id'}" invisible="carrier_liability_new == 0"/>
+                        <field name="carrier_liability_used" widget="monetary" options="{'currency_field': 'currency_id'}" invisible="carrier_liability_used == 0"/>
+                        <field name="currency" invisible="1"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="quote_id_ref" string="Quote ID"/>
+                        <field name="quote_id" invisible="1"/>
+                        <field name="sale_order_id" invisible="1"/>
+                    </group>
+                </group>
+
+                <div class="biziship-quote-help-group d-flex align-items-start gap-3 mb-2">
+                    <label for="biziship_references_json" string="Reference Number" class="o_form_label" style="white-space:nowrap;padding-top:6px;"/>
+                    <field name="biziship_references_json" widget="biziship_references" nolabel="1" class="flex-grow-1"/>
+                </div>
+
+                <group class="biziship-quote-help-group" string="Routing (Origin to Destination)">
+                    <group string="Origin">
+                        <field name="origin_company" nolabel="1" class="fw-bold mb-0" style="font-size: 1.1em; display: block;" colspan="2"/>
+                        <div class="o_address_format" colspan="2">
+                            <field name="origin_address" class="o_address_street"/>
+                            <field name="origin_address2" class="o_address_street"/>
+                            <field name="origin_city" class="o_address_city"/>
+                            <field name="origin_state" class="o_address_state"/>
+                            <field name="origin_zip" class="o_address_zip"/>
+                        </div>
+                        <field name="origin_contact_name" string="Contact Name (optional)"/>
+                        <field name="origin_contact_phone" widget="phone" string="Contact Phone *" required="1" class="biziship-mandatory-field"/>
+                        <field name="origin_contact_email" string="Contact Email (optional)"/>
+                    </group>
+                    <group string="Destination">
+                        <field name="destination_company" nolabel="1" class="fw-bold mb-0" style="font-size: 1.1em; display: block;" colspan="2"/>
+                        <div class="o_address_format" colspan="2">
+                            <field name="destination_address" class="o_address_street"/>
+                            <field name="destination_address2" class="o_address_street"/>
+                            <field name="destination_city" class="o_address_city"/>
+                            <field name="destination_state" class="o_address_state"/>
+                            <field name="destination_zip" class="o_address_zip"/>
+                        </div>
+                        <field name="destination_contact_name" string="Contact Name (optional)"/>
+                        <field name="destination_contact_phone" widget="phone" string="Contact Phone *" required="1" class="biziship-mandatory-field"/>
+                        <field name="destination_contact_email" string="Contact Email (optional)"/>
+                    </group>
+                </group>
+
+                <group class="biziship-quote-help-group" string="Carrier Terminals" invisible="not origin_terminal_city and not destination_terminal_city">
+                    <group>
+                        <label for="origin_terminal_city" string="Origin Terminal"/>
+                        <div class="o_row">
+                            <field name="origin_terminal_city" class="oe_inline" readonly="1" nolabel="1"/>
+                            <span invisible="not origin_terminal_state">, </span>
+                            <field name="origin_terminal_state" class="oe_inline" readonly="1" nolabel="1"/>
+                        </div>
+                        <field name="origin_terminal_phone" widget="phone" readonly="1" string="Phone"/>
+                    </group>
+                    <group>
+                        <label for="destination_terminal_city" string="Destination Terminal"/>
+                        <div class="o_row">
+                            <field name="destination_terminal_city" class="oe_inline" readonly="1" nolabel="1"/>
+                            <span invisible="not destination_terminal_state">, </span>
+                            <field name="destination_terminal_state" class="oe_inline" readonly="1" nolabel="1"/>
+                        </div>
+                        <field name="destination_terminal_phone" widget="phone" readonly="1" string="Phone"/>
+                    </group>
+                </group>
+
+                <group class="biziship-quote-help-group biziship-hazmat-section" invisible="not is_hazmat" style="background-color: #fff3cd; border: 1px solid #ffe69c; border-radius: 4px; padding: 15px; margin-bottom: 15px;">
+                    <div colspan="2" class="mb-2">
+                        <h3 style="color: #856404; margin: 0; font-size: 1.1em; font-weight: bold;">
+                            <i class="fa fa-warning me-2"></i>HAZARDOUS MATERIAL DETAILS
+                        </h3>
+                    </div>
+                    <group string="EMERGENCY CONTACT">
+                        <field name="hazmat_contact_name" string="Contact Name *" required="is_hazmat"/>
+                        <field name="hazmat_contact_phone" string="Contact Phone *" required="is_hazmat"/>
+                    </group>
+                    <group string="CARGO DETAILS (APPLIED TO ALL HAZARDOUS ITEMS)">
+                        <field name="hazmat_un_number" string="UN Number *" placeholder="UN1234" required="is_hazmat"/>
+                        <field name="hazmat_proper_shipping_name" string="Proper Shipping Name *" placeholder="Flammable Liquid" required="is_hazmat"/>
+                        <field name="hazmat_hazard_class" string="Hazard Class *" required="is_hazmat"/>
+                        <field name="hazmat_packing_group" string="Packing Group *" required="is_hazmat"/>
+                        <field name="hazmat_pieces_packaging" string="Pieces Packaging *" required="is_hazmat"/>
+                    </group>
+                    <field name="is_hazmat" invisible="1"/>
+                    <field name="is_hazmat_valid" invisible="1"/>
+                </group>
+
+                <notebook class="biziship-quote-help-group">
+                    <page string="Freight Details" name="freight_details">
+                        <div class="mb-2 mt-2">
+                            <strong>Requested Pickup: </strong> <field name="biziship_pickup_date" readonly="1" class="oe_inline"/>
+                        </div>
+                        <field name="biziship_cargo_line_ids" nolabel="1" create="false" delete="false">
+                            <tree editable="bottom">
+                                <field name="pieces" string="UNITS" readonly="1"/>
+                                <field name="packaging_type" string="TYPE" readonly="1"/>
+                                <field name="weight" string="WEIGHT" readonly="1"/>
+                                <field name="weight_unit" nolabel="1" class="oe_inline" readonly="1"/>
+                                <field name="length" string="L" readonly="1"/>
+                                <field name="width" string="W" readonly="1"/>
+                                <field name="height" string="H" readonly="1"/>
+                                <field name="dim_unit" nolabel="1" readonly="1"/>
+                                <field name="cargo_desc" string="DESCRIPTION" readonly="1"/>
+                                <field name="computed_freight_class" string="CLASS" readonly="1"/>
+                                <field name="nmfc" string="NMFC" optional="show"/>
+                            </tree>
+                        </field>
+                        <group name="cargo_footer" col="6" class="mt-2 mt-md-0">
+                            <group colspan="4">
+                                <field name="accessorial_services_text" string="Accessorials" readonly="1" invisible="not has_accessorials" style="white-space: pre; font-size: 13px; color: #666;"/>
+                                <field name="biziship_special_instructions" string="Special Instructions" style="white-space: pre; font-size: 1.1em; color: #000; text-align: left;"/>
+                        
+                        <!-- Environment Indicator -->
+                        <div class="mt-4 mb-2 text-center" invisible="not priority1_env">
+                            <span class="badge rounded-pill bg-warning text-dark px-3 py-2" style="font-size: 14px;" invisible="priority1_env != 'DEV'">
+                                <i class="fa fa-flask me-1"></i> DEVELOPMENT ENVIRONMENT
+                            </span>
+                            <span class="badge rounded-pill bg-success text-white px-3 py-2" style="font-size: 14px;" invisible="priority1_env != 'PROD'">
+                                <i class="fa fa-check-circle me-1"></i> PRODUCTION ENVIRONMENT (LIVE)
+                            </span>
+                            <field name="priority1_env" invisible="1"/>
+                        </div>
+                    </group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="cargo_total_weight">
+                                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                    <label for="biziship_total_weight" string="Total Weight"/>
+                                </div>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <field name="biziship_total_weight" nolabel="1" class="oe_inline oe_right" style="font-weight: bold; font-size: 1.2em;"/>
+                                    <field name="biziship_total_weight_unit" nolabel="1" class="oe_inline ms-1"/>
+                                </div>
+                            </group>
+                            <div class="oe_clear"/>
+                        </group>
+                    </page>
+                    <page string="Charge Breakdown" name="charge_breakdown">
+                        <field name="quote_details" readonly="1" widget="text" style="font-family: monospace; white-space: pre; padding: 10px; background-color: #f9f9f9; border-radius: 4px;"/>
+                    </page>
+                </notebook>
+
+                <div class="biziship-quote-help-group mt-2">
+                    <field name="biziship_salesperson_name" invisible="1"/>
+                    <field name="biziship_salesperson_email" invisible="1"/>
+                    <field name="biziship_notify_salesperson" invisible="1"/>
+                    <field name="biziship_cc_emails_json" widget="biziship_email_chips" nolabel="1"/>
+                </div>
+
+                <div class="biziship-quote-progress-container">
+                    <div class="biziship-quote-progress-text">Booking Quote... (~20s)</div>
+                    <div class="biziship-quote-progress-wrapper">
+                        <div class="biziship-quote-progress-bar"></div>
+                    </div>
+                </div>
+                <footer>
+                    <button name="action_confirm_and_send" string="Confirm Booking" type="object" class="btn-primary" invisible="is_hazmat and not is_hazmat_valid" data-hotkey="q"/>
+                    <!-- Disabled: hazmat not valid -->
+                    <button string="Confirm Booking" class="btn-primary o_disabled pe-none opacity-50" invisible="not is_hazmat or is_hazmat_valid"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_biziship_quote_confirm_wizard" model="ir.actions.act_window">
+        <field name="name">Confirm Chosen Quote</field>
+        <field name="res_model">biziship.quote.confirm.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

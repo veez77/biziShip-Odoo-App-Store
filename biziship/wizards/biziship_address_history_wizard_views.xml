@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="biziship_address_history_wizard_view_form" model="ir.ui.view">
+        <field name="name">biziship.address.history.wizard.form</field>
+        <field name="model">biziship.address.history.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Previous Addresses" class="biziship_address_history_wizard">
+                <sheet>
+                    <!-- Search / Filter bar -->
+                    <div style="margin-bottom:14px;">
+                        <div style="display:flex;gap:8px;align-items:center;">
+                            <div style="position:relative;flex:1;">
+                                <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#aaa;font-size:14px;">🔍</span>
+                                <field name="search_query"
+                                       nolabel="1"
+                                       placeholder="Type and press Enter to filter…"
+                                       style="padding-left:32px;width:100%;border:1px solid #dee2e6;border-radius:6px;font-size:13px;"/>
+                            </div>
+                            <button name="action_filter" string="Filter" type="object" class="btn btn-sm btn-outline-secondary" style="white-space:nowrap;"/>
+                        </div>
+                        <div style="font-size:11px;color:#aaa;margin-top:4px;margin-left:2px;">
+                            Showing unique addresses used by your company. Toggle a row to select it.
+                        </div>
+                    </div>
+
+                    <!-- Address list -->
+                    <field name="address_line_ids" nolabel="1">
+                        <tree string="Previous Origin Addresses"
+                              editable="top"
+                              create="0"
+                              delete="0"
+                              decoration-success="is_selected"
+                              no_open="True"
+                              limit="50">
+                            <field name="is_selected" widget="boolean_toggle" string="" optional="show" width="40px"/>
+                            <field name="company_name" string="Company" readonly="1"/>
+                            <field name="address_display" string="Address" readonly="1"/>
+                            <field name="contact_display" string="Contact" readonly="1" optional="show"/>
+                            <field name="source_order_name" string="From Quote" readonly="1" optional="show"/>
+                            <field name="source_date" string="Date" readonly="1" optional="show"/>
+                            <!-- Hidden fields used by apply action -->
+                            <field name="address" column_invisible="1"/>
+                            <field name="address2" column_invisible="1"/>
+                            <field name="city" column_invisible="1"/>
+                            <field name="state_id" column_invisible="1"/>
+                            <field name="zip_code" column_invisible="1"/>
+                            <field name="country_id" column_invisible="1"/>
+                            <field name="contact_name" column_invisible="1"/>
+                            <field name="contact_phone" column_invisible="1"/>
+                            <field name="contact_email" column_invisible="1"/>
+                        </tree>
+                    </field>
+
+                    <field name="sale_order_id" invisible="1"/>
+                    <field name="address_type" invisible="1"/>
+                </sheet>
+
+                <footer>
+                    <button name="action_apply_address"
+                            string="Use Selected Address"
+                            type="object"
+                            class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary ms-2"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

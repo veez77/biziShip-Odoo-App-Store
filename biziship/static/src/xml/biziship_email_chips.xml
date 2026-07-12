@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="biziship.EmailChips">
+        <div class="biziship-notif">
+
+            <!-- Header -->
+            <div class="biziship-notif-header">
+                <i class="fa fa-bell-o me-2"/>
+                <span class="biziship-notif-title">Shipment notifications (optional)</span>
+            </div>
+            <div class="biziship-notif-help">
+                Recipients are emailed when the shipment is booked, delivered, or cancelled.
+            </div>
+
+            <!-- Read-only: company defaults -->
+            <t t-if="state.loadingDefaults">
+                <div class="biziship-notif-loading">Loading company recipients…</div>
+            </t>
+            <t t-elif="hasDefaults">
+                <div class="biziship-notif-block">
+                    <div class="biziship-notif-sublabel">ALWAYS NOTIFIED BY YOUR COMPANY</div>
+                    <div class="biziship-chip-readonly-wrap">
+                        <t t-foreach="state.defaults" t-as="email" t-key="email">
+                            <span class="biziship-chip-readonly">
+                                <i class="fa fa-envelope-o me-1"/>
+                                <t t-esc="email"/>
+                            </span>
+                        </t>
+                    </div>
+                </div>
+            </t>
+
+            <!-- Salesperson recipient — included by default, toggleable -->
+            <div t-if="hasSalesperson" class="biziship-notif-block">
+                <div class="biziship-notif-sublabel">SALESPERSON</div>
+                <div class="biziship-sp-row" t-att-class="{ 'excluded': !notifySalesperson }">
+                    <i class="fa fa-user-circle-o biziship-sp-avatar"/>
+                    <div class="biziship-sp-info">
+                        <span class="biziship-sp-name" t-esc="salespersonName"/>
+                        <span class="biziship-sp-email" t-esc="salespersonEmail"/>
+                    </div>
+                    <label class="biziship-switch" t-att-title="notifySalesperson ? 'Salesperson will be notified' : 'Salesperson excluded'">
+                        <input type="checkbox" t-att-checked="notifySalesperson"
+                               t-on-change="() => this.toggleSalesperson()"
+                               t-att-aria-label="'Notify salesperson ' + salespersonName"/>
+                        <span class="biziship-switch-slider"/>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Editable: per-shipment extras -->
+            <div class="biziship-notif-block">
+                <div t-if="hasDefaults" class="biziship-notif-sublabel">ADD RECIPIENTS FOR THIS SHIPMENT</div>
+                <div class="biziship-chip-input" t-att-class="{ 'is-invalid': state.invalid }" t-on-click="() => this._focusInput()">
+                    <t t-foreach="chips" t-as="chip" t-key="chip_index">
+                        <span class="biziship-chip">
+                            <t t-esc="chip"/>
+                            <button type="button" class="biziship-chip-x"
+                                    t-on-click.stop="() => this.removeChip(chip_index)"
+                                    t-att-aria-label="'Remove ' + chip">×</button>
+                        </span>
+                    </t>
+                    <input
+                        type="text"
+                        class="biziship-chip-field"
+                        t-ref="input"
+                        placeholder="alice@example.com"
+                        t-att-value="state.draft"
+                        t-on-input="onInput"
+                        t-on-keydown="onKeydown"
+                        t-on-paste="onPaste"
+                        t-on-blur="onBlur"/>
+                </div>
+                <div t-if="state.error" class="biziship-notif-error" t-esc="state.error"/>
+                <div t-else="" class="biziship-notif-help2" t-esc="helperText"/>
+            </div>
+
+        </div>
+    </t>
+
+</templates>

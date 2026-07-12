@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_biziship_booking_warning_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.booking.warning.wizard.form</field>
+        <field name="model">biziship.booking.warning.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Live Freight Booking">
+                <style>
+                    /* Blur effect for the background when this modal is open */
+                    .modal-backdrop.show {
+                        backdrop-filter: blur(4px);
+                        background-color: rgba(0, 0, 0, 0.4);
+                    }
+                    .biziship-warning-header {
+                        background-color: #1ea94b !important;
+                        color: white !important;
+                        padding: 24px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        border-radius: 12px 12px 0 0 !important;
+                    }
+                    .biziship-warning-body {
+                        padding: 32px !important;
+                        background-color: white !important;
+                        border-radius: 0 0 12px 12px !important;
+                    }
+                    .biziship-warning-text {
+                        font-size: 16px !important;
+                        line-height: 1.6 !important;
+                        color: #495057 !important;
+                        margin: 0 !important;
+                    }
+                    .biziship-warning-footer {
+                        border-top: none !important;
+                        padding: 20px 32px 32px !important;
+                        justify-content: center !important;
+                        display: flex !important;
+                        gap: 15px !important;
+                    }
+                    /* Specific button style to match screenshot */
+                    .btn-biziship-confirm {
+                        background-color: #1ea94b !important;
+                        border-color: #1ea94b !important;
+                        color: white !important;
+                        border-radius: 8px !important;
+                        padding: 10px 24px !important;
+                        font-weight: bold !important;
+                        font-size: 15px !important;
+                    }
+                    .btn-biziship-cancel {
+                        background-color: white !important;
+                        border: 1px solid #dee2e6 !important;
+                        color: #495057 !important;
+                        border-radius: 8px !important;
+                        padding: 10px 24px !important;
+                        font-size: 15px !important;
+                    }
+                </style>
+                <field name="quote_id" invisible="1"/>
+                <div class="p-0 m-0">
+                    <div class="biziship-warning-header">
+                        <span class="fa fa-exclamation-triangle mr-3" title="Warning Icon" style="font-size: 24px; margin-right: 15px;"></span>
+                        <h2 style="margin: 0; color: white; font-weight: bold; font-size: 20px;">Live Freight Booking</h2>
+                    </div>
+                    
+                    <div class="biziship-warning-body">
+                        <p class="biziship-warning-text">
+                            You are about to submit a real freight shipment through the <b>live carrier network</b>. 
+                            This is not a test — the carrier will be dispatched and your company will be billed for this shipment.
+                        </p>
+                    </div>
+                </div>
+                <footer class="biziship-warning-footer">
+                    <button string="Cancel" class="btn-biziship-cancel" special="cancel" data-hotkey="z"/>
+                    <button name="action_confirm_and_book" string="Confirm &amp; Book Shipment" type="object" class="btn-biziship-confirm" data-hotkey="q"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

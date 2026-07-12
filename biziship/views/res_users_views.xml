@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_biziship_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.biziship.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="%(action_biziship_auth_wizard)d" 
+                        string="Connect BiziShip Account" 
+                        type="action" 
+                        class="oe_highlight"
+                        invisible="biziship_token != False"/>
+                <button name="%(action_biziship_auth_wizard)d" 
+                        string="Reconnect BiziShip" 
+                        type="action" 
+                        invisible="biziship_token == False"/>
+            </xpath>
+            <xpath expr="//page[@name='preferences']" position="inside">
+                <group string="BiziShip Integration" name="biziship_integration">
+                    <field name="biziship_user_name" readonly="1" invisible="not biziship_user_name"/>
+                    <field name="biziship_token" password="True" readonly="1"/>
+                    <field name="biziship_p1_env" readonly="1"/>
+                    <field name="biziship_version" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_form_simple_modif_biziship_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.simple.modif.biziship.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='preferences']" position="before">
+                <field name="biziship_token" invisible="1"/>
+                <div class="alert alert-info d-flex justify-content-between align-items-center" role="alert" invisible="biziship_token != False">
+                    <span>Connect your BiziShip account to enable Saved Freights.</span>
+                    <button name="%(action_biziship_auth_wizard)d" string="Connect BiziShip Account" type="action" class="btn btn-primary btn-sm"/>
+                </div>
+                <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert" invisible="biziship_token == False">
+                    <span>Account Connected (Environment: <field name="biziship_p1_env" class="fw-bold"/>)</span>
+                    <button name="%(action_biziship_auth_wizard)d" string="Reconnect" type="action" class="btn btn-link btn-sm p-0"/>
+                </div>
+                <div style="font-size:0.78rem;color:#888;margin-bottom:8px;">
+                    BiziShip.ai Version: <field name="biziship_version" readonly="1" class="fw-bold" style="display:inline;"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="biziship.References">
+        <div class="biziship-refs" t-ref="root">
+            <t t-foreach="references" t-as="ref" t-key="ref_index">
+                <div class="biziship-ref-row">
+                    <span class="biziship-ref-badge" t-esc="badge(ref_index)"/>
+                    <input
+                        type="text"
+                        class="biziship-ref-input"
+                        t-att-value="ref"
+                        t-att-placeholder="placeholder(ref_index)"
+                        t-att-maxlength="64"
+                        t-att-readonly="readonly"
+                        t-on-change="() => this.onChange()"/>
+                    <button t-if="ref_index > 0 and !readonly"
+                            type="button"
+                            class="biziship-ref-remove"
+                            title="Remove reference"
+                            t-att-aria-label="'Remove ' + badge(ref_index)"
+                            t-on-click="() => this.removeRow(ref_index)">×</button>
+                </div>
+            </t>
+            <button t-if="canAdd"
+                    type="button"
+                    class="biziship-ref-add"
+                    t-on-click="() => this.addRow()">
+                <i class="fa fa-plus me-1"/>Add another reference
+            </button>
+        </div>
+    </t>
+
+</templates>

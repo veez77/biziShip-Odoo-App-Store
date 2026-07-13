@@ -9,7 +9,7 @@
         AI-driven BOL extraction to optimize your bottom line.
     """,
     'author': 'BiziShip',
-    'website': 'https://biziship.ai',
+    'website': 'https://www.biziship.ai',
     'support': 'zeev@biziship.ai,avner@biziship.ai',
     'images': ['static/description/banner.png'],
     'depends': ['base', 'sale'],

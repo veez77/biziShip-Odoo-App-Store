@@ -10,7 +10,7 @@
     """,
     'author': 'BiziShip',
     'website': 'https://biziship.ai',
-    'support': 'support@biziship.ai',
+    'support': 'zeev@biziship.ai,avner@biziship.ai',
     'images': ['static/description/banner.png'],
     'depends': ['base', 'sale'],
     'external_dependencies': {

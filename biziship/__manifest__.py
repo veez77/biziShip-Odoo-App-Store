@@ -1,11 +1,11 @@
 {
     'name': 'BiziShip',
-    'version': '17.0.2.1.0',
+    'version': '17.0.2.0.8',
     'category': 'Sales',
-    'summary': 'AI-Powered LTL Quoting & Automated Freight Procurement',
+    'summary': 'AI-Powered LTL & FTL Quoting & Automated Freight Procurement',
     'description': """
-        The ultimate shipping companion for Odoo. Supercharge your logistics 
-        with instant Mega-Search LTL quoting, real-time rate shopping, and 
+        The ultimate shipping companion for Odoo. Supercharge your logistics
+        with instant Mega-Search LTL and FTL quoting, real-time rate shopping, and
         AI-driven BOL extraction to optimize your bottom line.
     """,
     'author': 'BiziShip',

@@ -15,7 +15,7 @@
     'images': ['static/description/banner.png'],
     'depends': ['base', 'sale'],
     'external_dependencies': {
-        'python': ['requests', 'PyPDF2'],
+        'python': ['requests'],
     },
     'data': [
         'security/ir.model.access.csv',

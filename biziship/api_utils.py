@@ -72,9 +72,6 @@ def get_biziship_api_url(env=None):
 def get_email2quote_api_key():
     return get_secrets().get("EMAIL2QUOTE_API_KEY", "")
 
-def get_groq_api_key():
-    return get_secrets().get("GROQ_API_KEY", "")
-
 def fetch_biziship_user_profile(env):
     """
     Call GET /erp/auth/me and return the profile dict, or None on failure.

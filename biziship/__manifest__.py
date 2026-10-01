@@ -1,6 +1,6 @@
 {
     'name': 'BiziShip',
-    'version': '17.0.2.1.9',
+    'version': '17.0.2.0.8',
     'category': 'Sales',
     'summary': 'AI-Powered LTL & FTL Quoting & Automated Freight Procurement',
     'description': """
@@ -11,6 +11,7 @@
     'author': 'BiziShip',
     'website': 'https://www.biziship.ai',
     'live_test_url': 'https://www.youtube.com/watch?v=Odyhh1H-2Ss',
+    'linkedin': 'https://www.linkedin.com/company/biziship',
     'support': 'zeev@biziship.ai,avner@biziship.ai',
     'images': ['static/description/banner.png'],
     'depends': ['base', 'sale'],

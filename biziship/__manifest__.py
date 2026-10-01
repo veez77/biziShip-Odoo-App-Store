@@ -11,7 +11,6 @@
     'author': 'BiziShip',
     'website': 'https://www.biziship.ai',
     'live_test_url': 'https://www.youtube.com/watch?v=Odyhh1H-2Ss',
-    'linkedin': 'https://www.linkedin.com/company/biziship',
     'support': 'zeev@biziship.ai,avner@biziship.ai',
     'images': ['static/description/banner.png'],
     'depends': ['base', 'sale'],

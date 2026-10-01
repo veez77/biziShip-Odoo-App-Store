@@ -545,8 +545,8 @@
                             <span class="text-uppercase fw-bold me-2">BiziShip Booking Details</span>
                             <button name="action_delete_biziship_booking" type="object" icon="fa-trash" class="btn btn-link text-muted p-0" title="Delete Booking Details" confirm="Are you sure you want to delete these booking details?"/>
                         </div>
-                        <field name="biziship_bol_number" invisible="1"/>
                         <field name="biziship_shipment_id" invisible="1"/>
+                        <field name="biziship_bol_number" string="BOL Number" readonly="1" invisible="not biziship_bol_number"/>
                         <field name="biziship_pro_number" readonly="1" invisible="not biziship_pro_number"/>
                         <field name="biziship_bol_url" invisible="1"/>
                         <div colspan="2" class="d-flex align-items-center justify-content-between mt-1 mb-1" invisible="not biziship_bol_url and not biziship_documents_html">

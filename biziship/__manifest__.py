@@ -1,6 +1,6 @@
 {
     'name': 'BiziShip',
-    'version': '17.0.2.2.1',
+    'version': '17.0.2.0.8',
     'category': 'Sales',
     'summary': 'AI-Powered LTL & FTL Quoting & Automated Freight Procurement',
     'description': """
@@ -15,7 +15,7 @@
     'images': ['static/description/banner.png'],
     'depends': ['base', 'sale'],
     'external_dependencies': {
-        'python': ['requests', 'PyPDF2'],
+        'python': ['requests'],
     },
     'data': [
         'security/ir.model.access.csv',

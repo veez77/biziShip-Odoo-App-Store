@@ -15,7 +15,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-from odoo.addons.biziship.api_utils import get_biziship_api_url, get_groq_api_key, BIZISHIP_MODULE_VERSION, BIZISHIP_APP_NAME
+from odoo.addons.biziship.api_utils import get_biziship_api_url, get_groq_api_key, BIZISHIP_MODULE_VERSION, BIZISHIP_APP_NAME, poll_bol_extraction
 
 try:
     from PyPDF2 import PdfReader
@@ -178,23 +178,37 @@ class BizishipBolImportWizard(models.TransientModel):
             # Send BOL Document (PDF or Image)
             files = {"file": (file_name, file_bytes, mime_type)}
             local_response_bol = requests.post(
-                local_api_bol_url, 
-                headers=api_key_header, 
-                files=files, 
-                timeout=30
+                local_api_bol_url,
+                headers=api_key_header,
+                files=files,
+                timeout=10
             )
-            local_response_bol.raise_for_status()
 
-            # Process JSON response
-            response_json = local_response_bol.json()
-            
+            # Expect 202 Accepted with jobId (async extraction)
+            if local_response_bol.status_code == 202:
+                response_json = local_response_bol.json()
+                job_id = response_json.get('jobId')
+                if not job_id:
+                    raise UserError(
+                        _("BOL extraction job initiated but no job ID returned. Please contact support.")
+                    )
+
+                _logger.info("BOL extraction job started: %s", job_id)
+
+                # Poll until completion
+                api_url = email2quote_api_url
+                extracted_details = poll_bol_extraction(self.env, job_id, api_url)
+            else:
+                # Fallback for older endpoints or error responses
+                local_response_bol.raise_for_status()
+                response_json = local_response_bol.json()
+                extracted_details = response_json.get('extracted_details', response_json)
+
             # Check context to see if we were launched from a sale order
             active_id = self.env.context.get('active_id')
             active_model = self.env.context.get('active_model')
-            
+
             if active_id and active_model == 'sale.order':
-                # Save the JSON dict string directly to the sales order
-                extracted_details = response_json.get('extracted_details', response_json)
                 sale_order_record = self.env['sale.order'].browse(active_id)
                 
                 # --- AUTO-POPULATION LOGIC ---

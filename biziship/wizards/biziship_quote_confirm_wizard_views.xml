@@ -197,7 +197,7 @@
                             <strong>Requested Pickup: </strong> <field name="biziship_pickup_date" readonly="1" class="oe_inline"/>
                         </div>
                         <field name="biziship_cargo_line_ids" nolabel="1" create="false" delete="false">
-                            <tree editable="bottom">
+                            <list editable="bottom">
                                 <field name="pieces" string="UNITS" readonly="1"/>
                                 <field name="packaging_type" string="TYPE" readonly="1"/>
                                 <field name="weight" string="WEIGHT" readonly="1"/>
@@ -209,7 +209,7 @@
                                 <field name="cargo_desc" string="DESCRIPTION" readonly="1"/>
                                 <field name="computed_freight_class" string="CLASS" readonly="1"/>
                                 <field name="nmfc" string="NMFC" optional="show"/>
-                            </tree>
+                            </list>
                         </field>
                         <group name="cargo_footer" col="6" class="mt-2 mt-md-0">
                             <group colspan="4">

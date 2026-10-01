@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_biziship_email_quotes_confirm_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.email.quotes.confirm.wizard.form</field>
+        <field name="model">biziship.email.quotes.confirm.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Confirm Recipients" edit="0">
+                <field name="sale_order_id" invisible="1"/>
+                <field name="to_emails" invisible="1"/>
+                <field name="has_invalid_emails" invisible="1"/>
+
+                <!-- Header -->
+                <div style="background: #f3f4f6; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                    <div style="font-size: 18px; font-weight: 700; color: #1f2937; margin-bottom: 4px;">Confirm Email Recipients</div>
+                    <div style="font-size: 13px; color: #6b7280;">Please review the email addresses below. Invalid addresses are marked in red.</div>
+                </div>
+
+                <!-- Email List with Validation -->
+                <div style="margin-bottom: 20px;">
+                    <field name="emails_display_html" nolabel="1" widget="html" readonly="1"/>
+                </div>
+
+                <!-- Footer Buttons -->
+                <div style="border-top: 1px solid #e5e7eb; padding-top: 16px; display: flex; justify-content: space-between; gap: 8px;">
+                    <button name="action_cancel" type="object" string="Back &amp; Edit" class="btn-secondary"/>
+                    <button name="action_confirm_and_send" type="object" string="✓ Confirm &amp; Send" class="btn-primary" invisible="has_invalid_emails"/>
+                    <button name="action_confirm_and_send" type="object" string="✓ Confirm &amp; Send" class="btn-primary" invisible="not has_invalid_emails" disabled="1"/>
+                </div>
+
+                <footer>
+                    <!-- Custom footer with no buttons—all actions are in the main form -->
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_biziship_email_quotes_confirm_wizard" model="ir.actions.act_window">
+        <field name="name">Confirm Recipients</field>
+        <field name="res_model">biziship.email.quotes.confirm.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

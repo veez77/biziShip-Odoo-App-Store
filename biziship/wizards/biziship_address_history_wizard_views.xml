@@ -25,7 +25,7 @@
 
                     <!-- Address list -->
                     <field name="address_line_ids" nolabel="1">
-                        <tree string="Previous Origin Addresses"
+                        <list string="Previous Origin Addresses"
                               editable="top"
                               create="0"
                               delete="0"
@@ -48,7 +48,7 @@
                             <field name="contact_name" column_invisible="1"/>
                             <field name="contact_phone" column_invisible="1"/>
                             <field name="contact_email" column_invisible="1"/>
-                        </tree>
+                        </list>
                     </field>
 
                     <field name="sale_order_id" invisible="1"/>

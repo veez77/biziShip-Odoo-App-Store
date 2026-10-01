@@ -17,3 +17,7 @@ access_biziship_address_history_wizard,biziship.address.history.wizard,model_biz
 access_biziship_address_history_line,biziship.address.history.line,model_biziship_address_history_line,base.group_user,1,1,1,1
 access_biziship_not_connected_wizard,biziship.not.connected.wizard,model_biziship_not_connected_wizard,base.group_user,1,1,1,1
 access_biziship_logout_wizard,biziship.logout.wizard,model_biziship_logout_wizard,base.group_user,1,1,1,1
+access_biziship_quotes_report_export_wizard,biziship.quotes.report.export.wizard,model_biziship_quotes_report_export_wizard,base.group_user,1,1,1,1
+access_biziship_quotes_report_email_wizard,biziship.quotes.report.email.wizard,model_biziship_quotes_report_email_wizard,base.group_user,1,1,1,1
+access_biziship_email_quotes_simple_wizard,biziship.email.quotes.simple.wizard,model_biziship_email_quotes_simple_wizard,base.group_user,1,1,1,1
+access_biziship_email_quotes_confirm_wizard,biziship.email.quotes.confirm.wizard,model_biziship_email_quotes_confirm_wizard,base.group_user,1,1,1,1

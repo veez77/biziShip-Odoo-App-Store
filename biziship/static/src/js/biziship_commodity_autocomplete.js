@@ -2,7 +2,7 @@
 
 import { registry } from "@web/core/registry";
 import { CharField } from "@web/views/fields/char/char_field";
-import { useService } from "@web/core/utils/hooks";
+import { rpc } from "@web/core/network/rpc";
 import { onMounted, useState, useRef } from "@odoo/owl";
 
 const COMMODITIES = [
@@ -120,7 +120,7 @@ export class BiziShipCommodityAutocomplete extends CharField {
             currentValue: this.props.record.data[this.props.name] || ""
         });
         this.inputRef = useRef("input");
-        this.rpc = useService("rpc");
+        this.rpc = rpc;
         this.debounceTimer = null;
         
         onMounted(() => {

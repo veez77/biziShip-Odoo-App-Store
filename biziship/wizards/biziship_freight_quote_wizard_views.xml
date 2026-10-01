@@ -80,7 +80,7 @@
                             <span class="fw-bold">CARGO DETAILS</span>
                         </div>
                         <field name="cargo_line_ids" nolabel="1" colspan="2">
-                            <tree editable="bottom" class="biziship-cargo-tree">
+                            <list editable="bottom" class="biziship-cargo-tree">
                                 <field name="packaging_type" />
                                 <field name="pieces" />
                                 <field name="weight" decoration-danger="weight == 0" />
@@ -93,7 +93,7 @@
                                 <field name="last_dim_unit" column_invisible="True" />
                                 <field name="freight_class" string="Class" />
                                 <field name="cargo_desc" />
-                            </tree>
+                            </list>
                         </field>
                         
                         <group name="cargo_footer" col="6" class="mt-2 mt-md-0">

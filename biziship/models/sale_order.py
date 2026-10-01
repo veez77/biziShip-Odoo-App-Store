@@ -75,6 +75,7 @@ class SaleOrder(models.Model):
         return res
 
     biziship_quote_ids = fields.One2many('biziship.quote', 'sale_order_id', string='Freight Quotes')
+    biziship_quote_request_id = fields.Char(string='BiziShip Quote Request ID', readonly=True, copy=False)
     biziship_extracted_json = fields.Text(string='BiziShip Extracted JSON', readonly=True)
     biziship_bol_number = fields.Char(string='BiziShip BOL Number', readonly=True, copy=False)
     biziship_shipment_id = fields.Char(string='BiziShip Shipment ID', readonly=True, copy=False)
@@ -1218,7 +1219,10 @@ class SaleOrder(models.Model):
             
             response_json = response.json()
             quotes = response_json.get('quotes', [])
-            
+
+            # Capture the quote request UUID (valid for ~10 minutes on backend)
+            self.biziship_quote_request_id = response_json.get('request_id', '')
+
             # Capture environment from top level, then fetch full profile for demo_tries
             self.biziship_priority1_env = response_json.get('priority1_env', 'DEV')
             self._biziship_fetch_and_store_user_profile()
@@ -1299,4 +1303,28 @@ class SaleOrder(models.Model):
             'view_mode': 'form',
             'target': 'current',
             'context': dict(self.env.context, biziship_switch_tab=True),
+        }
+
+    def action_export_quotes_report(self):
+        """Open export quotes report wizard."""
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'biziship.quotes.report.export.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_sale_order_id': self.id,
+            },
+        }
+
+    def action_email_quotes_report(self):
+        """Open email quotes report wizard (simplified)."""
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'biziship.email.quotes.simple.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {
+                'default_sale_order_id': self.id,
+            },
         }

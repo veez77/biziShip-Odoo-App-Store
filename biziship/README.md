@@ -27,6 +27,7 @@ The module will not fetch quotes or book shipments without a configured API key.
 - **Shipment Notifications** — configurable email recipients (company defaults, salesperson,
   per-shipment extras) notified on booking, delivery, and cancellation.
 - **Multi-Reference Numbers, Saved Freight Templates, Address History**, and more.
+- **FTL (Full Truckload) Quoting** — coming soon.
 
 ## Configuration
 

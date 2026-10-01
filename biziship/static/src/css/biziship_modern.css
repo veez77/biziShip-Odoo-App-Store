@@ -1207,3 +1207,17 @@ div[name="biziship_dest_country_id"] input {
     color: #94a3b8;
     margin-top: 5px;
 }
+
+/* Make both BiziShip freight tabs have same text appearance */
+.o_notebook .nav-link[name="biziship_freight_details"],
+.o_notebook .nav-link[name="biziship_freight_quotes"] {
+    color: #1a1a2e !important;
+    font-weight: 500 !important;
+}
+
+/* Active state: show purple underline for both tabs */
+.o_notebook .nav-link.active[name="biziship_freight_details"],
+.o_notebook .nav-link.active[name="biziship_freight_quotes"] {
+    border-bottom-color: #714B67 !important;
+}
+

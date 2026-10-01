@@ -99,18 +99,16 @@ class BizishipSaleCargoLine(models.Model):
     
     freight_class = fields.Selection([
         ('50', '50'), ('55', '55'), ('60', '60'), ('65', '65'),
-        ('70', '70'), ('77.5', '77.5'), ('85', '85'), ('92.5', '92.5'),
-        ('100', '100'), ('110', '110'), ('125', '125'), ('150', '150'),
-        ('175', '175'), ('250', '250'), ('300', '300'),
-        ('400', '400'), ('500', '500')
+        ('70', '70'), ('85', '85'), ('92.5', '92.5'),
+        ('100', '100'), ('125', '125'), ('175', '175'),
+        ('250', '250'), ('300', '300'), ('400', '400')
     ], string="Class", default='50', required=True)
-    
+
     computed_freight_class = fields.Selection([
         ('50', '50'), ('55', '55'), ('60', '60'), ('65', '65'),
-        ('70', '70'), ('77.5', '77.5'), ('85', '85'), ('92.5', '92.5'),
-        ('100', '100'), ('110', '110'), ('125', '125'), ('150', '150'),
-        ('175', '175'), ('250', '250'), ('300', '300'),
-        ('400', '400'), ('500', '500')
+        ('70', '70'), ('85', '85'), ('92.5', '92.5'),
+        ('100', '100'), ('125', '125'), ('175', '175'),
+        ('250', '250'), ('300', '300'), ('400', '400')
     ], string="Computed Class", compute='_compute_computed_class', store=True)
     
     is_class_overridden = fields.Boolean(compute='_compute_is_class_overridden')
@@ -243,23 +241,33 @@ class BizishipSaleCargoLine(models.Model):
                 if volume_cf > 0:
                     effective_weight = convert_to_lbs(rec.weight, rec.weight_unit)
                     density = effective_weight / volume_cf
-                    if density < 1: rec.computed_freight_class = '500'
-                    elif density < 2: rec.computed_freight_class = '400'
-                    elif density < 3: rec.computed_freight_class = '300'
-                    elif density < 4: rec.computed_freight_class = '250'
-                    elif density < 6: rec.computed_freight_class = '175'
-                    elif density < 7: rec.computed_freight_class = '150'
-                    elif density < 8: rec.computed_freight_class = '125'
-                    elif density < 9: rec.computed_freight_class = '110'
-                    elif density < 10.5: rec.computed_freight_class = '100'
-                    elif density < 12: rec.computed_freight_class = '92.5'
-                    elif density < 13.5: rec.computed_freight_class = '85'
-                    elif density < 15: rec.computed_freight_class = '77.5'
-                    elif density < 22.5: rec.computed_freight_class = '70'
-                    elif density < 30: rec.computed_freight_class = '65'
-                    elif density < 35: rec.computed_freight_class = '60'
-                    elif density < 50: rec.computed_freight_class = '55'
-                    else: rec.computed_freight_class = '50'
+                    # Priority1 corrected density thresholds (13-class system)
+                    if density >= 50.0:
+                        rec.computed_freight_class = '50'
+                    elif density >= 35.0:
+                        rec.computed_freight_class = '55'
+                    elif density >= 30.0:
+                        rec.computed_freight_class = '60'
+                    elif density >= 22.5:
+                        rec.computed_freight_class = '65'
+                    elif density >= 15.0:
+                        rec.computed_freight_class = '70'
+                    elif density >= 12.0:
+                        rec.computed_freight_class = '85'
+                    elif density >= 10.0:
+                        rec.computed_freight_class = '92.5'
+                    elif density >= 8.0:
+                        rec.computed_freight_class = '100'
+                    elif density >= 6.0:
+                        rec.computed_freight_class = '125'
+                    elif density >= 4.0:
+                        rec.computed_freight_class = '175'
+                    elif density >= 2.0:
+                        rec.computed_freight_class = '250'
+                    elif density >= 1.0:
+                        rec.computed_freight_class = '300'
+                    else:
+                        rec.computed_freight_class = '400'
                 else:
                     rec.computed_freight_class = '50'
             else:

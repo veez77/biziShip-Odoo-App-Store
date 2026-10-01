@@ -5,8 +5,19 @@
         <field name="name">biziship.bol.import.wizard.form</field>
         <field name="model">biziship.bol.import.wizard</field>
         <field name="arch" type="xml">
-            <form string="Import BOL" class="biziship-bol-form">
+            <form string="Process BOL" class="biziship-bol-form">
                 <style>
+                    .biziship-logo-header {
+                        text-align: center;
+                        margin-bottom: 24px;
+                        padding-bottom: 16px;
+                        border-bottom: 1px solid #e9ecef;
+                    }
+                    .biziship-logo-header img {
+                        height: 64px;
+                        width: auto;
+                    }
+
                     /* Modern Progress Bar */
                     .biziship-progress-container {
                         display: none;
@@ -45,6 +56,14 @@
                         100% { width: 95%; }
                     }
 
+                    .biziship-progress-timer {
+                        text-align: center;
+                        color: #6c757d;
+                        font-size: 13px;
+                        margin-top: 8px;
+                        font-weight: 500;
+                    }
+
                     /* Trigger: When Odoo disables the primary button during RPC call, show animation! */
                     .modal:has(button[name="action_process_bol"]:disabled) .biziship-progress-container,
                     .modal:has(button[name="action_process_bol"].o_disabled) .biziship-progress-container {
@@ -59,7 +78,11 @@
                         display: none;
                     }
                 </style>
-                
+
+                <div class="biziship-logo-header">
+                    <img src="/biziship/static/description/icon.png" alt="BiziShip"/>
+                </div>
+
                 <div class="text-center mb-4 mt-2 biziship-help-text">
                     <h2 style="font-weight: 300;">Extract BOL Details</h2>
                     <p class="text-muted">Select your Bill of Lading document (PDF, PNG, JPG) and click Process.</p>
@@ -71,23 +94,75 @@
                 </group>
 
                 <div class="biziship-progress-container">
-                    <div class="biziship-progress-text">Analyzing Freight Data... (~15s)</div>
+                    <div class="biziship-progress-text">Analyzing Freight Data... (typically 7-15 seconds)</div>
                     <div class="biziship-progress-wrapper">
                         <div class="biziship-progress-bar"></div>
                     </div>
+                    <div class="biziship-progress-timer"><span class="biziship-elapsed">0</span>s / ~15s</div>
                 </div>
 
                 <footer>
                     <button name="action_process_bol" string="Process BOL" type="object" class="btn-primary" data-hotkey="q"/>
                     <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
                 </footer>
+
+                <script type="text/javascript">
+                    <![CDATA[
+                    (function() {
+                        function setupTimer() {
+                            const button = document.querySelector('button[name="action_process_bol"]');
+                            const elapsedSpan = document.querySelector('.biziship-elapsed');
+
+                            if (!button || !elapsedSpan) {
+                                setTimeout(setupTimer, 100);
+                                return;
+                            }
+
+                            const observer = new MutationObserver(function(mutations) {
+                                const isDisabled = button.disabled || button.classList.contains('o_disabled');
+
+                                if (isDisabled && !window.biziship_timer_active) {
+                                    window.biziship_timer_active = true;
+                                    let seconds = 0;
+                                    elapsedSpan.textContent = '0';
+
+                                    window.biziship_timer = setInterval(function() {
+                                        seconds++;
+                                        elapsedSpan.textContent = seconds;
+
+                                        if (seconds >= 20) {
+                                            clearInterval(window.biziship_timer);
+                                            window.biziship_timer_active = false;
+                                        }
+                                    }, 1000);
+                                } else if (!isDisabled && window.biziship_timer_active) {
+                                    clearInterval(window.biziship_timer);
+                                    window.biziship_timer_active = false;
+                                }
+                            });
+
+                            observer.observe(button, {
+                                attributes: true,
+                                attributeFilter: ['disabled', 'class'],
+                                attributeOldValue: true
+                            });
+                        }
+
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', setupTimer);
+                        } else {
+                            setupTimer();
+                        }
+                    })();
+                    ]]>
+                </script>
             </form>
         </field>
     </record>
 
     <!-- Action for the Wizard -->
     <record id="action_biziship_bol_import_wizard" model="ir.actions.act_window">
-        <field name="name">Process BOL (BiziShip)</field>
+        <field name="name">Process BOL</field>
         <field name="res_model">biziship.bol.import.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>

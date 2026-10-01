@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_biziship_email_quotes_simple_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.email.quotes.simple.wizard.form</field>
+        <field name="model">biziship.email.quotes.simple.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Email Quotes Report" edit="0">
+                <field name="sale_order_id" invisible="1"/>
+                <field name="html_report" invisible="1"/>
+                <field name="shipment_details_html" invisible="1"/>
+                <field name="markup_enabled" invisible="1"/>
+                <field name="apply_markup" invisible="1"/>
+                <field name="send_success" invisible="1"/>
+
+                <!-- Success State -->
+                <div invisible="not send_success" style="text-align: center; padding: 40px 20px; background: #f0fdf4;">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">✓</div>
+                    <div style="font-size: 1.5rem; font-weight: 700; color: #16a34a; margin-bottom: 8px;">Report Sent!</div>
+                    <div style="color: #65a30d; margin-bottom: 20px;" invisible="not success_recipients">
+                        Sent to: <span style="font-weight: 600;"><field name="success_recipients" nolabel="1"/></span>
+                    </div>
+                    <button name="close" type="object" string="Close" class="btn-primary"/>
+                </div>
+
+                <!-- Main Dialog (hidden during send) -->
+                <div invisible="send_success">
+                    <!-- Alert -->
+                    <div class="alert alert-info" style="margin-bottom: 16px;">
+                        <i class="fa fa-envelope me-2"/>
+                        Send carrier quotes to recipients. They'll receive a link to view the report online.
+                    </div>
+
+                    <!-- Recipients Input + Buttons -->
+                    <div style="display: flex; gap: 16px; margin-bottom: 16px; align-items: flex-end;">
+                        <div style="flex: 1;">
+                            <div class="o_form_label" style="font-weight: 600; color: #1a3c6e; display: block; margin-bottom: 8px;">Recipient Emails</div>
+                            <field name="to_emails" nolabel="1" style="width: 100%; padding: 10px; border: 1px solid #dee2e6; border-radius: 4px; min-height: 80px;"/>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-direction: column;">
+                            <!-- Include Markup Checkbox -->
+                            <div invisible="not markup_enabled" style="display: flex; align-items: center; gap: 8px;">
+                                <field name="apply_markup" nolabel="1"/>
+                                <div class="o_form_label" style="margin: 0; font-size: 13px;">Include Markup</div>
+                            </div>
+                            <button name="action_send_report" type="object" string="📧 Send Report" class="btn-primary" style="white-space: nowrap;" data-noSave="true"/>
+                            <button name="action_cancel" type="object" string="Cancel" class="btn-secondary" style="white-space: nowrap;"/>
+                        </div>
+                    </div>
+
+                    <!-- Shipment Details -->
+                    <field name="shipment_details_html" nolabel="1" widget="html" readonly="1"/>
+
+                    <!-- Carrier Pricing Table -->
+                    <div style="background: #f8f9fa; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                        <div style="margin-bottom: 12px;">
+                            <div class="o_form_label" style="font-weight: 600; color: #1a3c6e; margin: 0; margin-bottom: 8px;">Carrier Pricing</div>
+                            <field name="markup_rule_description" readonly="1" nolabel="1" style="font-size: 12px; font-weight: 700; color: #ff8c00; margin-bottom: 12px;" invisible="not apply_markup"/>
+                        </div>
+                        <field name="markup_preview_html" nolabel="1" widget="html" readonly="1"/>
+                    </div>
+                </div>
+
+                <footer>
+                    <!-- Custom footer with no buttons—all actions are in the main form -->
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_biziship_email_quotes_simple_wizard" model="ir.actions.act_window">
+        <field name="name">Email Quotes Report</field>
+        <field name="res_model">biziship.email.quotes.simple.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Export Report Wizard Form -->
+    <record id="view_biziship_quotes_report_export_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.quotes.report.export.wizard.form</field>
+        <field name="model">biziship.quotes.report.export.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Export Quotes Report">
+                <field name="sale_order_id" invisible="1"/>
+                <field name="html_report" invisible="1"/>
+                <field name="markup_enabled" invisible="1"/>
+
+                <div class="alert alert-info" style="margin-bottom: 16px;">
+                    <i class="fa fa-download me-2"/>
+                    Download carrier quotes as a standalone HTML file to view offline or share.
+                </div>
+
+                <!-- Markup Toggle (only if enabled) -->
+                <div invisible="not markup_enabled" style="background: #f8f9fa; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div class="o_form_label" style="font-weight: 600; color: #1a3c6e; margin: 0;">Add Markup</div>
+                        <field name="apply_markup" nolabel="1"/>
+                    </div>
+                    <field name="markup_rule_description" readonly="1" nolabel="1" style="font-size: 12px; color: #666;"/>
+                </div>
+
+                <footer>
+                    <button name="action_export_report" string="📥 Download" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Email Report Wizard Form -->
+    <record id="view_biziship_quotes_report_email_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.quotes.report.email.wizard.form</field>
+        <field name="model">biziship.quotes.report.email.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Email Quotes Report">
+                <field name="markup_enabled" invisible="1"/>
+                <field name="sale_order_id" invisible="1"/>
+
+                <div class="alert alert-info" style="margin-bottom: 16px;">
+                    <i class="fa fa-envelope me-2"/>
+                    Send carrier quotes to recipients. They'll receive a link to view the report online.
+                </div>
+
+                <!-- Recipients -->
+                <div style="margin-bottom: 16px;">
+                    <div class="o_form_label" style="font-weight: 600; color: #1a3c6e; display: block; margin-bottom: 8px;">Recipients</div>
+                    <field name="to_emails" placeholder="Enter email addresses (comma-separated)" style="width: 100%; padding: 10px; border: 1px solid #dee2e6; border-radius: 4px;"/>
+                </div>
+
+                <!-- Share Price Toggle (only if enabled) -->
+                <div invisible="not markup_enabled" style="background: #f8f9fa; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                        <div class="o_form_label" style="font-weight: 600; color: #1a3c6e; margin: 0;">Share price</div>
+                        <field name="apply_markup" nolabel="1"/>
+                    </div>
+                    <field name="markup_rule_description" readonly="1" nolabel="1" style="font-size: 12px; color: #666;"/>
+                </div>
+
+                <!-- Markup Preview (shown when markup toggled) -->
+                <div invisible="not apply_markup" style="background: #f8f9fa; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
+                    <div class="o_form_label" style="font-weight: 600; color: #1a3c6e; display: block; margin-bottom: 12px;">Pricing Adjustments</div>
+                    <field name="markup_preview_html" nolabel="1" widget="html" readonly="1"/>
+                </div>
+
+                <!-- Report Preview -->
+                <div style="border-top: 2px solid #e9ecef; padding-top: 16px; margin-bottom: 16px;">
+                    <div class="o_form_label" style="font-weight: 600; color: #1a3c6e; display: block; margin-bottom: 12px;">Report Preview</div>
+                    <field name="html_report" nolabel="1" widget="html" readonly="1" style="border: 1px solid #dee2e6; border-radius: 4px; padding: 16px; background: #fff;"/>
+                </div>
+
+                <footer>
+                    <button name="action_send_report" string="📧 Send" type="object" class="btn-primary"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Export Action -->
+    <record id="action_biziship_quotes_report_export_wizard" model="ir.actions.act_window">
+        <field name="name">Export Quotes Report</field>
+        <field name="res_model">biziship.quotes.report.export.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Email Action -->
+    <record id="action_biziship_quotes_report_email_wizard" model="ir.actions.act_window">
+        <field name="name">Email Quotes Report</field>
+        <field name="res_model">biziship.quotes.report.email.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

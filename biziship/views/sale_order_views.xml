@@ -481,7 +481,7 @@
                         <button name="action_biziship_fetch_live_quotes" string="Get Live Quotes" type="object" class="biziship-btn-get-quotes" icon="fa-bolt" invisible="state not in ['draft', 'sent', 'sale']"/>
                     </div>
                 </page>
-                <page string="LTL Freight Quotes" name="biziship_freight_quotes">
+                <page string="LTL Freight Quotes" name="biziship_freight_quotes" active="False">
                     <!-- BiziShip Branded Header -->
                     <div style="display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e8e6f0;border-left:4px solid #f49800;border-radius:8px;padding:8px 18px 8px 14px;margin-bottom:14px;box-shadow:0 1px 4px rgba(32,31,65,0.07);">
                         <div>
@@ -725,18 +725,26 @@
                             </sheet>
                         </form>
                     </field>
-                    <div class="mt-4 text-center" invisible="not biziship_quote_ids">
+                    <div class="mt-4" invisible="not biziship_quote_ids" style="display: flex; align-items: flex-start; gap: 24px;">
+                        <!-- Left: Export & Email buttons (stacked) -->
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <button name="action_email_quotes_report" type="object" string="📧 Email Report" class="btn-secondary"/>
+                            <button name="action_export_quotes_report" type="object" string="📥 Export Report" class="btn-secondary"/>
+                        </div>
 
-                        <field name="biziship_has_selected_quote" invisible="1"/>
-                        <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-primary" invisible="not biziship_has_selected_quote or biziship_priority1_env == 'DEMO'"/>
-                        <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-secondary" invisible="biziship_has_selected_quote or biziship_priority1_env == 'DEMO'" title="Please select a quote first to submit it."/>
-                        <div class="d-inline-flex align-items-center gap-3" invisible="biziship_priority1_env != 'DEMO'">
-                            <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-secondary" disabled="1"/>
-                            <div class="text-muted text-start" style="max-width: 340px; font-size: 13px;">
-                                Demo mode — to activate booking, contact our sales team at
-                                <a href="mailto:zeev@biziship.ai">zeev@biziship.ai</a> or
-                                <a href="mailto:avner@biziship.ai">avner@biziship.ai</a>,
-                                or call / <a href="https://wa.me/16787722785" target="_blank">WhatsApp +1 (678) 772-2785</a>.
+                        <!-- Center: Submit button -->
+                        <div style="margin: 0 auto;">
+                            <field name="biziship_has_selected_quote" invisible="1"/>
+                            <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-primary" invisible="not biziship_has_selected_quote or biziship_priority1_env == 'DEMO'"/>
+                            <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-primary" invisible="biziship_has_selected_quote or biziship_priority1_env == 'DEMO'" title="Please select a quote first to submit it."/>
+                            <div class="d-inline-flex align-items-center gap-3" invisible="biziship_priority1_env != 'DEMO'">
+                                <button name="action_open_biziship_quote_confirm" type="object" string="Submit the chosen quote" class="btn-primary" disabled="1"/>
+                                <div class="text-muted text-start" style="max-width: 340px; font-size: 13px;">
+                                    Demo mode — to activate booking, contact our sales team at
+                                    <a href="mailto:zeev@biziship.ai">zeev@biziship.ai</a> or
+                                    <a href="mailto:avner@biziship.ai">avner@biziship.ai</a>,
+                                    or call / <a href="https://wa.me/16787722785" target="_blank">WhatsApp +1 (678) 772-2785</a>.
+                                </div>
                             </div>
                         </div>
                     </div>

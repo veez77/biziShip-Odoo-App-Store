@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_biziship_residential_warning_wizard_form" model="ir.ui.view">
+        <field name="name">biziship.residential.warning.wizard.form</field>
+        <field name="model">biziship.residential.warning.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Residential Address Warning">
+                <style>
+                    .modal-backdrop.show {
+                        backdrop-filter: blur(4px);
+                        background-color: rgba(0, 0, 0, 0.4);
+                    }
+                    .biziship-res-warning-header {
+                        background-color: #e6a817 !important;
+                        color: white !important;
+                        padding: 24px !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        border-radius: 12px 12px 0 0 !important;
+                    }
+                    .biziship-res-warning-body {
+                        padding: 32px !important;
+                        background-color: white !important;
+                        border-radius: 0 0 12px 12px !important;
+                    }
+                    .biziship-res-warning-text {
+                        font-size: 15px !important;
+                        line-height: 1.6 !important;
+                        color: #495057 !important;
+                        margin: 0 0 16px !important;
+                    }
+                    .biziship-res-stop-card {
+                        background-color: #fff8e6 !important;
+                        border: 1px solid #f3dca3 !important;
+                        border-radius: 8px !important;
+                        padding: 14px 16px !important;
+                        margin-bottom: 12px !important;
+                    }
+                    .biziship-res-stop-label {
+                        font-weight: bold !important;
+                        color: #7a5600 !important;
+                        font-size: 13px !important;
+                        text-transform: uppercase !important;
+                        letter-spacing: 0.4px !important;
+                    }
+                    .biziship-res-warning-footer {
+                        border-top: none !important;
+                        padding: 20px 32px 32px !important;
+                        justify-content: center !important;
+                        display: flex !important;
+                        gap: 15px !important;
+                    }
+                    .btn-biziship-res-primary {
+                        background-color: #714B67 !important;
+                        border-color: #714B67 !important;
+                        color: white !important;
+                        border-radius: 8px !important;
+                        padding: 10px 24px !important;
+                        font-weight: bold !important;
+                        font-size: 15px !important;
+                    }
+                    .btn-biziship-res-secondary {
+                        background-color: white !important;
+                        border: 1px solid #dee2e6 !important;
+                        color: #868e96 !important;
+                        border-radius: 8px !important;
+                        padding: 8px 18px !important;
+                        font-size: 13px !important;
+                    }
+                </style>
+                <field name="quote_id" invisible="1"/>
+                <field name="origin_flagged" invisible="1"/>
+                <field name="destination_flagged" invisible="1"/>
+                <field name="origin_address_display" invisible="1"/>
+                <field name="destination_address_display" invisible="1"/>
+                <div class="p-0 m-0">
+                    <div class="biziship-res-warning-header">
+                        <span class="fa fa-exclamation-triangle mr-3" title="Warning Icon" style="font-size: 24px; margin-right: 15px;"></span>
+                        <h2 style="margin: 0; color: white; font-weight: bold; font-size: 20px;">Residential address not flagged</h2>
+                    </div>
+
+                    <div class="biziship-res-warning-body">
+                        <p class="biziship-res-warning-text">
+                            We detected a residential address on this quote, but the matching accessorial isn't selected.
+                        </p>
+
+                        <div class="biziship-res-stop-card" invisible="not origin_flagged">
+                            <div class="biziship-res-stop-label">Pickup</div>
+                            <div><field name="origin_address_display" nolabel="1" readonly="1"/></div>
+                            <div style="color:#7a5600;">"Residential Pickup" was not checked for this quote.</div>
+                        </div>
+
+                        <div class="biziship-res-stop-card" invisible="not destination_flagged">
+                            <div class="biziship-res-stop-label">Destination</div>
+                            <div><field name="destination_address_display" nolabel="1" readonly="1"/></div>
+                            <div style="color:#7a5600;">"Residential Delivery" was not checked for this quote.</div>
+                        </div>
+
+                        <p class="biziship-res-warning-text" style="margin-top: 16px;">
+                            Booking without it may result in the carrier adding a residential/rate-variance charge after pickup.
+                        </p>
+                    </div>
+                </div>
+                <footer class="biziship-res-warning-footer">
+                    <button name="action_go_back" string="Go back and fix it" type="object" class="btn-biziship-res-primary" data-hotkey="q"/>
+                    <button name="action_acknowledge_and_continue" string="I acknowledge — book without the residential accessorial" type="object" class="btn-biziship-res-secondary" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,6 +1,6 @@
 {
     'name': 'BiziShip',
-    'version': '17.0.2.3.3',
+    'version': '17.0.2.0.8',
     'category': 'Sales',
     'summary': 'AI-Powered LTL & FTL Quoting & Automated Freight Procurement',
     'description': """
@@ -24,6 +24,7 @@
         'wizards/biziship_bol_wizard_views.xml',
         'wizards/biziship_quote_confirm_wizard_views.xml',
         'wizards/biziship_booking_warning_wizard_views.xml',
+        'wizards/biziship_residential_warning_wizard_views.xml',
         'wizards/biziship_freight_quote_wizard_views.xml',
         'wizards/biziship_auth_wizard_views.xml',
         'wizards/biziship_save_freight_wizard_views.xml',

@@ -425,6 +425,14 @@ class BizishipQuoteConfirmWizard(models.TransientModel):
         if sales_order_ref:
             payload["sales_order"] = sales_order_ref
 
+        # Residential address risk acknowledgment, tracked per stop at the
+        # booking-confirmation warning (see sale.order.action_open_biziship_quote_confirm
+        # and biziship.residential.warning.wizard). Omitted entirely when False.
+        if self.quote_id.origin_residential_risk_acknowledged:
+            payload["origin_residential_risk_acknowledged"] = True
+        if self.quote_id.destination_residential_risk_acknowledged:
+            payload["destination_residential_risk_acknowledged"] = True
+
         # Reference numbers: first entry = primary reference_number, the rest =
         # additional_references. Trim, drop empties; omit either field entirely when empty.
         try:

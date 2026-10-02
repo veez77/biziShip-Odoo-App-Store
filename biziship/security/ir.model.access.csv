@@ -7,6 +7,7 @@ access_biziship_accessorial,biziship.accessorial,model_biziship_accessorial,base
 access_biziship_sale_cargo_line,biziship.sale.cargo.line,model_biziship_sale_cargo_line,base.group_user,1,1,1,1
 access_biziship_quote_cargo_line,biziship.quote.cargo.line,model_biziship_quote_cargo_line,base.group_user,1,1,1,1
 access_biziship_booking_warning_wizard,biziship.booking.warning.wizard,model_biziship_booking_warning_wizard,base.group_user,1,1,1,1
+access_biziship_residential_warning_wizard,biziship.residential.warning.wizard,model_biziship_residential_warning_wizard,base.group_user,1,1,1,1
 access_biziship_auth_wizard,biziship.auth.wizard,model_biziship_auth_wizard,base.group_user,1,1,1,1
 access_biziship_save_freight_wizard,biziship.save.freight.wizard,model_biziship_save_freight_wizard,base.group_user,1,1,1,1
 access_biziship_load_freight_wizard,biziship.load.freight.wizard,model_biziship_load_freight_wizard,base.group_user,1,1,1,1

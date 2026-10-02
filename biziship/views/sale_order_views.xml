@@ -546,8 +546,9 @@
                             <button name="action_delete_biziship_booking" type="object" icon="fa-trash" class="btn btn-link text-muted p-0" title="Delete Booking Details" confirm="Are you sure you want to delete these booking details?"/>
                         </div>
                         <field name="biziship_shipment_id" invisible="1"/>
-                        <field name="biziship_bol_number" string="BOL Number" readonly="1" invisible="not biziship_bol_number"/>
-                        <field name="biziship_pro_number" readonly="1" invisible="not biziship_pro_number"/>
+                        <field name="biziship_bol_number" invisible="1"/>
+                        <field name="biziship_pro_number" invisible="1"/>
+                        <field name="biziship_booking_numbers_html" nolabel="1" colspan="2" invisible="not biziship_bol_number and not biziship_pro_number"/>
                         <field name="biziship_bol_url" invisible="1"/>
                         <div colspan="2" class="d-flex align-items-center justify-content-between mt-1 mb-1" invisible="not biziship_bol_url and not biziship_documents_html">
                             <field name="biziship_documents_html" nolabel="1" readonly="1" class="flex-grow-1"/>
@@ -625,12 +626,14 @@
                         </div>
                     </group>
                     <field name="biziship_quote_ids" nolabel="1">
-                        <list string="Quotes" create="false" edit="false" class="biziship-quotes-tree">
+                        <list string="Quotes" create="false" edit="false" class="biziship-quotes-tree" decoration-info="is_recommended and not is_selected">
                             <field name="is_selected" column_invisible="True"/>
+                            <field name="is_recommended" column_invisible="True"/>
                             <button name="action_select_quote_toggle" type="object" icon="fa-lg fa-toggle-on text-success" invisible="not is_selected" class="btn btn-link p-0" title="Selected" aria-label="Selected"/>
                             <button name="action_select_quote_toggle" type="object" icon="fa-lg fa-toggle-off text-muted" invisible="is_selected" class="btn btn-link p-0" title="Select" aria-label="Not Selected"/>
                             <field name="carrier_logo" widget="image" options="{'size': [30, 30]}" class="me-2" nolabel="1" readonly="1" optional="show"/>
                             <field name="carrier_name" readonly="1"/>
+                            <field name="biziship_recommendation_html" nolabel="1" readonly="1"/>
                             <field name="service_level" readonly="1"/>
                             <field name="total_charge" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
                             <field name="transit_days" readonly="1"/>

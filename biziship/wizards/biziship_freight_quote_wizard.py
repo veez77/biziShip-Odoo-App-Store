@@ -359,6 +359,11 @@ class BizishipFreightQuoteWizard(models.TransientModel):
                     'quote_details': details_text,
                 })
 
+            self.order_id._biziship_apply_quote_recommendation(
+                response_json.get('recommended_quote_id'),
+                response_json.get('recommendation_reason'),
+            )
+
         except requests.exceptions.HTTPError as e:
             err_msg = str(e)
             if hasattr(e, 'response') and e.response is not None:

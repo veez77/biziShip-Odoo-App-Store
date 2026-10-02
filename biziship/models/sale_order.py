@@ -103,6 +103,10 @@ class SaleOrder(models.Model):
         string='BOL Reference', compute='_compute_biziship_ref_html',
         sanitize=False, readonly=True
     )
+    biziship_booking_numbers_html = fields.Html(
+        string='Booking Numbers', compute='_compute_biziship_booking_numbers_html',
+        sanitize=False, readonly=True
+    )
 
     def action_add_cargo_line(self):
         """Adds a blank cargo line to the current sale order."""
@@ -303,6 +307,28 @@ class SaleOrder(models.Model):
                 if val:
                     rows += plain_row(label, _html.escape(str(val)))
             order.biziship_ref_html = f'<table class="biziship-reference-table">{rows}</table>' if rows else False
+
+    @api.depends('biziship_bol_number', 'biziship_pro_number')
+    def _compute_biziship_booking_numbers_html(self):
+        import html as _html
+
+        def row(label, value):
+            if not value:
+                return ''
+            esc = _html.escape(value)
+            return (
+                f'<tr>'
+                f'<td style="font-weight:600;color:#4c4c4c;font-size:13px;'
+                f'padding:2px 16px 2px 0;white-space:nowrap;vertical-align:top;">{label}</td>'
+                f'<td style="font-size:13px;color:#1a1a2e;">'
+                f'<span class="biziship-ref-copyable" title="Click to copy" '
+                f'data-copy-text="{esc}">{esc}</span></td>'
+                f'</tr>'
+            )
+
+        for order in self:
+            rows = row('BOL Number', order.biziship_bol_number) + row('PRO Number', order.biziship_pro_number)
+            order.biziship_booking_numbers_html = f'<table>{rows}</table>' if rows else False
 
     # --- LTL Freight Fields ---
     # Origin & Pickup
@@ -836,6 +862,27 @@ class SaleOrder(models.Model):
                 self.write(vals)
         return profile
 
+    def _biziship_apply_quote_recommendation(self, recommended_quote_id, recommendation_reason=None):
+        """Mark the matching quote as AI-recommended and pre-select it, but only if
+        nothing is already selected - never override an existing/active selection.
+        Both args are null whenever a recommendation isn't available; that's the
+        normal, unremarkable default and this is a no-op in that case.
+        """
+        self.ensure_one()
+        if not recommended_quote_id:
+            return
+        quotes = self.biziship_quote_ids
+        recommended = quotes.filtered(lambda q: q.quote_id_ref == recommended_quote_id)
+        if not recommended:
+            return
+        recommended = recommended[0]
+        recommended.write({
+            'is_recommended': True,
+            'recommendation_reason': recommendation_reason or False,
+        })
+        if not quotes.filtered('is_selected'):
+            recommended.is_selected = True
+
     def action_open_biziship_quote_confirm(self):
         self.ensure_one()
         if not self.env.user.biziship_token:
@@ -854,6 +901,38 @@ class SaleOrder(models.Model):
                 "zeev@biziship.ai or avner@biziship.ai, or call / WhatsApp +1 (678) 772-2785."
             ))
 
+        # Residential address check — re-evaluated fresh on every single booking attempt.
+        # Reset any stale acknowledgment from a previous (closed/abandoned) attempt first,
+        # so it can never silently suppress this check on a later attempt.
+        quote = selected_quote[0]
+        quote.write({
+            'origin_residential_risk_acknowledged': False,
+            'destination_residential_risk_acknowledged': False,
+        })
+        origin_flagged = bool(self.biziship_origin_residential_warning and not self.biziship_origin_residential)
+        dest_flagged = bool(self.biziship_dest_residential_warning and not self.biziship_dest_residential)
+        if origin_flagged or dest_flagged:
+            return {
+                'name': 'Residential Address Warning',
+                'type': 'ir.actions.act_window',
+                'res_model': 'biziship.residential.warning.wizard',
+                'view_mode': 'form',
+                'target': 'new',
+                'context': {
+                    'default_quote_id': quote.id,
+                    'default_origin_flagged': origin_flagged,
+                    'default_destination_flagged': dest_flagged,
+                }
+            }
+
+        return self._biziship_quote_confirm_next_step(quote)
+
+    def _biziship_quote_confirm_next_step(self, quote):
+        """The booking-confirmation step after all pre-booking checks have passed
+        (or been explicitly acknowledged). Shared by the normal path and by
+        biziship.residential.warning.wizard's override-and-continue action.
+        """
+        self.ensure_one()
         if self.biziship_priority1_env == 'PROD':
             return {
                 'name': 'Live Freight Booking',
@@ -862,7 +941,7 @@ class SaleOrder(models.Model):
                 'view_mode': 'form',
                 'target': 'new',
                 'context': {
-                    'default_quote_id': selected_quote[0].id,
+                    'default_quote_id': quote.id,
                 }
             }
 
@@ -873,7 +952,7 @@ class SaleOrder(models.Model):
             'view_mode': 'form',
             'target': 'new',
             'context': {
-                'default_quote_id': selected_quote[0].id,
+                'default_quote_id': quote.id,
             }
         }
 
@@ -1280,6 +1359,11 @@ class SaleOrder(models.Model):
                     'destination_terminal_phone': extracted_details.get('destination_terminal_phone'),
                     'quote_details': details_text,
                 })
+
+            self._biziship_apply_quote_recommendation(
+                response_json.get('recommended_quote_id'),
+                response_json.get('recommendation_reason'),
+            )
 
         except requests.exceptions.HTTPError as e:
             err_msg = str(e)

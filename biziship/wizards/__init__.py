@@ -3,6 +3,7 @@ from . import biziship_quote_confirm_wizard
 from . import biziship_freight_quote_wizard
 from . import biziship_freight_quote_cargo_line
 from . import biziship_booking_warning_wizard
+from . import biziship_residential_warning_wizard
 from . import biziship_auth_wizard
 from . import biziship_save_freight_wizard
 from . import biziship_load_freight_wizard

@@ -12,6 +12,21 @@ function rpc(model, method, args, kwargs) {
 }
 
 document.addEventListener('click', function (e) {
+    // AI recommendation "Why?" toggle — collapsed by default, click to reveal the reason.
+    // Capture phase + stopPropagation: this sits inside an Odoo list row, and without
+    // this the click bubbles up to Odoo's own row handler and opens the record form.
+    var whyEl = e.target.closest('.biziship-why-toggle');
+    if (whyEl) {
+        e.preventDefault();
+        e.stopPropagation();
+        var reasonEl = whyEl.parentElement && whyEl.parentElement.querySelector('.biziship-why-reason');
+        if (reasonEl) {
+            var isOpen = reasonEl.classList.toggle('biziship-why-open');
+            whyEl.textContent = isOpen ? 'Hide why' : 'Why?';
+        }
+        return;
+    }
+
     // BOL copy-to-clipboard
     var copyEl = e.target.closest('.biziship-ref-copyable');
     if (copyEl) {
@@ -57,4 +72,4 @@ document.addEventListener('click', function (e) {
             refreshEl.classList.remove('fa-spin');
             alert(err.message || String(err));
         });
-});
+}, true);

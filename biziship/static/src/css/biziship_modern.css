@@ -71,6 +71,50 @@
     color: #017e84 !important;
 }
 
+/* AI carrier recommendation — badge + collapsed-by-default "Why?" toggle */
+.biziship-rec-wrap {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+}
+.biziship-rec-badge {
+    display: inline-block;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 6px;
+}
+.biziship-why-toggle {
+    color: #714B67;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
+}
+.biziship-why-toggle:hover {
+    text-decoration: underline;
+}
+.biziship-why-reason {
+    display: none;
+    color: #666;
+    font-size: 12px;
+    margin-top: 4px;
+}
+.biziship-why-reason.biziship-why-open {
+    display: block;
+}
+
+/* Recommended-but-not-selected row: subtle ring, distinct from the "selected" toggle state.
+   Reuses Odoo's decoration-info row class (text-info) as a hook, but overrides its color
+   so only the ring shows - no unwanted blue text. */
+.biziship-quotes-tree tr.o_data_row.text-info {
+    color: inherit;
+    box-shadow: inset 0 0 0 1px #9c7b93;
+    border-radius: 4px;
+}
+
 /* Modern BiziShip Freight Pool Styling */
 
 .biziship-freight-pool-container {

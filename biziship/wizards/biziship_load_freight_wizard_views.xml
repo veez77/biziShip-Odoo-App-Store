@@ -43,7 +43,7 @@
                             <field name="creator_info"/>
                             <field name="freight_id"/>
                             <templates>
-                                <t t-name="kanban-box">
+                                <t t-name="card">
                                     <div class="biziship-freight-card">
                                         <div class="biziship-card-icon">
                                             <i class="fa fa-file-text-o fa-2x" title="Freight Document Icon"/>

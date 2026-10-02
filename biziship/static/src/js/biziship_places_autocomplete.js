@@ -153,6 +153,16 @@ export class BiziShipPlacesAutocomplete extends CharField {
                 if (result) {
                     result[`${prefix}address_invalid`] = false;
                     result[`${prefix}address2`] = '';
+                    // Many2one fields (state_id, country_id) come back from the RPC as
+                    // [id, display_name] tuples - the classic Odoo read() shape.
+                    // record.update() expects a {id, display_name} object for
+                    // relational fields, not a raw array, so convert any such values.
+                    for (const key in result) {
+                        const val = result[key];
+                        if (Array.isArray(val) && val.length === 2 && typeof val[0] === "number") {
+                            result[key] = { id: val[0], display_name: val[1] };
+                        }
+                    }
                     this.props.record.update(result);
                 }
             });

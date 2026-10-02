@@ -32,7 +32,7 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
         <field name="arch" type="xml">
-            <xpath expr="//group[@name='preferences']" position="before">
+            <xpath expr="//page[@name='preferences_page']/group[1]" position="before">
                 <field name="biziship_token" invisible="1"/>
                 <div class="alert alert-info d-flex justify-content-between align-items-center" role="alert" invisible="biziship_token != False">
                     <span>Connect your BiziShip account to enable Saved Freights.</span>

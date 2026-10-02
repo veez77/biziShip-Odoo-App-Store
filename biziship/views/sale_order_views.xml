@@ -209,7 +209,7 @@
                         <field name="biziship_cargo_line_ids" nolabel="1" colspan="2" context="{'default_sale_order_id': id}" mode="kanban">
                             <kanban class="biziship-cargo-kanban" create="0" quick_create="false">
                                 <templates>
-                                     <t t-name="kanban-box">
+                                     <t t-name="card">
                                         <div class="biziship-cargo-card oe_kanban_global_click">
                                             <a t-if="!read_only_mode" type="delete" class="biziship-cargo-delete" title="Delete Cargo Item"><i class="fa fa-trash-o" title="Delete Icon"/></a>
                                             

@@ -7,7 +7,7 @@ import json
 # Set to 'DEV' to connect to local backend
 # ==========================================
 BIZISHIP_ENV = 'PROD'
-BIZISHIP_MODULE_VERSION = '1.1.1.100226_3'
+BIZISHIP_MODULE_VERSION = '1.1.1.100226_4'
 BIZISHIP_APP_NAME = 'biziShip.ai on Odoo'
 # Default BiziShip ERP Gateway endpoint. Not a credential by itself — the gateway is
 # unusable without a valid API key (see get_erp_api_key). Admins can override it in

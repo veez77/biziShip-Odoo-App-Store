@@ -1,6 +1,6 @@
 {
     'name': 'BiziShip',
-    'version': '19.0.2.4.1',
+    'version': '19.0.2.0.8',
     'category': 'Sales',
     'summary': 'AI-Powered LTL & FTL Quoting & Automated Freight Procurement',
     'description': """

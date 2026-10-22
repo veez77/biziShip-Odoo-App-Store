@@ -40,6 +40,28 @@ document.addEventListener('click', function (e) {
         return;
     }
 
+    // Shipment Photos: delete-x on a pallet thumbnail — remove it instantly, no reload
+    var photoDeleteEl = e.target.closest('.biziship-pallet-photo-delete');
+    if (photoDeleteEl) {
+        e.preventDefault();
+        var thumbWrap = photoDeleteEl.closest('.biziship-pallet-photo-thumb-wrap');
+        var lineId = thumbWrap && parseInt(thumbWrap.getAttribute('data-line-id'), 10);
+        var imageId = thumbWrap && thumbWrap.getAttribute('data-image-id');
+        if (!lineId || !imageId) return;
+
+        thumbWrap.style.opacity = '0.4';
+        rpc('biziship.pallet.line', 'action_delete_photo_by_id', [[lineId], imageId])
+            .then(function (res) {
+                if (res.error) throw new Error((res.error.data && res.error.data.message) || 'Delete failed.');
+                thumbWrap.remove();
+            })
+            .catch(function (err) {
+                thumbWrap.style.opacity = '1';
+                alert(err.message || String(err));
+            });
+        return;
+    }
+
     // PRO number refresh — update only the PRO cell, no page reload
     var refreshEl = e.target.closest('.biziship-pro-refresh');
     if (!refreshEl) return;

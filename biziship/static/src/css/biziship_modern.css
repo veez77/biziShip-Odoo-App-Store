@@ -1,3 +1,99 @@
+/* Shipment Photos wizard: per-pallet thumbnail grid */
+.biziship-pallet-photo-section {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.biziship-pallet-photo-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.biziship-pallet-photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.biziship-pallet-photo-thumb-wrap {
+    position: relative;
+    width: 64px;
+    height: 64px;
+}
+
+.biziship-pallet-photo-thumb {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    display: block;
+}
+
+.biziship-pallet-photo-delete {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    line-height: 16px;
+    text-align: center;
+    background: #ef4444;
+    color: #ffffff !important;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.biziship-pallet-photo-delete:hover {
+    background: #dc2626;
+}
+
+.biziship-pallet-photo-view {
+    display: block;
+}
+
+.biziship-pallet-photo-download {
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 18px;
+    height: 18px;
+    line-height: 17px;
+    text-align: center;
+    background: #334155;
+    color: #ffffff !important;
+    border-radius: 50%;
+    font-size: 11px;
+    text-decoration: none !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.biziship-pallet-photo-download:hover {
+    background: #1e293b;
+}
+
+.biziship-pallet-photo-size {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    font-size: 9px;
+    color: #ffffff;
+    background: rgba(0,0,0,0.45);
+    border-radius: 4px;
+    padding: 0 3px;
+    text-align: center;
+    pointer-events: none;
+}
+
 /* ZIP code validation indicator */
 .biziship-zip-error-bar {
     height: 2px;

@@ -1,8 +1,17 @@
+import base64
+from urllib.parse import urlparse
+
+import requests
+
 from odoo import http
 from odoo.http import request
 
+from odoo.addons.biziship import api_utils
+from odoo.addons.biziship.api_utils import get_erp_api_key, BIZISHIP_APP_NAME, BIZISHIP_MODULE_VERSION
+
+
 class BiziShipMapController(http.Controller):
-    
+
     @http.route('/biziship/map/<int:order_id>', type='http', auth='user', website=False)
     def render_map(self, order_id, **kw):
         order = request.env['sale.order'].sudo().browse(order_id)
@@ -118,3 +127,93 @@ class BiziShipMapController(http.Controller):
         </html>
         """
         return request.make_response(html_content)
+
+    @http.route('/biziship/shipments/<int:order_id>/pallets/zip', type='http', auth='user', website=False)
+    def download_pallet_photos_zip(self, order_id, pallet_id=None, **kw):
+        order = request.env['sale.order'].sudo().browse(order_id)
+        if not order.exists() or not order.biziship_booking_id:
+            return request.make_response("Shipment not found.", status=404)
+
+        user = request.env.user
+        email = (
+            user.biziship_email if user.biziship_token and user.biziship_email else user.email
+        ) or ""
+        headers = {
+            "X-ERP-API-Key": get_erp_api_key(request.env),
+            "X-User-Email": email,
+            "X-Client-App": BIZISHIP_APP_NAME,
+            "X-Client-Version": BIZISHIP_MODULE_VERSION,
+        }
+        if user.biziship_token:
+            headers["Authorization"] = f"Bearer {user.biziship_token}"
+
+        base_url = api_utils.get_biziship_api_url(request.env)
+        url = f"{base_url}/erp/shipments/{order.biziship_booking_id}/images/zip"
+        params = {"palletId": pallet_id} if pallet_id else {}
+
+        try:
+            response = requests.get(url, headers=headers, params=params, timeout=30)
+        except Exception:
+            return request.make_response("Could not reach BiziShip right now. Please try again.", status=502)
+
+        if response.status_code == 404:
+            return request.make_response("No images found for this shipment.", status=404)
+        if response.status_code != 200:
+            return request.make_response(
+                "BiziShip could not generate this ZIP right now. If this is a whole-shipment "
+                "download, try downloading one pallet at a time instead.",
+                status=502,
+            )
+
+        content_disposition = response.headers.get(
+            'Content-Disposition', 'attachment; filename="shipment-photos.zip"'
+        )
+        content = response.content
+        if not content.startswith(b'PK'):
+            # The gateway's binary media type config for this route doesn't
+            # decode the Lambda's base64 body before forwarding it, so the
+            # "zip" we got is actually base64 text. Decode it ourselves.
+            try:
+                decoded = base64.b64decode(content, validate=True)
+            except Exception:
+                decoded = None
+            if decoded and decoded.startswith(b'PK'):
+                content = decoded
+        return request.make_response(
+            content,
+            headers=[
+                ('Content-Type', 'application/zip'),
+                ('Content-Disposition', content_disposition),
+            ],
+        )
+
+    @http.route('/biziship/image_proxy', type='http', auth='user', website=False)
+    def download_single_image(self, url=None, filename=None, **kw):
+        """Forces a real download of a pallet photo. The presigned S3 url is
+        cross-origin, so the browser's native <a download> attribute is ignored
+        for it (browsers only honor "download" on same-origin links) - this
+        proxies the bytes through our own origin with an explicit
+        Content-Disposition instead."""
+        if not url:
+            return request.make_response("Missing url.", status=400)
+
+        host = (urlparse(url).hostname or '').lower()
+        if not host.endswith('.amazonaws.com'):
+            return request.make_response("Invalid image url.", status=400)
+
+        try:
+            response = requests.get(url, timeout=20)
+        except Exception:
+            return request.make_response("Could not reach the image right now.", status=502)
+
+        if response.status_code != 200:
+            return request.make_response("Image not found.", status=404)
+
+        safe_filename = (filename or 'photo.jpg').replace('"', '')
+        return request.make_response(
+            response.content,
+            headers=[
+                ('Content-Type', response.headers.get('Content-Type', 'image/jpeg')),
+                ('Content-Disposition', f'attachment; filename="{safe_filename}"'),
+            ],
+        )

@@ -90,6 +90,7 @@ class SaleOrder(models.Model):
     biziship_documents_html = fields.Html(string='Shipment Documents', compute='_compute_biziship_documents_html', readonly=True)
     biziship_pro_number = fields.Char(string='PRO Number', readonly=True, copy=False)
     biziship_booking_id = fields.Char(string='BiziShip Booking ID', readonly=True, copy=False)
+    biziship_photo_count = fields.Integer(string='Shipment Photo Count', readonly=True, copy=False, default=0)
     biziship_connected_email = fields.Char(string='Connected BiziShip Email', readonly=True, copy=False)
     biziship_po_number = fields.Char(string="PO Number")
     # Reference numbers as a JSON array string: index 0 = primary (reference_number),
@@ -811,6 +812,23 @@ class SaleOrder(models.Model):
             'target': 'new',
         }
 
+    def action_open_pallet_photos_wizard(self):
+        self.ensure_one()
+        if not self.biziship_shipment_id and not self.biziship_bol_number:
+            raise UserError(_("No shipment found. Please book the shipment first."))
+        wizard = self.env['biziship.pallet.photos.wizard'].create({
+            'sale_order_id': self.id,
+        })
+        wizard._populate_pallets()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Shipment Photos',
+            'res_model': 'biziship.pallet.photos.wizard',
+            'res_id': wizard.id,
+            'view_mode': 'form',
+            'target': 'new',
+        }
+
     def action_biziship_refresh_tracking_quick(self):
         """Refresh tracking status inline without opening the wizard."""
         self.ensure_one()
@@ -1141,6 +1159,7 @@ class SaleOrder(models.Model):
                 'biziship_pro_number': False,
                 'biziship_booking_id': False,
                 'biziship_ref_json': False,
+                'biziship_photo_count': 0,
             })
             # Also reset selection
             for quote in order.biziship_quote_ids:

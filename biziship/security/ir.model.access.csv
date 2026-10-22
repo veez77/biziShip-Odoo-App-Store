@@ -22,3 +22,6 @@ access_biziship_quotes_report_export_wizard,biziship.quotes.report.export.wizard
 access_biziship_quotes_report_email_wizard,biziship.quotes.report.email.wizard,model_biziship_quotes_report_email_wizard,base.group_user,1,1,1,1
 access_biziship_email_quotes_simple_wizard,biziship.email.quotes.simple.wizard,model_biziship_email_quotes_simple_wizard,base.group_user,1,1,1,1
 access_biziship_email_quotes_confirm_wizard,biziship.email.quotes.confirm.wizard,model_biziship_email_quotes_confirm_wizard,base.group_user,1,1,1,1
+access_biziship_pallet_photos_wizard,biziship.pallet.photos.wizard,model_biziship_pallet_photos_wizard,base.group_user,1,1,1,1
+access_biziship_pallet_line,biziship.pallet.line,model_biziship_pallet_line,base.group_user,1,1,1,1
+access_biziship_pallet_photo_upload_wizard,biziship.pallet.photo.upload.wizard,model_biziship_pallet_photo_upload_wizard,base.group_user,1,1,1,1

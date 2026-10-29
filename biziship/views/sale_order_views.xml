@@ -72,6 +72,9 @@
                         </div>
                         <div class="d-flex align-items-center gap-2">
                             <button name="action_biziship_refresh_profile_rpc" type="object" icon="fa-refresh" class="btn btn-link p-0 text-muted" title="Sync your BiziShip account details (name, environment) without re-authenticating" style="font-size: 0.95rem; line-height: 1;"/>
+                            <span class="badge rounded-pill bg-light text-dark fw-bold px-3" style="font-size: 11px; border: 1px solid #ccc;" invisible="not biziship_balance_display" title="Daily snapshot, not real-time">
+                                <field name="biziship_balance_display" nolabel="1" class="d-inline"/>
+                            </span>
                             <span class="badge rounded-pill bg-success-light text-success fw-bold px-3" style="font-size: 11px; border: 1px solid #00b14f;">ACCOUNT CONNECTED</span>
                             <button name="%(action_biziship_auth_wizard)d" type="action" icon="fa-sign-in" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign in again with a different email or refresh your session. You will receive a one-time PIN by email."/>
                             <button name="%(action_biziship_logout_wizard)d" type="action" icon="fa-sign-out" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign out from biziShip.ai"/>
@@ -534,6 +537,9 @@
                         </div>
                         <div class="d-flex align-items-center gap-2">
                             <button name="action_biziship_refresh_profile_rpc" type="object" icon="fa-refresh" class="btn btn-link p-0 text-muted" title="Sync your BiziShip account details (name, environment) without re-authenticating" style="font-size: 0.95rem; line-height: 1;"/>
+                            <span class="badge rounded-pill bg-light text-dark fw-bold px-3" style="font-size: 11px; border: 1px solid #ccc;" invisible="not biziship_balance_display" title="Daily snapshot, not real-time">
+                                <field name="biziship_balance_display" nolabel="1" class="d-inline"/>
+                            </span>
                             <span class="badge rounded-pill bg-success-light text-success fw-bold px-3" style="font-size: 11px; border: 1px solid #00b14f;">ACCOUNT CONNECTED</span>
                             <button name="%(action_biziship_auth_wizard)d" type="action" icon="fa-sign-in" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign in again with a different email or refresh your session. You will receive a one-time PIN by email."/>
                             <button name="%(action_biziship_logout_wizard)d" type="action" icon="fa-sign-out" class="btn btn-link p-0 text-muted" style="font-size: 0.75rem; opacity: 0.35;" title="Sign out from biziShip.ai"/>

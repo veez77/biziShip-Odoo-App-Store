@@ -85,6 +85,7 @@ class SaleOrder(models.Model):
     biziship_is_connected = fields.Boolean(compute='_compute_biziship_connection_status')
     biziship_connected_user_name = fields.Char(compute='_compute_biziship_connection_status')
     biziship_connected_email_display = fields.Char(compute='_compute_biziship_connection_status')
+    biziship_balance_display = fields.Char(compute='_compute_biziship_balance_display')
 
     biziship_documents_json = fields.Text(string='Shipment Documents JSON', readonly=True, copy=False)
     biziship_documents_html = fields.Html(string='Shipment Documents', compute='_compute_biziship_documents_html', readonly=True)
@@ -144,6 +145,31 @@ class SaleOrder(models.Model):
             else:
                 order.biziship_connected_user_name = ""
                 order.biziship_connected_email_display = ""
+
+    def _compute_biziship_balance_display(self):
+        """Shows the company's BiziShip account balance snapshot. Not stored - a non-
+        stored compute means this only hits the gateway when the record is actually
+        read (e.g. once per form load), matching the "fetch once per session, don't
+        poll" cadence the backend expects, rather than on every unrelated onchange."""
+        from odoo.addons.biziship.models.company_balance import CompanyBalance
+        for order in self:
+            order.biziship_balance_display = False
+            if not self.env.user.biziship_token:
+                continue
+            data = CompanyBalance.get_company_balance(self.env)
+            if not data:
+                continue
+            balance = data.get('balance')
+            as_of = data.get('asOfDate')
+            try:
+                date_obj = fields.Date.from_string(as_of)
+                date_display = f"{date_obj.strftime('%b')} {date_obj.day}"
+            except (ValueError, TypeError):
+                date_display = as_of
+            order.biziship_balance_display = _("Balance: $%(amount)s as of %(date)s") % {
+                'amount': f"{balance:,.2f}",
+                'date': date_display,
+            }
 
     @api.depends('biziship_documents_json', 'biziship_bol_url')
     def _compute_biziship_documents_html(self):
